@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"99e7c31c55ccadee","type":"text","text":"## Monte carlo simulation\ncomputerized mathematical technique that allows to account for stochastic phenomena. First used by scientist that were working on the atomic bomb. Using stochastic assumption for service and arrival times we can generate a random but plausible trace for the simulation.","x":-19,"y":-24,"width":499,"height":224},
+		{"id":"f642f6de5421674a","type":"text","text":"## Poisson process (negative exponential)\nevents are rare and occur in a completely random manner. Assume that p of one event in interval of length $\\Delta$ is $\\lambda \\Delta+ o(\\Delta)$ dividing the interval T in m part of length $\\Delta$ and count the events we obtain \n![[Pasted image 20231101180122.png]]\n$P(k,T|\\Delta) = \\binom{m}{k} (\\lambda \\Delta)^k(1-\\lambda \\Delta) ^{(m-k)} + o(\\Delta)$ \nthe limit of this probability for $m \\rightarrow \\infty$ \n$P(k,T) = \\frac{(\\lambda T)^k}{k!}e^{-\\lambda T}$ , with $\\tau$ as distance between successive arrivals we have \n$P(\\tau > T) = P(0,T)= \\frac{(\\lambda T)^0}{0!}e^{-\\lambda T} = e^{-\\lambda T}$  so that $P(\\tau < t) = 1- e^{-\\lambda T}$ \n\nCDF = $F_X(x)=Pr[X \\leq x] = 1-e^{-\\lambda x}$ , PDF= $f_X(x)=\\frac{dF_X(x)}{dx}= \\lambda e^{-\\lambda x}$ \n$E[X] = \\sigma = \\frac{1}{\\lambda}$ , $VAR[X]= \\sigma^2 = \\frac{1}{\\lambda^2}$, $CV[X]=\\frac{Std[X]}{E[X]}= \\frac{\\sqrt{VAR[X]}}{E[X]}= 1$ ","x":1080,"y":-440,"width":620,"height":466},
+		{"id":"dd4dfa3bbb511859","type":"text","text":"## Random number generation","x":-19,"y":-520,"width":499,"height":224}
+	],
+	"edges":[
+		{"id":"96894117d91250b7","fromNode":"99e7c31c55ccadee","fromSide":"right","toNode":"f642f6de5421674a","toSide":"left"},
+		{"id":"5e1bc1c69d894f6d","fromNode":"99e7c31c55ccadee","fromSide":"top","toNode":"dd4dfa3bbb511859","toSide":"bottom"}
+	]
+}
