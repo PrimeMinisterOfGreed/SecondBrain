@@ -1,5 +1,84 @@
-# Distribution of Sojourn Time for M/M/1 queue 
-## Pasta Property
+
+
+## Birth death process and queues 
+times between death and births are described by independent RVs distributed according to neg exp laws.
+- births can be interpreted as customer arrivals 
+- deaths as customers departures 
+
+so a birth-death process can be used as mathematical description for service stations, where customers arrive according to a Poisson process and service is provided by a service with neg exp distribution. queue management is carried by a particular queue discipline.
+Solution of birth death process 
+$$
+\begin{align}
+\pi_k=\frac{\lambda_0 \lambda_1 ... \lambda_{k-1}}{\micro_1 \micro_2 ... \micro_k} \pi_0 
+
+&& \pi_0=\frac{1}{1+\sum^{\infty}_{k=1} \prod^{k-1}_{j=0}\frac{\lambda_j}{\micro_j+1}}
+\end{align}
+$$
+
+## Kendall notation 
+Queues of type A/B/C/K/N/D where: 
+- A arrival process: M is markovnian (poisson,exponential distribution), G general (non markov)
+- B service process: M markovnian (exp. distribution), G general (non markovnian) 
+- C number of identical servers 
+- K maximum number of customers that can be queued (not specified --> infinite)
+- N maximum number of customers that request a service (not specified --> infinite)
+- D discipline used for queue ((not specified --> FCFS)
+
+## M/M/1 queue
+simplest case where: arrivals are poisson process, service are exponentially distributed, single server, infinite queue room, infinite customer population, FCFS discipline, arrival and service rate are constant $\lambda_k = \lambda$ and $\micro_k = \micro$ .
+
+Using the solution to birth death process the probablity distribution of the number of customers in service station is
+$$
+\pi_k=\pi_0 \prod^{k-1}_{i=0}\frac{\lambda}{\micro
+}=\pi_0(\frac{\lambda}{\micro})^k
+$$
+with ergodicity conditions 
+$$
+\begin{align}
+S_1= \sum^{\infty}_{k=0}(\frac{\lambda}{\micro})^k < \infty && S_2=\sum^{\infty}_{k=0}\frac{1}{\lambda}(\frac{\micro}{\lambda})^k = \infty
+\end{align}
+$$
+
+satisfied only if $\frac{\lambda}{\micro}<1$ normalization condition yields $\pi_0=1-\frac{\lambda}{\micro}= 1-\rho$  and $\pi_k=(1-\rho)\rho^k$ (refer to special case)
+
+### Performance indexes M/M/1
+System utilization is equal to $\rho$ --> $U=1-\pi_0=\rho$ 
+
+the average number of customers is obtained as $E[n]=\bar{n}=\sum^{\infty}_{k=0}k \pi_k=\frac{\rho}{1-\rho}$ 
+the second moment of this value is $E[n^2]=\bar{n^2}=\sum^{\infty}_{k=0}k^2\pi_k=2(\frac{\rho}{1-\rho})^2+\frac{\rho}{1- \rho}$ 
+so the variance is obtained as $VAR[n]=E[n^2]-(E[n])^2=\frac{\rho}{(1-\rho)^2}$  
+
+by little formula we obtain the avg time a customer spends in the system (sojourn time) as 
+$$E[w]=\frac{E[n]}{\lambda}=\frac{1/\micro}{1- \rho}$$ 
+
+We also can compute the probability that the queue length exceeds a given threshold as 
+$$
+Pr\{n \geq k\}= \sum^{\infty}_{i=k}\pi_i=\rho^k
+$$
+
+
+## M/M/1 queue with Discouraged arrivals 
+the longer the queue the slower the arrivals. $\lambda_k = \frac{\lambda}{k+1}$  and $\micro_k=\micro$. Using the solution to birth death process we obtain  $\pi_k=\pi_0(\frac{\lambda}{\micro})^k \frac{1}{k!}$ it follows that 
+
+$$
+\begin{align}
+\pi_0=e^{-\lambda/\micro} && \pi_k=\frac{(\lambda/\micro)^k}{k!}e^{-\lambda/\micro}
+\end{align}
+$$
+Ergodicity is satisfied when $\lambda/\micro < \infty$
+
+### Performance indexes M/M/1 Discouraged
+
+System utilization is $U = 1-e^{-\lambda/\micro}$ 
+
+the average number of customers is obtained as $E[n]=\bar{n}=\frac{\lambda}{\micro}$
+
+to compute the sojourn time derive the throughput as $X=\micro \sum^{\infty}_{k=1}\pi_k=\micro(1-e^{-\lambda/\micro})$ 
+and by little's formula $E[w]=\frac{E[n]}{X}=\frac{\lambda}{\micro^2(1-e^{-\lambda/\micro}})$  
+
+
+## Distribution of Sojourn Time for M/M/1 queue 
+### Pasta Property
 probability of finding k customers in the system $\pi_k= \lim_{t \rightarrow \infty} Pr[N(t)=k]$ , can be interpreted as the fraction of time the system spends in state $E_k$. $\pi_k^{[a]}$ = Pr\[an arriving customer finds the system in state $E_k$]. 
 
 Those 2 quantities aren't equals if we consider a D/D/1 queue (deterministic rates) such that $\lambda < \micro$ , where interarrival time are constants $\tau = 1/ \lambda$ as well as service times $\sigma = 1/ \micro$.  In this case we have 
@@ -52,6 +131,114 @@ let $f_{W}^{*}(s)$ be the Laplace transform of the PDF then
 $$
 f_{W}^{*}=\sum^{\infty}_{k=0}f_{W^[a]}^{*}(k,s)(1-\rho)\rho^{k}=(1-\rho)\frac{\micro}{s+ \micro}(\frac{1}{1-\frac{\rho \micro}{s+ \micro}})=(\frac{\alpha}{s+\alpha})$$
 where $\alpha=(1-\rho)\micro$ is the laplace transform of a neg exp distribution function with parameter $\alpha$ then $F_{W}(t)=Pr\{W \leq t\}= 1-e^{-\micro(1-\rho)t}$ 
+
+## M/M/$\infty$ 
+Dual system: the longer the queue the faster the service : $\lambda_k=\lambda$  and $\micro_k=k \micro$ , using the solution to birth death process. $\pi_k = \pi_0(\frac{\lambda}{\micro})^k \frac{1}{k!}$  yielding to 
+$$
+\begin{align}
+\pi_0=e^{-\lambda/\micro} && \pi_k=\frac{(\lambda/\micro)^k}{k!}e^{-\lambda/\micro}
+\end{align}
+$$
+
+where Ergodicity is satisfied when $\lambda/\micro < 1$ . Yielding to 
+
+### Performance indices M/M/$\infty$
+result are same as obtained for discouraged arrivals, it follows that $E[n]=\bar{n}=\frac{\lambda}{\micro}$
+
+differ the average sojourn time: $E[w]=\frac{E[n]}{\lambda}=\frac{1}{\micro}$ , it depends only on the service time 
+
+## M/M/m
+same as M/M/1 but m identical servers working in parallel are available. Customers queue only when all servers are busy on arrival.  $\lambda_k-\lambda$  and $\micro_k = \begin{cases}k \micro & 0 \leq  k \leq m \\ m \micro & m < k\end{cases}$ plugging those rates in the solution to birth death process we obtain .
+$$
+\pi_k=
+\begin{cases}
+\pi_0 (\frac{\lambda}{\micro})^k \frac{1}{k!} & 0 \leq k \leq m \\ 
+\pi_0 (\frac{\lambda}{\micro})^k \frac{1}{m!m^{k-m}} & m<k
+\end{cases}
+$$
+Ergodicity conditions are satisfied when $\rho=\frac{\lambda}{m \micro}< 1$ yielding 
+$$
+\pi_k = 
+\begin{cases}
+\pi_0 \frac{(m \rho)^k}{k!} & 0 \leq k \leq m \\
+\pi_0 \frac{\rho^k m^m}{m!} & m<k
+\end{cases}
+$$
+with explicit expression for $\pi_k$ we obtain 
+$$
+\pi_0=[1+\sum^{m-1}_{k=1}\frac{(m \rho)^k}{k!}+ \sum^{\infty}_{k=m}(\frac{(m \rho)^m}{m!})(\frac{1}{1-\rho})]^{-1}
+$$
+
+previous result is computationally simple, but it doesn't allow the compute of the avg Sojourn time and avg number of customers. Instead we can compute the probability that has a client to queue up (with the Erlang C formula)
+
+Pr{queue up}= 
+$$
+\sum^{\infty}_{k=m}\pi_k = \frac{ 
+    (\frac{(m \rho)^m}{m!})(\frac{1}{1-\rho})
+}{
+[1+\sum^{m-1}_{k=1}\frac{(m \rho)^k}{k!}+(\frac{(m \rho)^m}{m!})(\frac{1}{1-\rho})
+}
+$$
+
+
+## M/M/1/B queue with finite buffer 
+same as M/M/1 but with finite room for queueing customers. If a customers arrives and the queue is full it leave the system. $\lambda_k = \begin{cases} \lambda & 0 \leq k \leq B \\ 0 & k > B\end{cases}$  and $\micro_k=\micro$ , plugging them in the BDP solution we obtain 
+$$
+\pi_k= 
+\begin{cases}
+\pi_0(\frac{\lambda}{\micro})^k & 0 \leq k \leq B \\
+0 &k > B
+\end{cases}
+$$
+The number of possible states is equal to B+1 so Ergodicity is not an issue. This yields to 
+$$
+\begin{align}
+\pi_0=[\sum^{B}_{k=0}(\frac{\lambda}{\micro})^k]^{-1} = \frac{1-\lambda/\micro}{1- (\lambda/\micro)^{B+1}} && \pi_k=
+\begin{cases}
+\pi_0 (\frac{\lambda}{\micro})^k & 0 \leq k \leq B \\ 0 & k>B
+\end{cases}
+\end{align}
+$$
+
+
+No closed form expression is available for the avg number of customers and the avg sojourn time. For the case B=1 we obtain 
+
+$$
+\pi_k= 
+\begin{cases}
+\frac{1}{1+(\lambda/\micro)} & k=0 \\
+\frac{\lambda/\micro}{1+(\lambda/\micro)} & k =1\\ 
+0 & k>1
+\end{cases}
+$$
+
+
+## M/M/1//N queue with finite population 
+same as M/M/1 but with maximum number of customers equal to N. the arrival rate decrease as the number of customers in the queue increases: $\lambda_k= \begin{cases}\lambda(N-k) & 0 \leq k \leq N \\ 0 & k>N\end{cases}$ and $\micro_k=\micro$ , plugging them in the solution of BDP we obtain. 
+This system is ergodic and then 
+$$
+\pi_k= 
+\begin{cases}
+\pi_0 \prod^{k-1}_{i=0}\frac{\lambda(N-i)}{\micro} & 0 \leq k \leq N \\
+0 & k>N
+\end{cases}
+$$
+that is 
+$$
+\pi_k = 
+\begin{cases}
+\pi_0(\frac{\lambda}{\micro})^k \frac{N!}{(N-k)!} & 0 \leq k \leq N \\
+0 & k>N
+\end{cases}
+$$
+obtaining 
+$$
+\pi_0 = [1+\sum^{N}_{k=1}(\frac{\lambda}{\micro})^k \frac{N!}{(n-k)!}]^{-1}
+$$
+
+
+Again no closed form expression for the avg number of customer in the system or sojourn time
+
 
 ## Constant batch size 
 - Single queue
@@ -269,14 +456,19 @@ PDF
 $$
 b_{X(x)=}\sum^{R}_{i=1}\alpha_{i}\micro_{i}e^{-u_{i}x}, x \geq 0
 $$
-avg is $E[X]=\sum^{R}_{i=1}\frac{\alpha_i}{\micro^{2}_{i}}$  
+weights are such that 
+$$
+\sum^{R}_{i=1}\alpha_{i} = 1
+$$
 
+Average is  $E[X] =\sum^{R}_{i=1}\frac{\alpha_i}{\micro_i}$
+variance is $VAR[X]=\sum^{R}_{i=1}\frac{\alpha_{i}}{\micro_{i}^2}$ 
 state transition diagram is 
 ![[Pasted image 20231209204809.png]]
 
-we can compute $\bar{n}$ with Pollaczeck-Khinchine formula 
-$$
-\bar{n}=\rho + \frac{\rho^2[C_{s}^{2}+ 1}{2(1-\rho)} 
-$$
+it can be shown that 
+$\bar{n}=\frac{\rho}{1-\rho}[1+\frac{\rho}{2}(C_{s}^2-1)]$ also expressed as $\bar{n}=\rho +\frac{\rho^2[C_{s}^2+1]}{2(1-\rho)}$ 
+and also as $\bar{n}=\rho +\frac{\rho^2+\lambda Var(S)}{2(1-\rho)}$  where Var(S) is the variance of service time distributions
+
 service station is represented by 
 ![[Pasted image 20231209204949.png]]
