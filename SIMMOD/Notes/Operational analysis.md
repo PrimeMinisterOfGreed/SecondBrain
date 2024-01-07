@@ -207,6 +207,8 @@ assume that the state are defined on the base of the number of customer waiting 
 let $C(m,n)$ = number of transitions from state m to state n, then the state balance equation is $\sum_{k}C(n,k)= \sum_mC(n,m)$ .  This holds in general for all state but for first and last, except when in Operational equilibrium, then it holds for all states.
 
 ![[Pasted image 20231006125755.png]]
+
+
 ### State balance measures
 
 $r(n,m)=\frac{C(n,m)}{T(n)}$ => transition rate from m to n, while n is occupied
@@ -229,7 +231,7 @@ $$
 \end{equation}
 $$
 
-#### Simplify transition rates 
+#### Simplify transition rates (Balance equations)
 using
 - $C(n,n+1)= A(n)$ = # arrivals observed when the system is in state n; $A(N)=0$
 - $C(n,n-1)=C(n)$ = # completions observed when the system is in state n; $C(0)=0$
@@ -377,3 +379,353 @@ from which we can derive
 $p(0) = [1+\sum^{N}_{n=1}(\frac{\lambda}{\micro})^n \frac{N!}{(N-n)!}]^{-1}$  
 
 
+## One step behavior
+
+![[Pasted image 20231006152829.png]]
+since $T(n)$ sum to $T$ we can add the normalization condition $\sum_np(n)=1$. in this way the unique changes that can happen is the arrival or the departure of a customer.
+
+## State balance of a network of queues
+set of all possible states $S(M) = \{\underline{n} =(n_1,n_2,...,n_M), n_i \geq 0 i=1,2,...,M\}$  
+
+$\underline{k}, \underline{m}$ and $\underline{n}$ will be generic states.
+
+### Intermediate behavior
+$T(n)$ = total time spent by the system in state $\underline{n}$ during observation period, with $\sum T(n) = T$. 
+Let $P(n)= T(n)/T$ be the fraction of time spent by the system in state $\underline{n}$. 
+
+the set of fractions of time spent by the system in each state in $S(M)$ or $\{P(\underline{n}), \underline{n} \in S(M)\}$ is called "distribution of the fractions of time spent by the system in its states". The objective is to derive P(n) not through direct measures but by using the parameters of the model. 
+
+let $C(\underline{n}, \underline{m})$ be # of direct transition made by the system from state $\underline{n}$ to state $\underline{m}$. In our measurement we can't observe transition within the same state so $C(\underline{n},\underline{n}) = 0$ for any n
+
+### Operational equilibrium : steady state
+also in this case $A=C$ is required for every station. The number of departures and arrivals must be $n_i(0)= n_i(T) \ \ \  i=1...M$.
+
+this means that the op eq condition is satisfied every time the measurement start with a state and ends with that state. For a single server in isolation then 
+$$
+\sum_kC(\underline{k},\underline{n}) = \sum_mC(\underline{n},\underline{m}) \ \ \ \forall \underline{n}
+$$
+
+then we can say "the flow balance condition among customer of a system is equivalent to balancing the number of transition among the  state of the system" 
+
+Define now the transition rate from n to m as $r(\underline{n},\underline{m})= \frac{C(\underline{n},\underline{m})}{T(\underline{n})}$ . 
+$T(\underline{n})=0$ implies $C(\underline{n}, \underline{m})=0$. Now we can introduce those variables in balance equation 
+$$
+\sum_\underline{k} P(\underline{k})r(\underline{k},\underline{n}) = P(\underline{n}) \sum_\underline{m}r(\underline{n},\underline{m}) 
+$$
+the definition of P(n) allows to add a normalization equation 
+$\sum_\underline{n}P(\underline{n})=1$ 
+
+### Derived Measures (One step behaviour)
+denoting with H the total number of equations of this system, his value can be $H=(N_{max}+1)^M$  and $H = \binom{N+M-1}{M-1}$  in the case of a open system with Nmax customers observed or closed with N respectively.
+
+According to the one step behavior hypothesis the transition can occur only within adjacent states.  Let's introduce the following definitions 
+$\underline{n_{ij}} = (n_1,...,n_i+1,...,n_j-1,...,n_M)$ 
+$\underline{n_{i0}} = (n_1,...,n_i+1,...,n_j,...,n_M)$ 
+$\underline{n_{0j}} = (n_1,...,n_i,...,n_j-1,...,n_M)$ 
+that we can use to indicates the states that are adjacent to 
+$\underline{n} = (n_1,...,n_i,...,n_j,...,n_M)$ 
+
+
+### Homogeneity
+1) the output of a station of the system is completely determined by the length of its input queue, but independent of the length of the others stations.
+2) the transition frequencies among the stations of the system are independent of the state of the system and may depend at most on the total load of the system(N)
+
+### Simplify state transition balance equation (homogeneity)
+
+First part of hypothesis allows to simplify the definition of the state transition rates in 
+$$
+r(\bar{n},\bar{n}_{ij})=\frac{C_{ij}(n_{j})}{T_{j}(n_{j})}
+$$
+the second part implies that $C_{ji}(n_{j})=C_{j(n_{j})}q_{ji}$
+so that overall we obtain 
+$$
+r(\bar{n},\bar{n}_{ij})= 
+\begin{cases}
+\frac{q_{ji}}{S_{j(n_{j})}}  &  j \rightarrow i  \\
+\frac{q_{j_{0}}}{S_{j}(n_{j})} & j \rightarrow 0 \\
+\lambda_{0i}  &  0 \rightarrow i
+\end{cases}
+$$
+
+
+let's introduce an indicator function defined in this way $\sigma(n)= \begin{cases}1 \ \ \ n>0 \\0 \ \ \ n=0\end{cases}$ 
+using $\lambda_{0j}$ as the external arrival rate directed toward the station of index j
+With all those hypothesis the transition balance equations assume the following form 
+$$
+\sum^{M}_{i,j=1}P(\underline{n}_{ij}) \frac{q_{ij}}{S_i(n_i+1)}\sigma(n_j) + \sum^{M}_{j=1}P(\underline{n}_{0j})\lambda_{0j}\sigma(n_j) + \sum^{M}_{i=1}P(\underline{n}_{i0})\frac{q_{i0}}{S_i(n_i+1)}= P(\underline{n})[\sum^{M}_{i=1}\frac{\sigma(n_i)}{S_i(n_i)} +  \sum^{M}_{j=1}\lambda_{0j}]
+$$
+
+## Solving transition balance 
+assume all the $V_i$ are computed so that we can assume $\lambda_i=\begin{cases}\lambda V_i \ \ \ open\ system \\ V_i \ \ \ closed\ system \end{cases}$ , where $\lambda$ represent the total arrival rate of external customers to the system.  Define also the following function 
+$$
+f_i(k)= \begin{cases}
+1 \ \ \ k = 0 \\
+\lambda_iS_i(k)f_i)k-1 \ \ \ k>0
+\end{cases}
+$$
+is it possible to show that the time spent by the system in each of its states is $$P(\underline{n})= \frac{1}{G} \prod^{M}_{i=1}f_i(n_i)$$
+This is called product form solution , G is a normalization constant defined in this way 
+$$
+1= \sum_{\underline{n}}P(\underline{n}) = \frac{1}{G}\sum_{\underline{n}}\prod^{M}_{i=1}f_i(n_i) \rightarrow G= \sum_{\underline{n}}\prod^{M}_{i=1}f_i(n_i)
+$$
+### Queue length distribution 
+
+using the recursive expression of $p(\underline{n})$ we obtain (no intermediary)
+$$
+\begin{cases}
+P(\underline{n}_{i0}) = \lambda_iS_i(n_i+1)P(\underline{n}) \\
+\\
+P(\underline{n}_{0j}) = \frac{1}{\lambda_jS_j(n_j)}\\
+\\
+P(\underline{n}_{ij}) = \frac{\lambda_iS_i(n_i+1)}{\lambda_jS_j(n_j)}P(\underline{n})
+\end{cases}
+$$
+
+define the number of distribution of the number of customer at station 
+$$
+p_i(k) = \sum_{\underline{n_{n_i = k}}}P(\underline{n})
+$$
+recall $F(k)= \lambda S(k)f(k-1)$ for k>0 and F(0)=1
+- Case 1: Single server queue $p(n)=p(0)F(n)$    n>0
+- Case 2: Single Server queue embedded in Open network $P_M(n)=\frac{1}{G_M}F_M(n)$ n>0
+- Case 3: Single Server queue in closed netork $P_M(n)=\frac{g(N-m,M-1)}{G(N,M)}F_M(n)$    $0 \leq n \leq N$ 
+in Case 1 the normalizing constant p(0) is different from zero if the queue is stable
+$\lambda*S(k)<1$  for k>k0
+in Case 2 the normalizing constant Gm is != 0 if the queue is stable $\lambda_M*S_m(k)<1$ 
+in Case 3 the normalization factor is not constant.
+
+We then obtain the following performance indices 
+
+- $X_i=\sum^{n}_{k=1}p_i(k)\frac{1}{S_i(k)}$ 
+- $U_i=1-P_i(0)$ 
+- $\overline{n}_i=\sum_kkp_i(k)$ 
+- $\overline{w_i} = \frac{n_i}{X_i}$ 
+
+### The BCMP theorem
+A queueing network has a product form solution if it satisfies the following criteria:
+- The network has a finite number of stations 
+- Customer belong to an arbitrary and finite number of closed or open classes and can change class memberships
+- Routing probability are defined for each class identified by a DTMC (markov chain) (so as a matrix)
+- The station of the network may be of 4 different types:
+	- FCFS with negative exponential distribution of service times
+	- LCFS with a rationale laplace transform distribution of service times 
+	- Processor Sharing with a rationale laplace transform distribution of service times 
+	- Infinite server with a rationale laplace transform distribution of service times
+
+FCFS is commonly associated to negative exponential distribution, this is the standard first come first served policy.
+
+LCFSpr (preemptive resume) last come first served: studied as a simple approximation of server undergoing high priority interruptions. When a new customer join a non empty queue, the customer in service is interrupted, pushed into an input stack and resumed later.
+
+PS Process sharing discipline: represent a limit for the round robin discipline as its quantum size goes to 0
+
+IS infinte server discipline makes the server equivalent to a delay station.
+
+## Computing normalization constant in open systems 
+
+Denote with $N_i,i=1,...,M$ the maximum number of customers observed at station i during all observation (0,T].
+In the case of open systems those $N_i$ can be arbitrarily large (and in fact grow to infinity). This means that there is not dependency among $N_i$ so the normalization constant G becomes .
+$$
+G=\sum_\underline{n}\prod^{M}_{i=1}f_i(n_i) = \prod^{M}_{i=1}\sum^{N_i}_{i=1}f_i(n_i) = \prod^{M}_{i=1}G_i
+$$
+and then the product form solution become 
+$$
+P(\underline{n}) = \frac{1}{G} \prod^{M}_{i=1}f_i(n_i)=\prod^{M}_{i=1}\frac{f_i(n_i)}{G_i} = \prod^{M}_{i=1}p_i(n_i) 
+$$
+## Computing normalization constant in closed systems 
+
+The indipendece of $N_i$ doesn´t apply for closed network. In closed systems there aren't new arrivals, so the only possibility are customers that move from one station to another. The global balance equations assumes a much simpler form. 
+$$
+\sum^{M}_{i,j=1}P(\underline{n_{ij}})\frac{q_{ij}\delta(n_j)}{S_i(n_i+1)}=P(\underline{n})\sum^{M}_{i=1}\frac{\delta(n_i)}{S_i(n_i)}
+$$
+
+the formal definitions remains the same.  for G: $P(\underline{n}) = \frac{1}{G}\prod^{M}_{i=1}f_i(n_i)$  where 
+$$
+f_i(k)= \begin{cases}
+1 \ \ \ k=0 \\
+V_iS_i(k)f_i(k-1) \ \ k>0
+\end{cases}
+$$
+and $G = \sum_\underline{n}\prod^{M}_{i=1}f_i(n_i)$ 
+
+### The Convolution method
+In a closed system a state $\underline{n}$ is feasible if $n_i \geq 0,i=1\dots M$  and $\sum^{M}_{i=1}n_i=N$ the second condition introduce dependency among the stations of the system.
+
+for convenience let's define the state space of the system with m station and n customers as
+$$
+S(n,m)=\{(n_1 \dots n_M | n_i \geq 0, i=1 \dots m; \sum^{m}_{i=1}n_i=n \}
+$$
+define the following auxiliary function $g(n,m)= \sum_{\underline{n} \in S(n,m)} \prod^{m}_{i=1}f_i(n_i)$  with $g(N,M)=G$ 
+with a little manipulation is possible to prove that 
+$$
+g(n,m) = \sum^{n}_{k=0}f_m(k)g(n-k,m-1) 
+$$
+the definition of g(n,m) can be made recursive introducing the following base conditions
+$g(0,m) = 1(m=0 \dots )$ and $g(n,0) = 0 (n=1 \dots)$. This definition is a convolution sum (Convolution algorithm) used for compute the normalization constant in efficient manner. 
+
+### Computational Scheme for G
+in order for this scheme to work we must have first computed all the values of $f_m(k)$ and of $g(k,m-1)$ , every row of the recursion of g correspond to a specific load of the system and every column correspond to a specific station. The recursion is made first on the loading level (n) and then on the components of the network(m) starting from the upper left corner and ending to the bottom right.
+The complexity of the computation is in order of : $N^2*M$  in the general case and $N*M$ if all the stations are load indipendent (is much simpler to calculate). 
+```
+//Input -> M: int,N: int,V[i]: Array<double>, S[i](k): Array<Array<double>>, ST[i]: Array<SType>
+//Output -> G(k): Array<double>
+
+G[0] = 1.0;
+for k in 1...N{
+	G[k]= 0.0;
+}
+for i in 1...M{
+	if(ST[i] == LI){
+		d = V[i] * S[i][1];
+		for k in 1...N{
+			G[k] = G[k] + d*G[k-1];
+		}
+	}
+
+	else{
+		f[0] = 1.0
+		for k in 1...N{
+			f[k] = f[k-1]*V[i]*S[i][k];
+		}
+		for n in N...1{
+			sum = G[n];
+			for k in 1...n{
+				sum += f[k] * G[n-k];
+			}
+		}
+	}
+}
+```
+### Computation of performance figures
+using explicit expression of $P(\underline{n})$ we have $p_m(k)= f_m(k)\frac{g(n-k,m-1)}{g(n,m)}$.
+note: for the rest of the scheme $p_m(k,n)$ will be simplified in $p_m(k)$ omitting the explicit dependence with the size of the population. Here some perfomance indices that can be calculated:
+- $X_m= \sum^{n}_{k=1}p_m(k)\frac{1}{S_m(k)} = V_m \frac{g(n-1,m)}{g(n,m)}$ 
+- $U_m=1-p_m(0)=1- \frac{g(n,m-1)}{g(n,m)}$ 
+notice that X and U can be also picked from the table produced by the computation of g.
+- $\overline{n}_m = \sum^{n}_{k=1}kp_m(k)$ 
+- $\overline{w}_m = \frac{\overline{n}_m}{X_m}$ 
+In case of load indipendent station the following can be applied 
+- $U_m= X_m S_m = V_m S_m \frac{g(n-1,m)}{g(n,m)}$ (standard formula)
+- $\overline{n}_m(n)= U_m(n)[1+\overline{n}_m(n-1)]$ 
+- $\overline{w}_m(n)= S_m[1+\overline{n}_m(n-1)]$ 
+
+### Arrival theorem 
+$\overline{w}(n)= S_m[1+\overline{n}_m(n-1)$ this is known as the Arrival theorem that states: "if a single server has a poisson input process then the arriving customers see the queue as if they were external observers not involved in this operation".
+
+In the case of closed queueing networks with Product form solution the same theorem say: when network has n customers, arriving customer see queue i as external observers which monitor the queue in equilibrium when only n-1 customers are is the system
+## Mean value analysis 
+Let's group all the recurrent expression
+-  $\overline{w}_i(n) = S_i[1+\overline{n}_i(n-1)]$
+- $U_i(n)=X_i(n)S_i$ 
+- $\overline{n}_i(n)= U_i(n)[1+\overline{n}_i(n-1)]$ 
+The missing $X_i$ equation can be derived by using the little's law 
+- $X_{ref}(n)= \frac{n}{\sum^{M}_{j=1}V_j \overline{w_j}(n)}$ (derived from the definition of $Y_k(n)$)   
+- $X_i(n)= V_i X_{ref}(n)$ 
+### MVA for LI stations 
+```
+Input -> M: int, N: int, V[i] : Array<double>, S[i]: Array<double>
+Output -> X[i][k]: Array<Array<double>>, U[i][k]:Array<Array<double>>, n[i][k]:Array<Array<int>>, w[i][k] : Array<Array<double>>
+
+for k in 1...N{
+	for i in 1...M{
+		w[i][k] = S[i]*(1+n[i][k-1]);
+	}
+	sum = 0;
+	for i in 1...M{
+		sum += V[i]*w[i][k];
+	}
+	Xref = k/sum;
+	for i in 1...M{
+		X[i][k]= V[i]*Xref;
+		U[i][k]=S[i]*X[i][k];
+		n[i][k]=U[i][k]*(1+n[i][k-1]);
+	}
+}
+
+```
+
+### Mean value analysis with delay stations
+in the case of delay station $\overline{w}_i(n)= Z$ always. The algorithm can so modified observing that 
+- $\overline{w}_i(n)= \begin{cases}Z_i \ \ \ delay\ station \\ S_i[1+\overline{n}_i(n-1)] \ \ \ LI \  station \end{cases}$  
+- $\overline{n}_i(n)= \begin{cases}Z_iX_i(n) \ \ \ Delay \ Station \\ U_i(n)[1+\overline{n}_i(n-1)] \ \ \  LI \end{cases}$ 
+- $U_i(n)= \begin{cases}\frac{\overline{n}_i(n)}{n} \ \ \ DI \\ X_i(n)S_i \ \ \ LI \end{cases}$ 
+### MVA for LI&D stations 
+```
+Input -> M: int, N: int, V[i] : Array<double>, S[i]: Array<double>, ST[i]: Array<StationType>,Z[i] : Array<double>
+Output -> X[i][k]: Array<Array<double>>, U[i][k]:Array<Array<double>>, n[i][k]:Array<Array<int>>, w[i][k] : Array<Array<double>>
+
+for k in 1...N{
+	for i in 1...M{
+		if(ST[i] == "D){w[i][k] = Z[i]}
+		else{w[i][k] = S[i]*(1+n[i][k-1]);}
+	}
+	sum = 0;
+	for i in 1...M{
+		sum += V[i]*w[i][k];
+	}
+	Xref = k/sum;
+	for i in 1...M{
+		X[i][k]= V[i]*Xref;
+		if(ST[i] == "D){
+			n[i][k] = Z[i]*X[i][k];
+			U[i][k] = n[i][k]/k;
+		}
+		else{
+		U[i][k]=S[i]*X[i][k];
+		n[i][k]=U[i][k]*(1+n[i][k-1]);
+		}
+	}
+}
+
+```
+
+### Mean value analysis with  Load dependent stations
+
+consider the expression for the queue length distribution $p_m(k,n)= f_m(k)\frac{g(n-k,m-1)}{g(n,m)}$ , recall: the explicit expression of the service function $f_m(k)=V_mS_m(k)f_m(k-1)$  and throughput $X_m(n)= V_m \frac{g(n-1,m)}{g(n,m)}$  , substituting in the expression of queue length distribution we obtain  $p_m(k,n)= X_m(n)S_m(k)p_m(k-1,n-1)$ (intermediate passage omitted). since expression of $X_m$ hold for any index i we can use that expression for any index. The new recursive expression let us to obtain: 
+
+- $\overline{w}_i(n) = \frac{\overline{n}_i}{X_i(n)} = \frac{\sum^{n}_{k=1}kp_i(k,n)}{X_i(n)} = \sum^{n}_{k=1}kS_i(k)p_i(k-1,n-1)$ latter passage with queue length distribution 
+- $X_{ref}(n)= \frac{n}{\sum^{M}_{j=1}V_j \overline{w}_j(n)}$ 
+- $X_i(n)= V_iX_{ref}(n)$ 
+- $\overline{n}_i(n)=\overline{w}_i(n) * X_i(n)$ 
+- $p_i(k,n)= X_i(n)S_i(k)p_i(k-1,n-1)$
+- $p_i(0,n)= 1- \sum^{n}_{k=1}p_i(k,n)$ 
+- $U_i(n)= 1-p_i(0,n)= \sum^{n}_{k=1}p_i(k,n)$ 
+
+embedding these equation is easy, at each step the queue can be computed as $p_i(0,n)=1.0-U_i(n)$  and is initialized $p(0,0)=1.0$ 
+
+### MVA for LD stations 
+not usable when the bottleneck station is load dependent.
+```
+Input -> M: int, N: int, V[i] : Array<double>, S[i]: Array<double>
+Output -> X[i][k]: Array<Array<double>>, U[i][k]:Array<Array<double>>, n[i][k]:Array<Array<int>>, w[i][k] : Array<Array<double>>, p[i][k][n]: Array<Matrix<2,double>>
+
+cum = 0.0;wait=0.0;y=0.0
+for i in 1...M{
+	p[i](0,0) = 1.0;
+	for j in 1...N{p[i](j,0) = 0.0;}
+}
+
+for k in 1...N{
+	for i in 1...M{
+		for j in 1...k{
+			wait += j * S[i][j]*p[i](j-1,k-1);
+			w[i][k]=wait;
+		}
+	}
+	for i in 1...M{
+		Y+= V[i]*w[i][k];
+	}
+	Xref= k/Y;
+	for i in 1...M{
+		X[i][k] = V[i]*Xref;
+		for j in 1...k{
+			p[i](j,k)=X[i][k]*S[i][j]*p[i](j-1,k-1);
+			cum += p[i](j,k);
+		}
+		p[i](0,k) = 1.0-cum;
+		u[i][k]=cum;
+		n[i][k]=X[i][k]*w[i][k];
+	}
+}
+
+
+```
