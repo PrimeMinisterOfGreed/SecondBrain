@@ -1,0 +1,13 @@
+{
+  "obsidian-completr:completr-fake-enter": [],
+  "obsidian-completr:completr-fake-tab": [],
+  "obsidian-completr:completr-bypass-tab-key": [],
+  "obsidian-completr:completr-jump-to-next-snippet-placeholder": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "ArrowRight"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "main": {
+    "id": "73861b44f734fffc",
+    "type": "split",
+    "children": [
+      {
+        "id": "a5c3030ddf4656cb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dfeb1dc34f484542",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Caratterizzazione dei segnali"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4007deb9e4a93155",
+    "type": "split",
+    "children": [
+      {
+        "id": "80cbb0feb2b9d039",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ad6e06029121e5ee",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Esplora risorse"
+            }
+          },
+          {
+            "id": "1b13ff445bb9d160",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "[\"tags\"]",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Ricerca"
+            }
+          },
+          {
+            "id": "99a41ae3a16b3643",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Segnalibri"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 289.5
+  },
+  "right": {
+    "id": "e85fc5a525ed010b",
+    "type": "split",
+    "children": [
+      {
+        "id": "029a9d30af624b3d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "31cb8aeb3e7b1e01",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "SIMMOD/Notes/Interval Estimation.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Riferimenti a Interval Estimation"
+            }
+          },
+          {
+            "id": "0b67ada8f13f0a88",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "SIMMOD/Notes/Interval Estimation.md",
+                "linksCollapsed": true,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Collegamenti in uscita da Interval Estimation"
+            }
+          },
+          {
+            "id": "e03d00e45412bc98",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Etichette"
+            }
+          },
+          {
+            "id": "c9eee8bd9c570a91",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tutte le proprietà"
+            }
+          },
+          {
+            "id": "3c281df854d077f5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "SIMMOD/Notes/Interval Estimation.md"
+              },
+              "icon": "lucide-list",
+              "title": "Struttura di Interval Estimation"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
+      "copilot:Copilot Chat": false
+    }
+  },
+  "active": "dfeb1dc34f484542",
+  "lastOpenFiles": [
+    "Pasted image 20231209204949.png",
+    "Pasted image 20231209204809.png",
+    "Pasted image 20231209182726.png",
+    "Pasted image 20231118103525.png",
+    "Analisi dei segnali/Note/qualcosa.md",
+    "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
+    "Analisi dei segnali/Senza nome.md",
+    "Analisi dei segnali/Note",
+    "Senza nome.md",
+    "Analisi dei segnali",
+    "SIMMOD/Notes/Markov chains.md",
+    "SIMMOD/Markov chains.canvas",
+    "SIMMOD/Notes/Monte Carlo.md",
+    "SIMMOD/Notes/Interval Estimation.md",
+    "SIMMOD/Interval estimation.canvas",
+    "SIMMOD/Output Analysis.canvas",
+    "SIMMOD/Notes/Output analysis.md",
+    "SIMMOD/Notes/Operational analysis.md",
+    "SIMMOD/Notes/Queue theory.md",
+    "SIMMOD/Operational Analysis.canvas",
+    "SIMMOD/Queue theory.canvas",
+    "SIMMOD/Monte carlo.canvas",
+    "SIMMOD/Notes/Senza nome.md",
+    "SIMMOD/Notes/Intermediate state.md",
+    "SIMMOD/images/Pasted image 20231208151614.png",
+    "SIMMOD/images/Pasted image 20231208185828.png",
+    "SIMMOD/images/Pasted image 20231209145233.png",
+    "^derived_ns.md",
+    "Queue theory/^32ac4f.md",
+    "Queue theory",
+    "Math/Formulas.md",
+    "SIMMOD/Notes",
+    "Math/Markov chains.md",
+    "markov.md",
+    "SIMMOD/images/Pasted image 20231207130743.png",
+    "SIMMOD/images/Pasted image 20231203114257.png",
+    "SIMMOD/images/Pasted image 20231202154042.png",
+    "interval estimation Interval estimation.canvas",
+    "Senza nome 1.md",
+    "Math",
+    "SIMMOD/images",
+    "SIMMOD",
+    "HoneyPot.md",
+    "Programmi Metodi Numerici.md",
+    "Prova.md"
+  ]
+}
