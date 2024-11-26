@@ -1,5 +1,5 @@
 {
-  "version": "2.1.4",
+  "version": "2.2.0",
   "settings": {
     "/": {
       "profile": "English",
@@ -32,8 +32,7 @@
       "beginProof": "\\begin{proof}",
       "endProof": "\\end{proof}",
       "insertSpace": true
-    },
-    "SIMMOD/Notes/Queue theory.md": {}
+    }
   },
   "extraSettings": {
     "foldDefault": "",
@@ -101,42 +100,23 @@
             "linkedBeginSuffix": "の証明."
           }
         }
-      },
-      "Italian": {
-        "id": "Italian",
-        "meta": {
-          "tags": []
-        },
-        "body": {
-          "theorem": {
-            "axiom": "",
-            "definition": "",
-            "lemma": "",
-            "proposition": "",
-            "theorem": "",
-            "corollary": "",
-            "claim": "",
-            "assumption": "",
-            "example": "",
-            "exercise": "",
-            "conjecture": "",
-            "hypothesis": "",
-            "remark": ""
-          }
-        }
       }
     },
     "showTheoremTitleinBuiltin": true,
+    "showTheoremContentinBuiltin": false,
     "renderEquationinBuiltin": true,
     "triggerSuggest": "\\ref",
     "triggerTheoremSuggest": "\\tref",
     "triggerEquationSuggest": "\\eqref",
-    "triggerSuggestActiveNote": "\\rea",
-    "triggerTheoremSuggestActiveNote": "\\trea",
-    "triggerEquationSuggestActiveNote": "\\eqrea",
-    "triggerSuggestRecentNotes": "\\rer",
-    "triggerTheoremSuggestRecentNotes": "\\trer",
-    "triggerEquationSuggestRecentNotes": "\\eqrer",
+    "triggerSuggestActiveNote": "\\ref:a",
+    "triggerTheoremSuggestActiveNote": "\\tref:a",
+    "triggerEquationSuggestActiveNote": "\\eqref:a",
+    "triggerSuggestRecentNotes": "\\ref:r",
+    "triggerTheoremSuggestRecentNotes": "\\tref:r",
+    "triggerEquationSuggestRecentNotes": "\\eqref:r",
+    "triggerSuggestDataview": "\\ref:d",
+    "triggerTheoremSuggestDataview": "\\tref:d",
+    "triggerEquationSuggestDataview": "\\eqref:d",
     "enableSuggest": true,
     "enableTheoremSuggest": true,
     "enableEquationSuggest": true,
@@ -146,6 +126,9 @@
     "enableSuggestRecentNotes": true,
     "enableTheoremSuggestRecentNotes": true,
     "enableEquationSuggestRecentNotes": true,
+    "enableSuggestDataview": true,
+    "enableTheoremSuggestDataview": true,
+    "enableEquationSuggestDataview": true,
     "renderMathInSuggestion": true,
     "suggestNumber": 20,
     "searchMethod": "Fuzzy",
@@ -157,19 +140,16 @@
     "suggestLeafOption": "Current tab",
     "importerNumThreads": 2,
     "importerUtilization": 0.75,
-    "showTheoremCalloutEditButton": false,
+    "showTheoremCalloutEditButton": true,
     "setOnlyTheoremAsMain": false,
     "setLabelInModal": false,
     "excludeExampleCallout": false,
     "enableProof": true,
     "enableMathPreviewInCalloutAndQuote": true,
+    "autocompleteDvQuery": "",
     "searchModalQueryType": "both",
     "searchModalRange": "recent",
     "searchModalDvQuery": ""
   },
-  "excludedFiles": [
-    "SIMMOD/Notes/Queue theory.md",
-    "SIMMOD/images/Pasted image 20231208151614.png",
-    "SIMMOD/images/Pasted image 20231207130743.png"
-  ]
+  "excludedFiles": []
 }
