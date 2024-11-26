@@ -77,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 289.5
+    "width": 289.5,
+    "collapsed": true
   },
   "right": {
     "id": "e85fc5a525ed010b",
@@ -153,10 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SIMMOD/Notes/Interval Estimation.md"
+                "file": "Analisi dei segnali/Note/Caratterizzazione dei segnali.md"
               },
               "icon": "lucide-list",
-              "title": "Struttura di Interval Estimation"
+              "title": "Struttura di Caratterizzazione dei segnali"
             }
           }
         ],
@@ -175,33 +176,33 @@
       "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
       "command-palette:Apri riquadro comandi": false,
-      "copilot:Copilot Chat": false
+      "publish:Pubblica modifiche": false
     }
   },
   "active": "dfeb1dc34f484542",
   "lastOpenFiles": [
+    "Analisi dei segnali/Senza nome.md",
+    "SIMMOD/Notes/Interval Estimation.md",
+    "SIMMOD/Monte carlo.canvas",
+    "SIMMOD/Interval estimation.canvas",
+    "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
     "Pasted image 20231209204949.png",
     "Pasted image 20231209204809.png",
     "Pasted image 20231209182726.png",
     "Pasted image 20231118103525.png",
     "Analisi dei segnali/Note/qualcosa.md",
-    "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
-    "Analisi dei segnali/Senza nome.md",
     "Analisi dei segnali/Note",
     "Senza nome.md",
     "Analisi dei segnali",
     "SIMMOD/Notes/Markov chains.md",
     "SIMMOD/Markov chains.canvas",
     "SIMMOD/Notes/Monte Carlo.md",
-    "SIMMOD/Notes/Interval Estimation.md",
-    "SIMMOD/Interval estimation.canvas",
     "SIMMOD/Output Analysis.canvas",
     "SIMMOD/Notes/Output analysis.md",
     "SIMMOD/Notes/Operational analysis.md",
     "SIMMOD/Notes/Queue theory.md",
     "SIMMOD/Operational Analysis.canvas",
     "SIMMOD/Queue theory.canvas",
-    "SIMMOD/Monte carlo.canvas",
     "SIMMOD/Notes/Senza nome.md",
     "SIMMOD/Notes/Intermediate state.md",
     "SIMMOD/images/Pasted image 20231208151614.png",

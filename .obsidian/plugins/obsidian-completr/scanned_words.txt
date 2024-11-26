@@ -1798,6 +1798,7 @@ complesso
 caratterizzato
 caso
 costante
+campionaria
 fortiguard
 fingerprint
 for
@@ -1992,6 +1993,7 @@ Ddh
 Defines
 Discreto
 Deterministici
+Differenziazione
 guessed
 guess
 gnome
@@ -2593,6 +2595,7 @@ IRHH
 IS
 Is
 IDF
+Integrazione
 Time
 TJ
 Tv
@@ -2877,6 +2880,7 @@ Vh
 Variables
 Vettoriale
 Variazione
+Varianza
 JW
 Jy
 JX
@@ -3103,6 +3107,7 @@ Calculate
 Considerando
 Che
 Continuo
+Campionaria
 zs
 zaa
 zz
@@ -3152,6 +3157,7 @@ MD
 Mzz
 Measures
 Moltiplicazione
+Media
 qww
 qll
 qMu

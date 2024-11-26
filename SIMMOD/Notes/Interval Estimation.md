@@ -1,6 +1,6 @@
 ## Sample mean and standard statistics
-- Sample mean: $\bar{X} = \frac{1}{p} \sum^{i=1}_{p}x_i$
-- Sample variance: $\hat{s}^2 =\frac{1}{p-1}\sum^{i=1}_{p}(x_i-\bar{X})^2$    
+- Media campionaria: $\bar{X} = \frac{1}{p} \sum^{i=1}_{p}x_i$
+- Varianza Campionaria: $\hat{s}^2 =\frac{1}{p-1}\sum^{i=1}_{p}(x_i-\bar{X})^2$    
 - Sample standard deviation: $\hat{s} = \sqrt{\hat{s}^2}$
 - Coefficient of variation: $\frac{\hat{s}}{\bar{X}}$ 
 

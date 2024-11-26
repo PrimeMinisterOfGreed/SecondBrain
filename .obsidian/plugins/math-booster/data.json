@@ -101,6 +101,29 @@
             "linkedBeginSuffix": "の証明."
           }
         }
+      },
+      "Italian": {
+        "id": "Italian",
+        "meta": {
+          "tags": []
+        },
+        "body": {
+          "theorem": {
+            "axiom": "",
+            "definition": "",
+            "lemma": "",
+            "proposition": "",
+            "theorem": "",
+            "corollary": "",
+            "claim": "",
+            "assumption": "",
+            "example": "",
+            "exercise": "",
+            "conjecture": "",
+            "hypothesis": "",
+            "remark": ""
+          }
+        }
       }
     },
     "showTheoremTitleinBuiltin": true,
