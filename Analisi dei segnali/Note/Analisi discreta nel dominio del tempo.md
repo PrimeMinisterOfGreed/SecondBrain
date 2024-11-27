@@ -26,4 +26,65 @@ le sequenze finite nel dominio delle frequenze sono indicate con $x[k]$ per esem
 >ne consegue che $\mid\mid x\mid\mid_{2}$ => è la media delle radici di ${x[n]}$ e 
 >che $\frac{\mid\mid x\mid\mid_{1}}{N}$  => mean absolute value. 
 
-Un applicazione della norma è stimare l'errore nella discretizzazione di un segnale partendo dalla sua forma continua. Una prima stima della qualità dell'approssimazione è il **Mean Square Error** $$MSE=\frac{1}{n}\sum^{N-1}_{i=0}()$$
+Un applicazione della norma è stimare l'errore nella discretizzazione di un segnale partendo dalla sua forma continua. Una prima stima della qualità dell'approssimazione è il
+>[!definition] **Mean Square Error** 
+>$$MSE=\frac{1}{n}\sum^{N-1}_{i=0}(|y[n]-x[n]|)^2=\frac{1}{N}(\mid\mid y[n]-x[n]\mid\mid_{2})$$ 
+
+
+un'altro approccio è 
+>[!definition] **Errore relativo** 
+> $$E_{rel}=^{!1} \frac{\mid\mid y[n]-x[n]\mid\mid_{2}}{\mid\mid x[n]\mid\mid_{2}}$$
+
+
+## Operazioni sulle sequenze 
+>[!definition] Prodotto  
+> Siano $x[n]$ e $y[n]$ due sequenze. Il loro prodotto è una sequenza $w_{1}[n]=x[n]*y[n]$ 
+
+%%metti un immagine modulatore qui %%  
+In alcune applicazioni questo processo è noto come **modulazione** e il dispositivo che lo implementa è detto **modulatore**. La moltiplicazione per uno scalare invece $w_{2}[n]=Ax[n]$ è implementata da un **moltiplicatore**. 
+
+>[!definition] Addizione
+>$$w_{3}[n]=x[n]+y[n]$$
+
+%%metti un immagine adder e moltiplicatore qua%%
+
+il device che implementa questo processo è un **sommatore**. 
+
+Un applicazione dell'operazione di somma è quella di migliorare la qualità della misura di un segnale disturbato da un rumore aleatorio sommato. 
+
+>[!corollary] Ensemble average
+Sia D il vettore di rumore aleatorio e $D_{i}$ un suo elemento, allora se S è il segnale $x_{i}=s_{i}+d_{i}$  il suo vettore di dati medio detto **Ensemble average** è  $$x_{ave}=\frac{1}{k}\sum^{k}_{i=1}(x_{i})=^{!1}s+\frac{1}{k}\left( \sum^{k}_{i=1}d_{i} \right)$$  
+
+per un valore di k abbastanza grande , $x_{ave}$ è una replica ragionevole del segnale originale. Poichè la media del vettore dei rumori diventa sempre più piccola.  Una particolare applicazione di questo vettore è nella stima della potenza del rumore. 
+
+>[!definition] Time shift 
+>$$w_{H}[n]=x[n-N]$$ 
+>- con $N<0$ si parla di avanzamento
+>- con $N=1$ si parla di relazione input-output 
+
+>[!definition] Avanzamento/ritardo unitario
+>$$w_{h}[n]= x[n-1]$$ e $$w_{s}[n]=x[n+1]$$ scrivibile in termini della trasformata z come $$W_{H}(z)=z^{-1}X(z)$$ e $$W_{s}(z)=zX(z)$$
+
+>[!definition] Inversione temporale 
+> $$w[n]=x[-n]$$
+
+## Combinazione di operazioni elementari 
+
+in molti casi le operazioni semplici vengono combinate in circuiti più complessi. Un esempio è una sequenza generata da una combinazione pesata con i valori passati di un altra sequenza $$y[n]=b_{0}x[n]+b_{1}x[n-1]+b_{2}x[n-1]+a_{1}y[n-1]$$
+Un'altra operazione è la 
+>[!definition] Somma Convolutiva 
+> Siano $x[n]$ e $h[n]$ due sequenze. Allora la loro somma convolutiva è $$y[n]=\sum^{\infty}_{k=-\infty}x[k]*h[n-k]$$ Scrivibile anche come $$y[n]=\sum^{\infty}_{k=-\infty}x[n-k]*h[k]$$
+
+Per sintesi questa operazione si scrive come $y[n]=x[n] \oplus h[n]$. Se la lunghezza di $x[n]$ è N e $h[n]$ è M allora la **convoluzione** genera una sequenza lunga M+N-1
+
+Se invece volessimo generare una sequenza con rateo modificato rispetto all'originale, bisogna ricorrere alla 
+>[!definition] Alterazione del rateo di campionamento 
+> Sia $x[n]$ una sequenza con rateo $F_{T}Hz$ usata per generare $y[x]$ che ha rateo $F_{T}'Hz$ allora il rateo di alterazione voluto è $$R=\frac{F_{T}'}{F_{T}}$$
+> 
+
+quando $R>1$ allora si ottiene una sequenza con frequenza più alta e il processo si chiama **sovracampionamento** , ed è implementato da un **interpolatore**. Viceversa se $R<0$ il processo si chiama **sottocampionamento** ed è implementato da un **decimatore**.  In sovracampionamento ogni $L-1 : L>1$ campioni equidistanti si inserisce un campione 0, otteniamo quindi una sequenza $$x[n]=\begin{cases}
+x[nk]  \\ 0
+\end{cases}$$
+Viceversa nel sottocampionamento si tiene solo un campione ogni $M:M>1 \implies y[n]=x[nM]$ il cui rateo sarà quindi $\frac{1}{M}$ 
+
+## Operazioni su sequenza finite 

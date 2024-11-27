@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5646022b51e8ac81",
+        "id": "af8f092407733b51",
         "type": "tabs",
         "children": [
           {
-            "id": "6a59c0616d3a1c58",
+            "id": "02bf056a4c249df1",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#joint_pdf",
+                "query": "[\"aliases\"]",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": false
+                "file": "SIMMOD/Notes/Interval Estimation.md",
+                "linksCollapsed": true,
+                "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Collegamenti in uscita da Caratterizzazione dei segnali"
+              "title": "Collegamenti in uscita da Interval Estimation"
             }
           },
           {
@@ -161,7 +161,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -179,29 +179,34 @@
       "publish:Pubblica modifiche": false
     }
   },
-  "active": "6a59c0616d3a1c58",
+  "active": "02bf056a4c249df1",
   "lastOpenFiles": [
-    "SIMMOD/Notes/Stime Intervallari.md",
-    "SIMMOD/Notes/Analisi Output.md",
-    "SIMMOD/Output Analysis.canvas",
-    "SIMMOD/Markov chains.canvas",
-    "SIMMOD/Interval estimation.canvas",
-    "SIMMOD/Notes/Catene di Markov.md",
-    "SIMMOD/Notes/Teoria Delle Code.md",
-    "SIMMOD/Notes/Monte Carlo.md",
     "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
-    "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
+    "Analisi dei segnali/Note/qualcosa.md",
     "Analisi dei segnali/Senza nome.md",
+    "SIMMOD/Notes/Teoria Delle Code.md",
+    "SIMMOD/Notes/Stime Intervallari.md",
+    "SIMMOD/Notes/Catene di Markov.md",
+    "SIMMOD/Notes/Analisi Output.md",
+    "SIMMOD/Notes/Analisi Operazionale.md",
+    "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
+    "().md",
+    "SIMMOD/Notes/Interval Estimation.md",
     "SIMMOD/Monte carlo.canvas",
+    "SIMMOD/Interval estimation.canvas",
     "Pasted image 20231209204949.png",
     "Pasted image 20231209204809.png",
     "Pasted image 20231209182726.png",
     "Pasted image 20231118103525.png",
-    "Analisi dei segnali/Note/qualcosa.md",
     "Analisi dei segnali/Note",
-    "Senza nome.md",
     "Analisi dei segnali",
-    "SIMMOD/Notes/Analisi Operazionale.md",
+    "SIMMOD/Notes/Markov chains.md",
+    "SIMMOD/Markov chains.canvas",
+    "SIMMOD/Notes/Monte Carlo.md",
+    "SIMMOD/Output Analysis.canvas",
+    "SIMMOD/Notes/Output analysis.md",
+    "SIMMOD/Notes/Operational analysis.md",
+    "SIMMOD/Notes/Queue theory.md",
     "SIMMOD/Operational Analysis.canvas",
     "SIMMOD/Queue theory.canvas",
     "SIMMOD/Notes/Senza nome.md",
@@ -225,7 +230,6 @@
     "SIMMOD/images",
     "SIMMOD",
     "HoneyPot.md",
-    "Programmi Metodi Numerici.md",
-    "Prova.md"
+    "Programmi Metodi Numerici.md"
   ]
 }
