@@ -25,7 +25,7 @@ I valori dei segnali possono essere:
 - Differenziazione => $y(1)= \frac{dx(t)}{dt}$ 
 
 Alcune operazioni sono meglio eseguibili nel dominio delle frequenze, a cui si passa usando la 
->[!important] **trasformata di fourier**
+>[!theorem] **trasformata di fourier**
 >$$X(j\Omega) = \int^{t}_{-\infty}x(t)e^{-j\Omega t}dt$$
 >definito anche **spettro di** $x(t)$ l'operazione di passaggio serve per eseguire il filtraggio del segnale. Il range di frequenze che può passare da un filtro è detto **banda passante** mentre quella che non passa è la **banda filtrata**.
 
@@ -48,7 +48,7 @@ Queste operazioni sono molto importanti per recuperare un segnale ad esempio da 
 
 Una sequenza può avere valori reali o complessi (segnali reali/complessi). I segnali acquisiti di solito hanno valori reali, ma per esigenze di analisi potrebbe essere necessario generare un segnale complesso da uno reale. Per farlo generalmente si ricorre alla 
 
->[!important] **Trasformata di Hilbert**  
+>[!theorem] **Trasformata di Hilbert**  
  >$$
 h_{HT(T)}=\frac{1}{\pi t} \rightarrow H_{HT}(j\Omega)= 
 \begin{cases}
@@ -68,7 +68,7 @@ Dove:
 - $X_{n}(j\Omega)$ => porzione di frequenze negative di $X(j\Omega)$ 
 
 Se applichiamo a $X_{}(t)$ Hilbert , il suo output $\hat{x}(t)$ avrà spettro 
->[!important] Corollario
+>[!corollary] Corollario
 >$$\hat{X}(j\Omega) = H_{HT}(j\Omega)X(j\Omega)= -jX_{p}(j\Omega)+jX_{m}(j\Omega)$$
 >Si può mostrare che **$x(t)$ è anch'esso reale**.
 >
@@ -86,7 +86,7 @@ Ci sono 4 tipi di modulazioni possibili dei segnali analogici:
 - dell'impulso dell'ampiezza 
 
 La modulazione dell'ampiezza parte da un segnale sinusoidale $A\cos(\Omega_{0}t)$, chiamato **carrier** o **portante**, variato da un segnale limitato in banda di frequenza detto **segnale modulante** $$y(t)=Ax(t)*\cos(\Omega_{0}t)$$ La modulazione si implementa moltiplicando i due segnali, lo spettro ottenuto è 
->[!important]  Modulazione 
+>[!definition]  Modulazione 
 >$$f_{Y}(j\Omega)=\frac{A}{2}+f_{X}(j(\Omega-\Omega_{0})) + \frac{A}{2}f_{X}(j(\Omega+\Omega_{0}))$$
 >Assumendo che $\Omega_{0}>\Omega_{m}$ dove $\Omega_{m}$ => massima frequenza del segnale. Adesso $y(t)$  è un segnale limitato in banda ad alta frequenza, in cui :
 >- le frequenze in  $\Omega_{0}$ e $\Omega_{0}+\Omega_{m}$ è detta **banda superiore** 
@@ -113,7 +113,7 @@ Questo metodo si chiama **Quadrature Amplitude Modulation** (QAM), usa DSB per m
 Siano $x_{1}(t)$ e $x_{2}(t)$ due segnali limitati in banda a bassa frequenza con larghezza $\Omega_{m}$. Allora $y(t)= Ax_{1(t)}*\cos(\Omega_{0}t)+ Ax_{2(t)}*\sin(\Omega_{0}t)$ dove: $A\cos(\Omega_{0t})$ e $A\sin(\Omega_{0}t)$ sono le modulazioni per i segnali portanti, che hanno ora la stessa frequenza $\Omega_{0}$ ma sono sfasati di 90 gradi. In generale la prima componente è la In-Phase mentre la seconda è quella di quadratura.
 
 Lo spettro di questo segnale è 
->[!important] Spettro  
+>[!definition] Spettro  QAM
 >$$Y(j\Omega)=\frac{A}{2}\{x{1(j(\Omega-\Omega_{0}))+x_{1}(j(\Omega-\Omega_{0}))}\}+\frac{A}{2j}\{x_{2}j(\Omega-\Omega_{0})-x_{2}(j(\Omega-\Omega_{0}))\}$$
 
 Il quale occupa la stessa banda che avrebbe occupato DSB. Per recuperare il vecchio segnale da quello composito deve questo deve essere moltiplicato per entrambe le componenti del carrier separatamente ottenendo il seguente risultato 
