@@ -1,4 +1,4 @@
-I segnali , quando convertiti in valori discreti, possono essere analizzati sia nel dominio del tempo che in quello delle frequenze.
+eI segnali , quando convertiti in valori discreti, possono essere analizzati sia nel dominio del tempo che in quello delle frequenze.
 ## Rappresentazione nel dominio del tempo
 i segnali sono rappresentati da sequenze numeriche dette campioni, questi valori sono una qualche funzione nel tempo che rappresenta il segnale, ad esempio $x[n]$ ne rappresenta l'ampiezza. Il periodo di tempo tra un acquisizione e l'altra è detto **intervallo di campionamento** T, il cui reciproco è la **frequenza di campionamento** $F_{T}=\frac{1}{T}$  in Hz. Questa sequenza può essere composta da numeri interi, reali o complessi (a cui corrispondono sequenze intere, reali o complesse). Le complesse si possono scrivere come 
 
@@ -88,3 +88,11 @@ x[nk]  \\ 0
 Viceversa nel sottocampionamento si tiene solo un campione ogni $M:M>1 \implies y[n]=x[nM]$ il cui rateo sarà quindi $\frac{1}{M}$ 
 
 ## Operazioni su sequenza finite 
+Alcune operazioni precedentemente descritte, non sono applicabili su sequenze finite. Ad esempio l'inversione temporale e lo shifting escono dai confini della sequenza e anche la convoluzione genera sequenze di lunghezze non valide. Per ovviare a questo problema si usa può ricorrere spesso e volentieri al modulo.
+>[!definition] Time Reversal circolare
+> Sia $M=0\dots N-1$ una sequenza intera con $m \in M$ un generico elemento. Un operazione di modulo è $<m>_{mN}=m \mod{n}$, sia $r=<m>_{N}$ allora $r=m+lN$. Dove l è un intero scelto per soddisfare la relazione $0<m+lN<n-1$. Il time reversal circolare si scrive quindi $${y[n]}={x[<-n>_{N}]}$$
+
+
+>[!definition] Shift Circolare 
+> Questa operazione è definita come $x_{c}[n]=x[<n-n_0>_{N}]$ , con $n_{0}>0$ è uno shift circolare a destra, con $n_{0}<0$ è uno shift circolare a sinistra.
+
