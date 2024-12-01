@@ -111,6 +111,7 @@ migliorare
 misura
 medio
 modulo
+meno
 delle
 different
 daemon
@@ -295,6 +296,7 @@ decimatore
 descritte
 dai
 destra
+dire
 potenze
 ports
 port
@@ -453,6 +455,10 @@ pesata
 passati
 precedentemente
 problema
+periodica
+periodiche
+periodi
+phase
 inv
 is
 it
@@ -716,6 +722,9 @@ tutti
 termini
 temporale
 tiene
+tilde
+totale
+tipiche
 honeypot
 http
 https
@@ -1017,6 +1026,8 @@ sottocampionamento
 scelto
 soddisfare
 sinistra
+simmetrico
+sinusoide
 open
 of
 os
@@ -1360,6 +1371,7 @@ abbastanza
 avanzamento
 alterazione
 applicabili
+antisimmetrico
 running
 redirection
 redirected
@@ -1507,6 +1519,8 @@ relazione
 rateo
 ricorrere
 reversal
+ricorrenti
+rappresentazioni
 but
 between
 by
@@ -2102,6 +2116,11 @@ convoluzione
 campione
 confini
 circolare
+classificare
+caratteristiche
+coniugato
+complessa
+converga
 fortiguard
 fingerprint
 for
@@ -2222,6 +2241,7 @@ fasi
 facendolo
 finita
 finito
+fondamentale
 Log
 Lr
 Lpp
@@ -2642,6 +2662,8 @@ volessimo
 voluto
 valide
 volentieri
+varie
+verifica
 Several
 Scanning
 SLL
@@ -2717,6 +2739,8 @@ Square
 Somma
 Scrivibile
 Shift
+Sequenza
+Sinusoide
 exploit
 escalation
 edges
@@ -2861,7 +2885,11 @@ errore
 elemento
 elementari
 equidistanti
+eI
 escono
+espressa
+essa
+energia
 Nikto
 NB
 NAA
@@ -3082,6 +3110,7 @@ Raising
 Repeat
 Rappresentazione
 Reversal
+Reale
 AJ
 AA
 And
@@ -3132,6 +3161,7 @@ Allora
 Avanzamento
 Alterazione
 Ad
+Alternativamente
 BX
 BCC
 Bottleneck
@@ -3291,6 +3321,7 @@ Variazione
 Varianza
 Viene
 Viceversa
+Visto
 JW
 Jy
 JX
@@ -3470,6 +3501,7 @@ Ovv
 Ok
 Obtain
 Operazioni
+Ogni
 CAAA
 CU
 Consistency
@@ -3531,6 +3563,8 @@ Carrier
 Combinazione
 Convolutiva
 Circolare
+Classificazione
+Coniugato
 zs
 zaa
 zz
