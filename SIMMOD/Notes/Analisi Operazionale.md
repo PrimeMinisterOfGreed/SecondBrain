@@ -1,141 +1,171 @@
 
-## Basic quantities
-$T$ length of observation period
-$B$ amount of time in which the system is busy
-$C$ Number of completions
-$A$ Number of arrivals
+## Quantità assiomatiche
 
-### Derived quantities
-$\lambda = \frac{A}{T}$  job/sec -> arrival rate
-$X= \frac{C}{T}$ output rate
-$U= \frac{B}{T}$ utilization 
-$S = \frac{B}{C}$ mean service time
+-  $T$ => lunghezza del periodo d'osservazione
+-  $B$ => frazione di tempo per cui il sistema è occupato 
+-  $C$ => Job completati 
+-  $A$ => Numero di arrivi
+
+### Quantità derivate 
+
+-  $\lambda = \frac{A}{T}$  job/sec -> Rateo di arrivi
+-  $X= \frac{C}{T}$ => throughput
+-  $U= \frac{B}{T}$ => Utilizzo
+-  $S = \frac{B}{C}$ => tempo di servizio medio 
 
 
 ### Saturation
-$U = X*S$  -> utilization law
-$A = C$  -> flow balance| operational equilibrium
-$U= \lambda*S$ 
+- $U = X*S$  -> legge dell'utilizzazione
+- $A = C$  -> equilibrio dei flussi/ equilibrio operazionale 
+- $U= \lambda*S$ 
+- Saturation =>  $U \leq 1$ -> $X \leq  \frac{1}{S}$  e $\lambda \leq \frac{1}{S}$ 
+Se $X = \frac{1}{S}$  =>  **il sistema è saturato**
 
-Saturation: $U \leq 1$ -> $X \leq  \frac{1}{S}$  and $\lambda \leq \frac{1}{S}$ 
-if $X = \frac{1}{S}$  the system is saturated ^1c8519
-## Customer quantities
-$a_k$  = the arrival of the k-th customer
-$c_k$ = instant in which leaves the system (must be $c_k \gt a_k \geq 0$)
-$w_k = c_k - a_k$ waiting time for k-th customer
-$\bar{w} = \frac{1}{C} \sum^{C}_{k=1}{w_k}$ average waiting time
-## Little's formula
+## Statistiche del cliente 
+- $a_k$  = tempo di arrivo del k-th cliente 
+- $c_k$ = Instante in cui il cliente lascia il sistema  ( $c_k \gt a_k \geq 0$)
+- $w_k = c_k - a_k$ Tempo di attesa del k-esimo cliente
+- $\bar{w} = \frac{1}{C} \sum^{C}_{k=1}{w_k}$ tempo d'attesa medio 
+## Formula di little ⚠
 
-$\bar{n} = X*\bar{w}$ -> waiting law
-$\bar{n} = \lambda*\bar{w}$ -> little's formula
+- $\bar{n} = X*\bar{w}$ -> legge del tempo d'attesa :LiAward:
+- $\bar{n} = \lambda*\bar{w}$ -> formula di little :LiAward:
 
 ![[Pasted image 20231001123801.png]]
 
- little formula without op eq
-$\bar{n} = \frac{G(T)}{T}$  and $\bar{w} = \frac{G(T)}{A(T)}$  --> $\bar{n} = \frac{A(T)}{G(T)} \bar{w} X$ 
+formula di little senza equilibrio operazionale 
+$\bar{n} = \frac{G(T)}{T}$  e $\bar{w} = \frac{G(T)}{A(T)}$  --> $\bar{n} = \frac{A(T)}{G(T)} \bar{w} X$ 
 
-## Network of queue
-i = 1,...,M -> index for each station in the network. 0 is the outside(or whole system).
+## Reti di code
+i = 1,...,M ->Indice per ogni stazione. 0 sta ad indicare una stazione esterna. :LiArrowLeftCircle:
 
-$U_i= X_iS_i$ , $X_0= \frac{C_0}{T}$ , $\lambda_0 = \frac{A_0}{T}$  --> in op eq. $\lambda_0 = X_0$ 
-$V_i$  number of service request for queue i $V_i = \frac{C_i}{C_0}$ 
-$D_i$ total service (time) demand for i $D_i = V_iS_i=\frac{B_i}{C_0}$ 
-
-
-### Consistency law
-$X_0 = \frac{C_0}{T} =\frac{1}{V_i}X_i = \frac{X_i}{V_i}$  -> X in terms of visits
-$X_0 = \frac{C_0}{T} = \frac{1}{D_i} = \frac{U_i}{D_i}$  -> X in terms of utilization
-it follows $\frac{X_i}{X_j} = \frac{V_i}{V_j}$ and $\frac{U_i}{U_j} = \frac{V_iS_i}{V_jS_j} = \frac{D_i}{D_j}$ . 
-X and U depend in general on the load of the system , relative values remains stable while change from station to station.
-V are characteristics of each client
-
-### Matrix representation
-
-$C_i$ number of departures from station i
-$C_{i,j}$ number of customers that move from i to j
-it follows $C_i=\sum^{M}_{j=0}{C_{i,j}}$ 
-
-$q_{i,j} = \frac{C_{i,j}}{C_i}$ transition frequency from i to j
-it follows $\frac{C_{i,j}}{T} = q_{i, j}X_i$ 
-
-if op eq -> $A_i = C_i$, then  $X_j = \sum^{M}_{i=0}{X_iq_{i,j}}$  --> can be written as $\boldsymbol{X}= \boldsymbol{X}\boldsymbol{Q}$   
-where $\textbf{X} = (X_0,...,X_M)$  --> vector of M+1 components
-$\textbf{Q}$ square matrix (M+1) x (M+1) filled with  $q_{i,j} = \frac{C_{i,j}}{C_i}$ , this matrix characterize the system. it follows that
-$\frac{X_j}{X_0}  = \sum^{M}_{i=0}\frac{X_i}{X_0}q_{i,j}$ --> rewrite of flow balance equation
-
-#### little law for Network of queues
-using $V_j=\frac{X_j}{X_0}$  and knowing $V_0 = 1$ is possible to define $\textbf{V} = \textbf{V}\textbf{Q}$ that can be used to describe the system. this is possible because of the Consistency Laws. it follows also that $\bar{n_i} = X_i\bar{w_i}$  where $\bar{n_i}$ are mean number of customers and $\bar{w_i}$ are the mean waiting times.
-
-## load dependency
-- $T(n)$ time spent by the system with n customers inside
-- $K_{max}$  maximum number of customers  simultaneously present inside the system 
-
-$T = \sum^{K_{max}}_{n=0}T(n)$  and $B=T-T(0)$  
-
-#### load dependent behaviour
-
-$\phi(k) = \frac{T(k)}{T}$    $k=0,...,K_{max}$  -> fraction of time spent by the system in each state
-
-$C(k)$ -> number of completions with k customers in the systems  -> $\sum^{K_{max}}_{k=1}{C(k)} = C$ 
-
-$S(k) = \frac{T(k)}{C(k)}$ -> load dependent mean service time or service function 
-
-$X = \sum^{K_{max}}_{k=1}{\frac{1}{S(k)}{\phi(k)}}$  generalized throughput
-
-### load dependent behaviour for queues
-$T_i(k)$ time spent at the i station with k customers inside (i=1,...,M) 
-we can then write $\sum^{K_{max}}_{k=0}T_i(k) = T$  (i=0,...,M) and then we can define 
-$\phi_i(k) = \frac{T_i(k)}{T}$ the fraction of time spent by each station with k customers. 
-
-Let $C_i(k)$  (i=1,...,M) be the number of completions from the i-th station with k customers inside, also in this case $\sum^{K_{max}}_{k=1}C_i(k)=C_i$   (i=0,..,M)
-Trivially we can define again $S_i(k)= \frac{T_i(k)}{C_i(k)}$  (i=0,...,M;k=1,...,$K_{max}$)  
-
-and again $X_i=\sum^{K_{max}}_{k=1}\frac{1}{S_i(k)}\phi_i(k)$  (i=0,...,M)
-
-## Response time
-
-with $V_i$ and $\bar{w_i}$ we can compute the amount of time taken by customers to go through the system (response time).
-
-2 types of system:
-- Open System: new customers enter with rate $\lambda$ . The number of customers can grow to $\infty$ . If the system is not saturated $X_0 = \lambda$ 
-- Closed System: fixed number of N customers is present in the system. Customers leaving are replaced with new customers
-### Response time: Closed
-N customers in system, index i=0 is meaningless and visits must be computed using a generic index k inside the system (arbitrary station) so $\Omega_i$ are dependent on k.
-
-$R_k = \sum^{i=1,i \neq k}_{M}{\Omega_i}$  average amount of time taken by customers to return to station k (Response time).
-
-$Y_k = \bar{w_k}+R_k = \sum^{M}_{i=1}{\Omega_i}$  average amount of time take by a customer to make a complete tour in the system starting from station k (cycle time).
-
-if we generalize taking in consideration explicitly the station K
-$V_j^{[k]} = \frac{C_j}{C_k} = \frac{X_j}{X_k} = \sum^{M}_{i=1}V_i^{[k]}q_{i,j}$          $j=1,...,m$    
-we can relate this notation referring to a second station h
-$V_j^{[h]} = \frac{C_j}{C_h} = \frac{V_j^{[k]}}{V_h^{[k]}}$              $j,h,k=1,...,M$ 
-and for this chosen station we can compute 
-$Y_k = \sum^{M}_{i=1}{\Omega_i}^{[k]} = \sum^{M}_{i=1}{V_i^{[k]}}\bar{w_i}$  
-and also 
-$Y_h = \sum^{M}_{i=1}\Omega_i^{[h]} = Y_k\frac{1}{V_h^{[k]}}$  and obtaining the general form
-$R_h = Y_h - \bar{w_h}$ 
+- $U_i= X_iS_i$ , $X_0= \frac{C_0}{T}$ , $\lambda_0 = \frac{A_0}{T}$  --> in equilibrio operazionale. $\lambda_0 = X_0$ ⚠
+- $V_i$  Numero di richieste di servizio alla stazione i $V_i = \frac{C_i}{C_0}$ ⚠
+- $D_i$ Domanda totale di servizio  $D_i = V_iS_i=\frac{B_i}{C_0}$ 
 
 
-### Closed system with delay station
-$Z$ average delay of station 0, using the delay station to compute visits counts (as reference station). We can write
-$R_0 = \sum^{M}_{i=1}{\Omega_i}$ ,  $Y_0= Z+R_0$. In whole system the number of customers is constant, so using little law's on the black box:
+### Leggi di consistenza
+- $X_0 = \frac{C_0}{T} =\frac{1}{V_i}X_i = \frac{X_i}{V_i}$  -> throughput in termini di visite 
+- $X_0 = \frac{C_0}{T} = \frac{1}{D_i} = \frac{U_i}{D_i}$  -> throughput in termini di utilizzazioni
+
+>[!definition] Leggi di consistenza  
+>$$\frac{X_i}{X_j} = \frac{V_i}{V_{j}}\implies\frac{U_i}{U_j} = \frac{V_iS_i}{V_jS_j} = \frac{D_i}{D_j}$$ 
+>
+
+il throughput e l'utilizzazione sono misure che variano a seconda del carico del sistema, i rapporti rimangono stabili tra una stazione e l'altra.
+Le visite sono invece una caratteristica che varia da stazione a stazione.
+
+### Rappresentazione matriciale 
+
+- $C_i$ Numero di partenze dalla stazioni i
+- $C_{i,j}$ Porzioni di partenze che si muovono da i a j
+==>$C_i=\sum^{M}_{j=0}{C_{i,j}}$ :LiXSquare:
+
+- $q_{i,j} = \frac{C_{i,j}}{C_i}$ Tasso di transizioni da i a j ==>  $\frac{C_{i,j}}{T} = q_{i, j}X_i$ :LiXSquare:
+
+Se siamo in equilibrio operazionale -> $A_i = C_i$, e quindi  $X_j = \sum^{M}_{i=0}{X_iq_{i,j}}$  che può essere scritto come  $\boldsymbol{X}= \boldsymbol{X}\boldsymbol{Q}$   
+
+Dove :
+- $\textbf{X} = (X_0,...,X_M)$  --> è un vettore di M+1 componenti che rappresenta i throughput
+- $\textbf{Q}$ Matrice quadrata (M+1) x (M+1) composta dai  $q_{i,j} = \frac{C_{i,j}}{C_i}$ , questa matrice caratterizza completamente il sistema. 
+
+Ne segue che l'equazione di bilanciamento dei flussi può essere riscritta come $$\frac{X_j}{X_0}  = \sum^{M}_{i=0}\frac{X_i}{X_0}q_{i,j}$$ 
+
+#### Regola di Little per Reti di Code 
+usando $V_j=\frac{X_j}{X_0}$  e sapendo che $V_0 = 1$ è possibile definire la matrice  $\textbf{V} = \textbf{V}\textbf{Q}$ che può essere usata per descrivere il sistema. Ciò è possibile grazie alle leggi di consistenza. Ne segue anche che  $$\bar{n_i} = X_i\bar{w_i}$$  Dove:
+- $\bar{n_i}$ => numero medio di clienti alla stazione i
+- $\bar{w_i}$ => tempo d'attesa medio
+
+## Dipendenza dal carico 
+- $T(n)$ => Tempo speso dal cliente dentro al sistema
+- $K_{max}$ => Massimo numero di clienti simultaneamente presenti dentro al sistema  
+
+==> $T = \sum^{K_{max}}_{n=0}T(n)$  e $B=T-T(0)$  
+
+#### Comportamento dipendente dal carico 
+
+- $\phi(k) = \frac{T(k)}{T}; k=0,...,K_{max}$ => frazione di tempo spesa dal sistema nello stato k
+- $C(k)$ -> numero di completamenti con k clienti   -> $\sum^{K_{max}}_{k=1}{C(k)} = C$ 
+- $S(k) = \frac{T(k)}{C(k)}$ -> tempo medio di servizio dipendente dal carico o **funzione di servizio** 
+- $X = \sum^{K_{max}}_{k=1}{\frac{1}{S(k)}{\phi(k)}}$ => throughput generalizzato 
+
+### Comportamento dipendente dal carico per reti di code 
+- $T_i(k)$ => Tempo speso dal cliente nella stazione i (i=1,...,M) 
+Usando questa quantità possiamo scrivere:
+- $\sum^{K_{max}}_{k=0}T_i(k) = T;i=0\dots M$  e quindi 
+- $\phi_i(k) = \frac{T_i(k)}{T}$ => frazione di tempo spesa da ogni cliente nella stazione I. 
+
+Sia:
+- $C_i(k)$  (i=1,...,M) => il numero di completamenti con k clienti in coda alla stazione i
+ - $\sum^{K_{max}}_{k=1}C_i(k)=C_i$   (i=0,..,M) anche in questo caso 
+Si può quindi definire nuovamente => $S_i(k)= \frac{T_i(k)}{C_i(k)}$  (i=0,...,M;k=1,...,$K_{max}$)  
+
+e di nuovo $X_i=\sum^{K_{max}}_{k=1}\frac{1}{S_i(k)}\phi_i(k)$  (i=0,...,M)
+
+## Tempo di Risposta 
+
+Con $V_i$ e $\bar{w_i}$ è possibile calcolare il tempo impiegato dal cliente per attraversare il sistema in 
+2 tipi di sistema :
+- Sistemi aperti:
+    - I nuovi clienti arrivano con tasso $\lambda$ .
+    - Il loro numero può aumentare a $\infty$ .
+    - fino a che il sistema non è saturato abbiamo $X_0 = \lambda$ 
+- Sistemi chiusi: 
+    - Numero fisso N di clienti nel sistema
+    - I clienti che escono vengono rimpiazzati subito con nuovi clienti 
+### Tempo di risposta: Caso dei sistemi aperti
+
+- $\Omega_i=V_i\bar{w_i}$ (i=1,...,M) => tempo medio speso dal cliente nella stazione i
+- $R = \sum^{M}_{i=1}\Omega_i$ => Tempo medio di risposta del sistema (o tempo di risposta medio dei clienti all'interno del sistema 
+
+usando la regola di Little 
+$$\bar{n}=\lambda R=\sum^{M}_{i=1}X_i\bar{w_i}= \sum^{M}_{i=1}{\lambda \Omega_i}=\sum^{M}_{i=1}\bar{n_i}$$
+### Tempo di Risposta: Caso dei sistemi chiusi 
+N clienti nel sistema. In questo caso la stazione di indice 0 non ha significato e bisogna quindi selezionarne una di riferimento (qui definita **stazione arbitraria** ) perciò $\Omega_i$ sono dipendenti da k.
+
+- $R_k = \sum^{i=1,i \neq k}_{M}{\Omega_i}$  => Tempo di risposta => Tempo impiegato dal cliente per tornare alla stazione k
+- $Y_k = \bar{w_k}+R_k = \sum^{M}_{i=1}{\Omega_i}$  => Tempo di ciclo => Tempo medio impiegato dal cliente per fare un tour completo del sistema 
+
+Si può generalizzare prendendo in considerazione un arbitraria stazione k
+$$
+\begin{aligned}
+V_j^{[k]} = \frac{C_j}{C_k} = \frac{X_j}{X_k} = \sum^{M}_{i=1}V_i^{[k]}q_{i,j} &&  j=1,...,m
+\end{aligned}
+$$
+
+Possiamo espandere la notazione prendendo in considerazione una seconda stazione h
+$$
+\begin{align}
+V_j^{[h]} = \frac{C_j}{C_h} = \frac{V_j^{[k]}}{V_{h^{[k]}}}&& j,h,k=1,...,M
+\end{align}
+$$      
+E per questa stazione scelta calcolare 
+$$Y_k = \sum^{M}_{i=1}{\Omega_i}^{[k]} = \sum^{M}_{i=1}{V_i^{[k]}}\bar{w_i}$$ 
+e anche 
+$$Y_h = \sum^{M}_{i=1}\Omega_i^{[h]} = Y_k\frac{1}{V_h^{[k]}}$$  ottenendo quindi la forma generale 
+$$R_h = Y_h - \bar{w_h}$$ ⚠ 
+
+
+### Sistemi chiusi con stazione di ritardo 
+- $Z$ => Ritardo medio della stazione 0 (stazione di ritardo)
+usando la stazione di ritardo come referenza si possono calcolare tutte le visite nel sistema. 
+Possiamo scrivere 
+- $R_0 = \sum^{M}_{i=1}{\Omega_i}$ 
+- $Y_0= Z+R_0$. 
+Visto che il numero di clienti all'interno del sistema è costante possiamo usare la regola di Little sul sistema come fosse una black box.
 ![[Pasted image 20231001173621.png]]
 
-in operational eq. we have $X_0=\frac{A_0}{T} = \frac{C_0}{T}$. And denoting $\bar{n_d}$ the avg number of customers in the delay station and $\bar{n_{cs}}$ the avg number of customer in the central system we have.
+in equilibrio operazionale abbiamo => $X_0=\frac{A_0}{T} = \frac{C_0}{T}$. 
+Siano:
+- $\bar{n_d}$  => il numero medio di clienti nella stazione di ritardo  
+- $\bar{n_{cs}}$ => il numero medio di clienti nel sistema centrale 
 
-$N=X_0Y_0= X_0(Z+R)= \bar{n_d} + \bar{n_{cs}}$ . it follows $R_0 = \frac{N_{cs}}{X_0} - Z$ 
-$U= n_{cs}/N$ 
+$$N=X_0Y_0= X_0(Z+R)= \bar{n_d} + \bar{n_{cs}} \implies R_0 = \frac{N_{cs}}{X_0} - Z$$
+- $U= n_{cs}/N$ => utilizzo del sistema centrale 
 
-### Response time: Open 
 
-$\Omega_i=V_i\bar{w_i}$ (i=1,...,M) average time spent by customer in queue i
-$R = \sum^{M}_{i=1}\Omega_i$  average response time of the system (or average response time spent by customer in the system).
 
-using little law's
-$\bar{n}=\lambda R=\sum^{M}_{i=1}X_i\bar{w_i}= \sum^{M}_{i=1}{\lambda \Omega_i}=\sum^{M}_{i=1}\bar{n_i}$ 
-
-## Bottleneck Analysis
+## Analisi del collo di bottiglia 
 using $V_i$ and $S_i$  we can observe the behaviour of the system under stress condition ($\lambda$ grow in case of open system and $N$ grow  in case of closed system).  
 
 ### Bottleneck Analysis: open systems

@@ -1,7 +1,7 @@
 {
 	"nodes":[
-		{"id":"372b330737fc6f7b","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Basic quantities","x":-780,"y":40,"width":766,"height":655,"color":"1"},
-		{"id":"a2f17c2529b46a8a","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Little's formula","x":320,"y":89,"width":740,"height":557,"color":"1"},
+		{"id":"372b330737fc6f7b","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Quantità assiomiche","x":-780,"y":40,"width":766,"height":655,"color":"1"},
+		{"id":"a2f17c2529b46a8a","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Formula di little","x":320,"y":89,"width":740,"height":557,"color":"1"},
 		{"id":"82fa675c8f4cced3","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Network of queue","x":-814,"y":1093,"width":800,"height":506,"color":"1"},
 		{"id":"f4650f79d98d9468","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Response time Open","x":1700,"y":1510,"width":800,"height":270,"color":"1"},
 		{"id":"86bda41fa4e1e2b2","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Response time","x":600,"y":1183,"width":800,"height":327,"color":"1"},
@@ -18,7 +18,7 @@
 		{"id":"226b3ee2992c6c69","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Case of queues with load dependent behaviour","x":-2680,"y":3604,"width":600,"height":274,"color":"1"},
 		{"id":"ff00de0b3abecd91","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Case of infinite server","x":-3760,"y":2624,"width":766,"height":795,"color":"1"},
 		{"id":"7ba10d4143bcda02","type":"text","text":"## a grahical analysis\n![[Pasted image 20231004122927.png]]\nthe slanted asymptote intersect the ordinate axis at -Z the abscissa at $N_T^*=\\frac{Z}{V_bS_b}$ .  The horizontal asymptote at the saturation point $N^*=\\frac{Z}{V_bS_b} + \\frac{R(1)}{V_bS_b} = N_T^* +N_S^*$ .\nwhere $N^*_T$ is the average number of thinking terminals in saturation condition. \n$N_S^* = \\frac{R_0(1)}{V_bS_b}= \\frac{\\sum^{i=1}_{M}{V_iS_i}}{V_bS_b}$ represent the minimum number of terminals that has to be connected in order to observe queueing in the Central server.  ","x":-3735,"y":3719,"width":717,"height":480,"color":"2"},
-		{"id":"efe263d1b0e0d0e9","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Customer quantities","x":320,"y":-320,"width":740,"height":209,"color":"1"},
+		{"id":"efe263d1b0e0d0e9","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Statistiche del cliente","x":320,"y":-320,"width":740,"height":209,"color":"1"},
 		{"id":"cf89fdbc77761461","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#State balance of a single queue","x":-1100,"y":-2155,"width":740,"height":400,"color":"3"},
 		{"id":"dd093aa1b43a0d70","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Balance equations","x":420,"y":-2874,"width":740,"height":871,"color":"3"},
 		{"id":"b6e56ce5826dc568","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Solution load dependent rates","x":1720,"y":-3007,"width":620,"height":375,"color":"3"},
