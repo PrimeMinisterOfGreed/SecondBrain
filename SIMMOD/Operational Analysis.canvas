@@ -1,14 +1,14 @@
 {
 	"nodes":[
-		{"id":"372b330737fc6f7b","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Quantità assiomiche","x":-780,"y":40,"width":766,"height":655,"color":"1"},
-		{"id":"a2f17c2529b46a8a","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Formula di little","x":320,"y":89,"width":740,"height":557,"color":"1"},
-		{"id":"82fa675c8f4cced3","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Network of queue","x":-814,"y":1093,"width":800,"height":506,"color":"1"},
+		{"id":"372b330737fc6f7b","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Quantità assiomatiche","x":-780,"y":40,"width":766,"height":655,"color":"1"},
+		{"id":"a2f17c2529b46a8a","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Formula di little ⚠","x":320,"y":89,"width":740,"height":557,"color":"1"},
+		{"id":"82fa675c8f4cced3","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Reti di code","x":-814,"y":1093,"width":800,"height":506,"color":"1"},
 		{"id":"f4650f79d98d9468","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Response time Open","x":1700,"y":1510,"width":800,"height":270,"color":"1"},
 		{"id":"86bda41fa4e1e2b2","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Response time","x":600,"y":1183,"width":800,"height":327,"color":"1"},
 		{"id":"4e0cae4cd012120f","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Response time Closed","x":1700,"y":630,"width":800,"height":587,"color":"1"},
 		{"id":"7d15031b93bb2975","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Closed system with delay station","x":2720,"y":604,"width":800,"height":640,"color":"1"},
 		{"id":"6577cddc2ab01100","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Bottleneck Analysis","x":-980,"y":2320,"width":674,"height":180,"color":"3"},
-		{"id":"627bf119fc445d00","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#load dependency","x":-1840,"y":146,"width":674,"height":443,"color":"1"},
+		{"id":"627bf119fc445d00","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Dipendenza dal carico","x":-1840,"y":146,"width":674,"height":443,"color":"1"},
 		{"id":"9093cf0015b096e3","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#load dependent behaviour for queues","x":-1860,"y":2149,"width":674,"height":351,"color":"1"},
 		{"id":"64f30f7adf0428a2","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Beyond $ lambda_{max}$ (asymptotic analysis)","x":-1003,"y":3549,"width":720,"height":540,"color":"1"},
 		{"id":"78f5bfb5b337c470","type":"file","file":"SIMMOD/Notes/Analisi Operazionale.md","subpath":"#Bottleneck Analysis open systems","x":-943,"y":2779,"width":600,"height":560,"color":"1"},

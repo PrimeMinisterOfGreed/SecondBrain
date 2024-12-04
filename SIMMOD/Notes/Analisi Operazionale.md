@@ -166,33 +166,56 @@ $$N=X_0Y_0= X_0(Z+R)= \bar{n_d} + \bar{n_{cs}} \implies R_0 = \frac{N_{cs}}{X_0}
 
 
 ## Analisi del collo di bottiglia 
-using $V_i$ and $S_i$  we can observe the behaviour of the system under stress condition ($\lambda$ grow in case of open system and $N$ grow  in case of closed system).  
+Usando $V_i$ e $S_i$  possiamo osservare come $\lambda$ cresce in caso di un sistema aperto e di un sistema chiuso a seconda del carico.  
 
-### Bottleneck Analysis: open systems
-$S_i$ and $V_i$ are independent of $\lambda$. The same is not true for $X_i$ and $U_i$ so they can be represented as function of $\lambda$ --> $X_i(\lambda)$ and $U_i(\lambda)$. For the Consistency Law we have $\frac{X_i(\lambda)}{X_j(\lambda)} = \frac{V_i}{V_j}$ and $\frac{U_i}{U_j} = \frac{V_iS_i}{V_jS_j}$ , independent from $\lambda$. it follows then 
-$\lambda_i = \lambda_0V_i$ and in op.eq $\lambda \leq \frac{1}{S_i}$ (i=1,...,M).  And so $X_i(\lambda) = \lambda_i = \lambda_0V_i$ and $U_i(\lambda) = X_i(\lambda)S_i$ .
+### Analisi del collo di bottiglia: Sistemi aperti 
+$S_i$ e $V_i$ sono indipendenti da  $\lambda$ (sono caratteristiche della topologia di rete).
 
-Denote with b the first station to reach 1 of utilization. This station is the Bottleneck of the system  and is used to identify the value of $\lambda_{max}$ after which the system loses the operation eq. property. If $\lambda>\lambda_{max}$ the system reach a point in which the queues grow to infinity and the system becomes unstable. Since $\frac{U_i(\lambda)}{U_j(\lambda)}$ is fixed for any pair i,j then the station that becomes saturated first is whose the utilization becomes the largest in any loading conditions. Formally: $\frac{U_b(\lambda)}{U_i(\lambda)}=\frac{V_bS_b}{V_iS_i}=\frac{D_b}{D_i} > 1$, in order to identify the index of the bottleneck $V_bS_b=max_i(V_iS_i)$ , then we can state the maximum throughput of the bottleneck station $X_b^{[max]}(\lambda)=\frac{U_b^{[max]}(\lambda)}{S_b} = \frac{1}{S_b}$ --> $\lambda_{max}=\frac{1}{V_bS_b}$ 
+Lo stesso non si può dire per $X_i$ e $U_i$  e quindi devono essere rappresentati in funzione di : $\lambda$ --> $X_i(\lambda)$ e $U_i(\lambda)$. 
+[Per la legge di consistenza](###Leggi di consistenza) $\frac{X_i(\lambda)}{X_j(\lambda)} = \frac{V_i}{V_j}$ e $\frac{U_i}{U_j} = \frac{V_iS_i}{V_jS_j}$ , Indipendentemente da $\lambda$. Ne segue che  
+- $\lambda_i = \lambda_0V_i$ 
+-  In equilibrio operazionale $\lambda \leq \frac{1}{S_i}$ (i=1,...,M).  
+- $X_i(\lambda) = \lambda_i = \lambda_0V_i$ e $U_i(\lambda) = X_i(\lambda)S_i$ .
 
-### Beyond $\lambda_{max}$ (asymptotic analysis)
-in certain cases is possible for $\lambda$ to grow beyond $\lambda_{max}$. This may yield to saturation also the other stations that have $V_iS_i < V_bS_b$ (depend on topology). 2 cases can arise:
-1) $V_iS_i > V_jS_j$  $\forall j > i; i,j=1,2,...,M$  in this network b = 1 and only the first station can have $U = 1$ 
-2) $V_iS_i \leq V_jS_j$   $\forall j > i; i,j=1,2,...,M$  in this network b=M and all the queues can have $U=1$  if $\lambda$ becomes sufficiently large. 
+Sia b la prima stazione a raggiungere utilizzo pari a 1. Questa stazione verrà usata per individuare il collo di bottiglia del sistema associato a $\lambda_{max}$ per cui quando superato il **sistema perde l'equilibrio operazionale**.
+Se $\lambda>\lambda_{max}$ il sistema raggiunge un punto in cui le code crescono a $\infty$ e il sistema diventa instabile.
+Siccome $\frac{U_i(\lambda)}{U_j(\lambda)}$ è fisso per ogni coppia di $i,j$ allora la stazione che si satura prima è quella la cui utilizzazione diviene 1 con la minima condizione di carico. 
+Formalmente: $\frac{U_b(\lambda)}{U_i(\lambda)}=\frac{V_bS_b}{V_iS_i}=\frac{D_b}{D_i} > 1$, per identificare l'indice della stazione bottleneck $V_bS_b=max_i(V_iS_i)$ . Possiamo quindi dire che $X_b^{[max]}(\lambda)=\frac{U_b^{[max]}(\lambda)}{S_b} = \frac{1}{S_b}$ --> $\lambda_{max}=\frac{1}{V_bS_b}$ 
 
-in both cases $X \leq \frac{1}{S_b}$  independently of $\lambda$
+### Oltre $\lambda_{max}$ (analisi asintotica)
+In alcuni casi è possibile per $\lambda$ crescere oltre $\lambda_{max}$. Questo potrebbe portare a saturare anche le altre stazioni per cui $V_iS_i < V_bS_b$ (a seconda della topologia). 
+2 casi sorgono:
+1) $V_iS_i > V_jS_j$  $\forall j > i; i,j=1,2,...,M$  in questa rete di code b = 1 e solo la prima stazione può avere $U = 1$ 
+2) $V_iS_i \leq V_jS_j$   $\forall j > i; i,j=1,2,...,M$  in questa stazione b=M e tutte le code possono avere $U=1$ , se $\lambda$ diventa sufficientemente grande. 
+
+in entrambi i casi $X \leq \frac{1}{S_b}$ indipendentemente da $\lambda$
 
 ![[Pasted image 20231002213059.png]]
 
-### Bottleneck Analysis: closed systems
-Assume that $S_i$ and $V_i$ are independent of the load system $N$, and concentrate the analysis on $X$ $U$ and $Y$  --> $X_i(N)$ ,$U_i(N)$ and $Y(N)$ (valid for the whole system) that are dependent. Consistency law is valid also there
-$\frac{X_i(N)}{X_j(N)} = \frac{V_i}{V_j}$ and $\frac{U_i(N)}{U_j(N)} = \frac{V_iS_i}{V_jS_j}$ independently of N.
+### Analisi del collo di bottiglia: sistemi chiusi
+Assumendo che $S_i$ e $V_i$ siano indipendenti dal carico del sistema $N$, e concentrando l'analisi su $X$ e $U$ 
+- $Y$  --> $X_i(N)$ ,$U_i(N)$ e $Y(N)$ (valido per tutto il sistema) sono dipendenti. 
+- anche in questo caso le [leggi di consistenza](###leggi di consistenza) sono valide $\frac{X_i(N)}{X_j(N)} = \frac{V_i}{V_j}$ e $\frac{U_i(N)}{U_j(N)} = \frac{V_iS_i}{V_jS_j}$  indipendentemente da N.
 
-denote with b the station whose $U=1$ first when $N$ grows, this is the bottleneck of the network, since $\frac{U_i(N)}{U_j(N)}$ is fixed for all station i,j=1,2,...,M. The station that becomes saturated first is the one whose $U$ is largest in any loading conditions 
-$\frac{U_b}{U_i}>1$ i=1,...,M $i \neq b$  so that $V_bS_b=max_i(V_iS_i)$  
+Sia b la stazione che raggiunge prima $U=1$ quando $N$ cresce, questo è il collo di bottiglia della rete, visto che  $\frac{U_i(N)}{U_j(N)}$ è fisso per tutti gli i,j=1,2,...,M. La stazione che raggiunge il massimo  $U$ nella condizione di carico minima 
+$\frac{U_b}{U_i}>1$ i=1,...,M $i \neq b$  cosi che $V_bS_b=max_i(V_iS_i)$  
 
-#### Asymptotic analysis for closed systems
-large values of $N$ yield $U \approxeq 1$ and $X_i(N) \approxeq \frac{1}{S_i}$, all the $V_i$ are computed on an arbitrary chosen station k, then the throughput of the system is $X_k(N) = \frac{U_b(N)}{V_bS_b} \approxeq \frac{1}{V_bS_b}$  the value derived is the possible maximum throughput of the station, is then possible to write 
-$\lim_{N \rightarrow \infty}X_i(N)=\frac{1}{V_bS_b}$. using $D_i$ as the total average service time received by station i describe $D=\sum^{i=1}_{M}V_iS_i = \sum^{i=1}_{M}D_i$ as the total average time for a client to make a tour of the system (in this case N=1). D is then the cycle time of the system $D = Y(1)$ with little formula we can state $X_k(1)= \frac{1}{Y(1)}$ , if the networks is build so that the station doesn't interfere with each other then $Y(N)=Y(1)$  and $X_k(N)=\frac{N}{Y(N)}= \frac{N}{Y(1)}$.
+#### Analisi asintotica per sistemi chiusi 
+Valori grandi per $N$ portano a:
+- $U \approxeq 1$ 
+- $X_i(N) \approxeq \frac{1}{S_i}$
+
+Tutte le $V_i$ sono calcolate a partire da una stazione arbitraria k, quindi il throughput del sistema è:
+- :LiAward: $X_k(N) = \frac{U_b(N)}{V_bS_b} \approxeq \frac{1}{V_bS_b}$ => massimo throughput possibile nel sistema
+    -  :LiArrowRightCircle: $\lim_{N \rightarrow \infty}X_i(N)=\frac{1}{V_bS_b}$
+- :LiAward: $D_i$ =>  tempo medio totale di servizio ricevuto dalla stazione i
+    - :LiArrowRightCircle: $D=\sum^{i=1}_{M}V_iS_i = \sum^{i=1}_{M}D_i$ => tempo totale medio per un cliente per fare un tour completo del sistema (in questo caso N=1)
+
+D è quindi il tempo di ciclo del sistema $D = Y(1)$ con la formula di little possiamo affermare che se la rete di code è costruita così che i clienti non interferiscono tra di loro :
+- :LiAward: $X_k(1)= \frac{1}{Y(1)}$ 
+    - :LiArrowRightCircle:  $Y(N)=Y(1)$  
+    - :LiArrowRightCircle: $X_k(N)=\frac{N}{Y(N)}= \frac{N}{Y(1)}$ 
+
 
 The intersection among the asymptotes identify a unique saturation point $N^*=\frac{Y(1)}{V_bS_b}$. Similarly for the cycle time is possible to note $Y(N)=\frac{N}{X_k(N)}$ with $Y(1)$ as lower limit and $Y'(N)=N*V_bS_b$ which is a second lower limit (slanting asymptote).
 

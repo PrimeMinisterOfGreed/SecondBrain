@@ -9,5 +9,7 @@
   "autoPairBrackets": false,
   "autoPairMarkdown": false,
   "useTab": false,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "readableLineLength": true,
+  "showLineNumber": true
 }

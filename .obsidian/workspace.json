@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "1fca71b60203b686",
+        "id": "4423df7013d3dce0",
         "type": "tabs",
         "children": [
           {
-            "id": "5cd2aa2206f66640",
+            "id": "ee98949381210e18",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -153,10 +153,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SIMMOD/Notes/Analisi Operazionale.md"
+                "file": "Analisi dei segnali/Note/Caratterizzazione dei segnali.md"
               },
               "icon": "lucide-list",
-              "title": "Struttura di Analisi Operazionale"
+              "title": "Struttura di Caratterizzazione dei segnali"
             }
           }
         ],
@@ -178,18 +178,18 @@
       "publish:Pubblica modifiche": false
     }
   },
-  "active": "ad6e06029121e5ee",
+  "active": "ee98949381210e18",
   "lastOpenFiles": [
-    "SIMMOD/Notes/Analisi Operazionale.md",
-    "SIMMOD/Notes/Analisi Output.md",
-    "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
-    "SIMMOD/Notes/Stime Intervallari.md",
-    "SIMMOD/Notes/Catene di Markov.md",
-    "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
     "SIMMOD/Operational Analysis.canvas",
+    "SIMMOD/Notes/Analisi Operazionale.md",
+    "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
+    "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
     "Analisi dei segnali/Note/qualcosa.md",
     "Analisi dei segnali/Senza nome.md",
     "SIMMOD/Notes/Teoria Delle Code.md",
+    "SIMMOD/Notes/Stime Intervallari.md",
+    "SIMMOD/Notes/Catene di Markov.md",
+    "SIMMOD/Notes/Analisi Output.md",
     "().md",
     "SIMMOD/Notes/Interval Estimation.md",
     "SIMMOD/Monte carlo.canvas",
