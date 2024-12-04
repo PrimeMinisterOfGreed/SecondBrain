@@ -217,25 +217,41 @@ D è quindi il tempo di ciclo del sistema $D = Y(1)$ con la formula di little po
     - :LiArrowRightCircle: $X_k(N)=\frac{N}{Y(N)}= \frac{N}{Y(1)}$ 
 
 
-The intersection among the asymptotes identify a unique saturation point $N^*=\frac{Y(1)}{V_bS_b}$. Similarly for the cycle time is possible to note $Y(N)=\frac{N}{X_k(N)}$ with $Y(1)$ as lower limit and $Y'(N)=N*V_bS_b$ which is a second lower limit (slanting asymptote).
+Le intersezioni tra gli asintoti identificano un unico punto di saturazione : 
+:LiArrowRightSquare: $N^*=\frac{Y(1)}{V_bS_b}$. 
+Come per il tempo di ciclo è possibile usare :
+- $Y(N)=\frac{N}{X_k(N)}$ con $Y(1)$ => asintoto orizzontale inferiore 
+- $Y'(N)=N*V_bS_b$ => secondo limite inferiore che è un asintoto obliquo.
 
 ![[Pasted image 20231003110041.png]]
 
-### Bottleneck analysis: case with load dependent behaviour
-in order to extend the analysis, we can remove the constant constraint from $S_i$, that now became $S_i(N)$ , this is possible only if this function has an upper bound limit for $N \rightarrow \infty$ .
-Using $S_i(1) \leq S_i^{[max]} = \lim_{h->\infty} S_i(h)$ , the discussion made for closed system  $D=Y(1)=\sum^{i=1}_{M}V_iS_i = \sum^{i=1}_{M}D_i$ and $Y(N)=NV_bS_b$  can be generalized to 
-$Y(1) = \sum^{i=1}_{M}V_iS_i$ and $Y(N)=NV_bS_b^{[max]}$  --> $V_bS_b^{[max]} = max_i(V_iS_i)^{[max]}$. If the service speed of i goes to 0 all the customers will be blocked by that station so this discussion  is not valid, and so is a generalization for all the stations whose service speed is not an increasing function of the load. 
+### Analisi del Collo di bottiglia: caso del comportamento dipendente dal carico
+Col fine di estendere l'analisi è possibile rendere variabile $S_i$, che adesso diventa una funzione dei clienti $S_i(N)$ , **cosa possibile solo se N ha un limite superiore se** $N \rightarrow \infty$ .
 
-NOTE: the expression for D is equal to R(1).
+Usando:
+:LiArrowRightCircle: $S_i(1) \leq S_i^{[max]} = \lim_{h->\infty} S_i(h)$ 
 
-#### Case of queues with load dependent behaviour
-using $S_i(1) \geq S_i^{[min]} = \lim_{h \rightarrow \infty} S_i(h)$ , the discussion can now be generalized in $Y(1) = \sum^{i=1}_{M}V_iS_i(1)$ and $Y(N)=NV_bS_b^{[min]}$  the problem now is that $Y(1) = \sum_{i=1}^{M}V_iS_i(1)$ can be larger that the minimum cycle of the network
+la discussione fatta per i sistemi chiusi parlando di
+:LiArrowRightCircle: $D=Y(1)=\sum^{i=1}_{M}V_iS_i = \sum^{i=1}_{M}D_i$ e $Y(N)=NV_bS_b$  
 
-#needclarify
-note: is not clear what min is referring to
+può essere generalizzata portando a 
+:LiArrowRightSquare: $Y(1) = \sum^{i=1}_{M}V_iS_i$ and $Y(N)=NV_bS_b^{[max]}$  --> $V_bS_b^{[max]} = max_i(V_iS_i)^{[max]}$. 
 
-#### Case of infinite server 
-infinite Server stations are such that their service function is $S_i(h)= \frac{S_i(1)}{h} = \frac{Z}{h}$. Because of this, the load dependent service speeds are non-decreasing, but also not limited so that these station cannot be bottlenecks because their limit service times are equal to 0. **They must be skipped during the search of a bottleneck**.
+>[!important] Nota
+ > 1) Questa discussione perde di significato se la velocità di servizio va 0: questo perchè i clienti verranno proprio bloccati dalla stazione. Perciò la generalizzazione è valida solo per quelle stazioni la cui velocità di servizio non è una funzione del carico. 
+> 2) l'espressione per D è uguale a R(1).
+
+#### Caso di code con comportamento dipendente dal carico 
+Usando:
+:LiArrowRightCircle: $S_i(1) \geq S_i^{[min]} = \lim_{h \rightarrow \infty} S_i(h)$ 
+
+si può generalizzare per :
+:LiArrowRightSquare: $Y(1) = \sum^{i=1}_{M}V_iS_i(1)$ e $Y(N)=NV_bS_b^{[min]}$ 
+
+il problema adesso è che $Y(1) = \sum_{i=1}^{M}V_iS_i(1)$ può essere più grande del minimo ciclo di attività del sistema.
+
+#### caso degli infinite server 
+Le stazioni infinite server sono quelle con funzione di servizio  $S_i(h)= \frac{S_i(1)}{h} = \frac{Z}{h}$. Queste stazioni hanno una funzione di servizio che non decresce, ma anche non limitata quindi la loro velocità di servizio è 0, motivo per il quale **devono essere scartate durante l'analisi del collo di bottiglia**.
 
 ![[Pasted image 20231003212636.png]]
 

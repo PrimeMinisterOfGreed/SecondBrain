@@ -120,6 +120,8 @@ matriciale
 muovono
 minima
 massimo
+minimo
+motivo
 delle
 different
 daemon
@@ -317,6 +319,10 @@ dipendente
 dipendenti
 devono
 diviene
+discussione
+degli
+decresce
+durante
 potenze
 ports
 port
@@ -495,6 +501,10 @@ punto
 portare
 portano
 partire
+parlando
+portando
+perch
+proprio
 inv
 is
 it
@@ -658,6 +668,9 @@ individuare
 instabile
 identificare
 indipendentemente
+interferiscono
+intersezioni
+identificano
 the
 to
 tomcat
@@ -1111,6 +1124,9 @@ satura
 saturare
 sorgono
 sufficientemente
+saturazione
+secondo
+scartate
 open
 of
 os
@@ -1203,6 +1219,8 @@ osservazione
 operazionale
 osservare
 oltre
+orizzontale
+obliquo
 with
 while
 were
@@ -1480,6 +1498,11 @@ aperto
 associato
 asintotica
 alcuni
+affermare
+asintoti
+asintoto
+adesso
+attivit
 running
 redirection
 redirected
@@ -1647,6 +1670,8 @@ referenza
 rete
 raggiungere
 raggiunge
+ricevuto
+rendere
 but
 between
 by
@@ -1764,6 +1789,7 @@ bisogna
 basse
 bilanciamento
 bottiglia
+bloccati
 nothing
 nmap
 not
@@ -2295,6 +2321,8 @@ coppia
 crescere
 concentrando
 calcolate
+costruita
+comportamento
 fortiguard
 fingerprint
 for
@@ -2430,6 +2458,7 @@ fino
 fisso
 fare
 fosse
+fine
 Log
 Lr
 Lpp
@@ -2472,6 +2501,8 @@ LiAward
 LiArrowLeftCircle
 Leggi
 LiXSquare
+LiArrowRightCircle
+LiArrowRightSquare
 During
 Di
 DF
@@ -2606,6 +2637,8 @@ generalizzato
 generalizzare
 gli
 grandi
+generalizzata
+generalizzazione
 under
 upload
 user
@@ -2667,6 +2700,8 @@ utilizzazione
 utilizzazioni
 usare
 utilizzo
+unico
+uguale
 linux
 local
 low
@@ -2747,6 +2782,8 @@ lunghezze
 lineari
 lascia
 leggi
+limite
+limitata
 just
 jP
 jUs
@@ -2876,6 +2913,11 @@ variano
 verr
 valido
 visto
+variabile
+velocit
+va
+verranno
+valida
 Several
 Scanning
 SLL
@@ -3114,6 +3156,8 @@ esimo
 esterna
 espandere
 entrambi
+estendere
+espressione
 Nikto
 NB
 NAA
@@ -3153,6 +3197,7 @@ Norma
 Notare
 Ne
 Numero
+Nota
 PNG
 PRy
 Pk
@@ -3205,6 +3250,7 @@ Periodo
 Pu
 Porzioni
 Possiamo
+Perci
 IHDR
 IDATx
 III
@@ -3825,6 +3871,9 @@ Componenti
 Code
 Comportamento
 Caso
+Come
+Collo
+Col
 zs
 zaa
 zz
