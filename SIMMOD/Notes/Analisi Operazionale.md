@@ -253,24 +253,41 @@ il problema adesso è che $Y(1) = \sum_{i=1}^{M}V_iS_i(1)$ può essere più gran
 #### caso degli infinite server 
 Le stazioni infinite server sono quelle con funzione di servizio  $S_i(h)= \frac{S_i(1)}{h} = \frac{Z}{h}$. Queste stazioni hanno una funzione di servizio che non decresce, ma anche non limitata quindi la loro velocità di servizio è 0, motivo per il quale **devono essere scartate durante l'analisi del collo di bottiglia**.
 
+#### caso del server centrale in time sharing
+
 ![[Pasted image 20231003212636.png]]
 
-Let's study the case of a central server time sharing composed by N terminals connected to the central server. Assume that Z represent the delay associated with the terminal station and that $S_i$ and $V_i$ are constant. What would be the impact on the behavior if we connect more terminals. The response can be found using the delay station as reference to calculate the performance of the others in the systems.
+In questo caso un server centrale è time shared da  N terminali connessi al server centrale.
 
-in this case we have $Y(N) = Z+R(N)$  where R is the response time with N terminals connected. The slanted asymptote for $X(N)$ is given by $X'(N)= \frac{N}{Y(1)} = \frac{N}{[Z+R(1)]}$ on the other hand $X$ is bounded by horizontal asymptote $\lim_{N \rightarrow \infty}X_0(N)=\frac{1}{V_bS_b}$.
+Sia :
+- Z => il ritardo associato al singolo terminale 
+-  $S_i$ e $V_i$ sono costanti.
 
-The saturation point is $N^*= \frac{Z}{V_bS_b}+\frac{R(1)}{V_bS_b}$ considering cycle and response time we have 
-$Y(N)=\frac{N}{X(N)} \geq \frac{N}{1/V_bS_b} = NV_bS_b$ consequently the slanted asymptote for the response time is $R'(N)= N(V_bS_b) - Z$ 
+:LiQuestionMarkGlyph: Quale sarebbe l'impatto sul comportamento se collegassimo più terminali?
+:LiAward: La risposta si può trovare usando la stazione di delay come riferimento per calcolare le performance delle altre stazioni nel sistema.
+
+in questo caso abbiamo: $Y(N) = Z+R(N)$
+dove :
+- R(N) => tempo di risposta con N terminali connessi.
+- l'asintoto obliquo per  $X(N)$ è dato da $X'(N)= \frac{N}{Y(1)} = \frac{N}{[Z+R(1)]}$ 
+- $X$ è vincolato da un limite inferiore  $\lim_{N \rightarrow \infty}X_0(N)=\frac{1}{V_bS_b}$.
+
+Il punto di saturazione è quindi $$N^*= \frac{Z}{V_bS_b}+\frac{R(1)}{V_bS_b}$$
+Concentrandoci sul tempo di risposta otteniamo 
+$$Y(N)=\frac{N}{X(N)} \geq \frac{N}{1/V_bS_b} = NV_bS_b$$ 
+di conseguenza l'asintoto del tempo di risposta è  $$R'(N)= N(V_bS_b) - Z$$
 
 
-# Operational Analysis: intermediate state  
 
-## Intermediate state
-steady state analysis is not enough to understand the behavior of the system in intermediate conditions, additional measure are needed. 
-The state of the system can be represented with a vector $\underline{n} = (n_1,n_2,...,n_m)$  $n_i \geq 0$  $i=1,2,...,M$  the set of all the possible state is called state space $S(M)$     
+# Analisi Operazionale: Stati intermedi    
 
+## Stato intermedio 
+L'analisi a stato stabile del sistema non mostra tutti i comportamenti del sistema, è necessario analizzare anche cosa succede negli stati intermedi.
+lo stato del sistema è rappresentabile come un vettore $\underline{n} = (n_1,n_2,...,n_m)$  $n_i \geq 0$  $i=1,2,...,M$  
 
-## State balance of a single queue
+- $S(M)$ => insieme di tutti gli stati possibili 
+
+## Equilibrio di stato in una coda 
 assume that the state are defined on the base of the number of customer waiting in the queue with states k,m,n.
 
 let $C(m,n)$ = number of transitions from state m to state n, then the state balance equation is $\sum_{k}C(n,k)= \sum_mC(n,m)$ .  This holds in general for all state but for first and last, except when in Operational equilibrium, then it holds for all states.
