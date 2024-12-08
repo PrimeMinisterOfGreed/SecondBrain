@@ -288,21 +288,23 @@ lo stato del sistema è rappresentabile come un vettore $\underline{n} = (n_1,n_
 - $S(M)$ => insieme di tutti gli stati possibili 
 
 ## Equilibrio di stato in una coda 
-assume that the state are defined on the base of the number of customer waiting in the queue with states k,m,n.
+assumiamo 3 stati generici , definiti dal numero di clienti in coda a ciascuna stazione => k,m,n.
 
-let $C(m,n)$ = number of transitions from state m to state n, then the state balance equation is $\sum_{k}C(n,k)= \sum_mC(n,m)$ .  This holds in general for all state but for first and last, except when in Operational equilibrium, then it holds for all states.
+:LiAward: sia $C(m,n)$ => numero di transizioni dallo stato m allo stato n. 
+:LiArrowRightCircle: allora l'equazione di bilanciamento tra stati è $$\sum_{k}C(n,k)= \sum_mC(n,m)$$
+In generale , questa equazione è vera per tutti gli stati tranne il primo e l'ultimo. Ad eccezion fatta per i sistemi in equilibrio operazionale per cui **è vera per tutti gli stati**.
 
 ![[Pasted image 20231006125755.png]]
 
 
-### State balance measures
+### Misure di equilibrio di stato
+definiamo:
+- :LiArrowRightCircle:  $r(n,m)=\frac{C(n,m)}{T(n)}$ => rateo di transizione da n a m.
+- :LiArrowRightCircle:  $p(n)=\frac{T(n)}{T}$ => frazione di tempo spesa con n clienti in attesa
 
-$r(n,m)=\frac{C(n,m)}{T(n)}$ => transition rate from m to n, while n is occupied
-$p(n)=\frac{T(n)}{T}$ fraction of time spent by the system with n customers waiting
-
-the state balance equation can be rewritten with $\sum_kp(k)r(k,n)=p(n)\sum_mr(n,m) \space |\forall n$    
-### Balance equations
-
+l'equazione di bilanciamento può essere riscritta come $$\sum_kp(k)r(k,n)=p(n)\sum_mr(n,m) \space |\forall n$$    
+### Equazioni di bilanciamento
+%%aggiungere anche i passaggi%%
 $$
 \begin{equation}
     \begin{cases}
@@ -317,17 +319,17 @@ $$
 \end{equation}
 $$
 
-#### Simplify transition rates (Balance equations)
-using
-- $C(n,n+1)= A(n)$ = # arrivals observed when the system is in state n; $A(N)=0$
-- $C(n,n-1)=C(n)$ = # completions observed when the system is in state n; $C(0)=0$
+#### Semplificare i ratei di bilanciamento 
+usando 
+- :LiArrowRightCircle: $C(n,n+1)= A(n)$ => # arrivi osservati quando il sistema è nello stato N; $A(N)=0$
+- :LiArrowRightCircle: $C(n,n-1)=C(n)$ => # completamenti osservati allo stato n; $C(0)=0$
 
-we can generalize to 
-$r(n,n+1)= \frac{A(n)}{T(n)}= \lambda(n)$
-$r(n,n-1)= \frac{C(n)}{T(n)}= \micro(n)$ 
+possiamo generalizzare a:
+- :LiArrowRightCircle: $r(n,n+1)= \frac{A(n)}{T(n)}= \lambda(n)$
+- :LiArrowRightCircle: $r(n,n-1)= \frac{C(n)}{T(n)}= \micro(n)$ 
 
 #### Result
-the system can now be rewritten as
+il sistema di equazioni può essere riscritto come 
 $$
 \begin{equation}
     \begin{cases}
@@ -338,11 +340,11 @@ $$
 \end{equation}
 $$
 
-nb this is the final form, you can take the other system and perform the substitution to see the intermediate one
+%%this is the final form, you can take the other system and perform the substitution to see the intermediate one%%
  
 
-### Solution: load dependent rates 
-the previous solution provide a new interesting relationship 
+### Ratei dipendenti dal carico
+nella precedente soluzione è presente un interessante relazione
 $$
 \begin{equation}
 \begin{cases}
@@ -352,50 +354,54 @@ p(0)= (1+\sum^{N}_{n=1}[\prod^{n}_{k=1}\frac{\lambda(k-1)}{\micro(k)}])^{-1}
 \end{cases}
 \end{equation}
 $$
-and performance indices
+e indici di performance
 
 - $X= \sum^{N}_{n=1}p(n)\micro(n)$ 
 - $\bar{n} = \sum^{N}_{n=1}np(n)$ 
 - $\bar{W}=\frac{\bar{n}}{X}$ 
 
-### Solution: homogeneous 
-arrival rates are independent from the state of the system 
-$\lambda(0)= \lambda(1)...=\lambda(N-1)=\lambda$
-service rates are also indipendent of the state of the system 
-$\micro(1)=\micro(2)...=\micro(N)=\micro$
+### Omogeneità
+I ratei di arrivo sono indipendenti dallo stato del sistema 
+    :LiAward: $\lambda(0)= \lambda(1)...=\lambda(N-1)=\lambda$
+E lo sono anche i ratei di servizio 
+    :LiAward: $\micro(1)=\micro(2)...=\micro(N)=\micro$
 
-we can define $\rho=\frac{\lambda}{\micro}$ and conclude that $p(n)= \frac{1-\rho}{1-\rho^{N+1}}\rho^n \ \ \ 0\leq n \leq N$  
-#### Asymptotic homogeneous performance indices
+definiamo:
+ :LiAward: $\rho=\frac{\lambda}{\micro}$ 
+per concludere che  :LiArrowRightCircle: $$p(n)= \frac{1-\rho}{1-\rho^{N+1}}\rho^n \ \ \ 0\leq n \leq N$$  
+#### Indici di performance asintotici e omogenei
 
-when $\rho < 1$ taking the limit for N that goes to $\infty$ we observe that the fraction of time spent by the system in each of its possible states assume the connotation of a probability
-$p(n)= (1-\rho)\rho^n$ 
+Quando $\rho<1$ se si prende $\lim_{ N \to \infty }$ si può osservare che la quantità di tempo spesa dal sistema in un certo stato assume la **connotazione di una probabilità** 
+    :LiAward: $p(n)= (1-\rho)\rho^n$ 
 
-we can then derive 
-- throughput $X= \lambda$ 
-- average queue length $\bar{n}=\frac{\rho}{1-\rho}$ 
-- average waiting time $\bar{W} = \frac{1}{\micro(1-\rho)}$ 
+Da cui possiamo derivare 
+- :LiArrowRightCircle: $X= \lambda$ => throughput
+- :LiArrowRightCircle:  $\bar{n}=\frac{\rho}{1-\rho}$ => lunghezza media della coda 
+- :LiArrowRightCircle:  $\bar{W} = \frac{1}{\micro(1-\rho)}$ => templo d'attesa medio 
 
 
-## Generalization 
-suppose that measurement of service rates change for possible values of the state k. The result obtained can be summarized in the following manner:
+## Generalizzazione 
+Supponiamo che i valori dei ratei di servizio possano cambiare a seconda di un generico stato k. I risultati che si ottengono possono essere riassunti in questo modo:
 
-- Discouraged arrivals
-- Multiple Server queue 
-- infinite server queue 
-- queue with a finite waiting room
-- queue with fixed population
+- [Arrivi scoraggiati](###Arrivi scoraggiati)
+- Coda con server multipli  
+- Coda con infinite server 
+- Coda con spazio d'attesa finito 
+- Coda con popolazione fissa 
 
-### Discouraged arrivals 
-$\lambda(k)=\frac{\lambda}{k+1}$ , $\micro(k)=\micro \ \ k \geq 1$  from this result we obtain 
+### Arrivi scoraggiati
+- $\lambda(k)=\frac{\lambda}{k+1}$ 
+- $\micro(k)=\micro \ \ k \geq 1$  
 
-$p(n)= p(0)\prod^{n-1}_{k=0}\frac{\lambda/(k+1)}{\micro}=p(0)(\frac{\lambda}{\micro})^n \frac{1}{n!}$  
+da questo risultato otteniamo 
+$$p(n)= p(0)\prod^{n-1}_{k=0}\frac{\lambda/(k+1)}{\micro}=p(0)(\frac{\lambda}{\micro})^n \frac{1}{n!}$$  
 
-p(0) can be computed using its explicit expression 
+p(0) si può ottenere mediante la sua espressione esplicita
 
 $$
 p(0)= [1+ \sum^{\infty}_{n=1}(\frac{\lambda}{\micro})^n \frac{1}{n!}]^{-1}=e^\frac{-\lambda}{\micro}
 $$  
-and then 
+e quindi
 
 $$
 p(n)= \frac{(\lambda/\micro)^n}{n!}e^\frac{-\lambda}{\micro} 
@@ -403,22 +409,26 @@ $$
 
 
 
-### Infinite server queue 
-$\lambda(k) = \lambda$ , $\micro(k) = k \micro$ 
-distribution of number of customers 
+### Coda infinite server
+- $\lambda(k) = \lambda$ 
+- $\micro(k) = k \micro$ 
+
+la distribuzione della lunghezza di coda è :LiArrowRightCircle: 
 $$
 p(n)=p(0) \prod^{n-1}_{k=0}\frac{\lambda}{(k+1)\micro} = p(0)(\frac{\lambda}{\micro})^n \frac{1}{n!} 
 $$
-a simple expression for p(0) can be obtained for $N \rightarrow \infty$ 
-$p(0) = [1+\sum^{\infty}_{n=1}(\frac{\lambda}{\micro})^n \frac{1}{n!}]^{-1} = e^{-\lambda/\micro}$ 
-and the general expression becomes then 
+un espressione semplice per  p(0) può essere ottenuta per $N \rightarrow \infty$ 
+$$p(0) = [1+\sum^{\infty}_{n=1}(\frac{\lambda}{\micro})^n \frac{1}{n!}]^{-1} = e^{-\lambda/\micro}$$ 
+Per cui l'espressione generale diventa :LiArrowRightCircle: 
 $$
 p(n) = \frac{(\lambda/\micro)^n}{n!}e^\frac{-\lambda}{\micro}
 $$
 
-### Multiple server queue 
-$\lambda(k) = \lambda$  , $\micro(k)= \begin{equation} \begin{cases}  k \micro \ \ \ 0 \leq k \leq m \\ m \micro \ \ m<k \end{cases} \end{equation}$   
-the distribution of the number of customers is then 
+### Coda con server multipli
+- $\lambda(k) = \lambda$ 
+- $\micro(k)= \begin{equation} \begin{cases}  k \micro \ \ \ 0 \leq k \leq m \\ m \micro \ \ m<k \end{cases} \end{equation}$   
+
+La distribuzione del numero dei clienti diventa quindi 
 $$
 p(n) = 
 \begin{equation}
@@ -429,12 +439,14 @@ p(0) \prod^{m-1}_{k=0} \frac{\lambda}{(k+1)\micro} \prod^{n-1}_{k=m} \frac{\lamb
 \end{cases}
 \end{equation}
 $$
-p(0) can be derived from normalization, or obtained taking the limit $N \rightarrow \infty$ under the assumption that $\frac{\lambda}{m \micro} < 1$ 
+p(0) può essere derivato per normalizzazione o prendendo il limite $N \rightarrow \infty$ sotto l'assunzione che  $\frac{\lambda}{m \micro} < 1$ 
 
-### queue with a finite waiting room
+### Coda con sala d'attesa finita 
 
-$\lambda(k) = \begin{cases} \lambda \ \ \ 0 \leq k \leq B \\ 0 \ \ \ k>B\end{cases}$  , $\micro(k)= \micro$ 
-we obtain 
+- $\lambda(k) = \begin{cases} \lambda \ \ \ 0 \leq k \leq B \\ 0 \ \ \ k>B\end{cases}$  
+- $\micro(k)= \micro$
+
+otteniamo 
 $$
 p(n) = \begin{cases}
 p(0) \prod^{n-1}_{k=0} \frac{\lambda}{\micro} = p(0) (\frac{\lambda}{\micro})^n \ \ \ 0 \leq n \leq B 
@@ -442,8 +454,9 @@ p(0) \prod^{n-1}_{k=0} \frac{\lambda}{\micro} = p(0) (\frac{\lambda}{\micro})^n 
 0
 \end{cases}
 $$
-in this case $p(0)= \frac{1-\lambda/\micro}{1-(\lambda/\micro)^{B+1}}$
-and the general expression becomes 
+in questo caso :
+$$p(0)= \frac{1-\lambda/\micro}{1-(\lambda/\micro)^{B+1}}$$
+e l'espressione generale diventa
 $$
 p(n) = \begin{cases}
 \frac{1-\lambda/\micro}{1-(\lambda/\micro)^{B+1}} \ \ \ 0 \leq n \leq B
@@ -453,77 +466,83 @@ $$
 
 
 ### Single queue with fixed number of customers
-$\lambda(k)= \begin{cases}(N-k)\lambda \ \ \ 0 \leq k \leq N \\ 0 \ \ \ k > N\end{cases}$, $\micro(k)= \micro$ 
- we have 
+- $\lambda(k)= \begin{cases}(N-k)\lambda \ \ \ 0 \leq k \leq N \\ 0 \ \ \ k > N\end{cases}$
+- $\micro(k)= \micro$ 
+
+  abbiamo: 
 $$
 p(n)= \begin{cases}
 p(0) \prod^{n-1}_{k=0}\frac{(N-k)\lambda}{\micro} = p(0)(\frac{\lambda}{\micro})^n \frac{N!}{(N-n)!} \ \ \ 0 \leq n \leq N \\
 0 \ \ \ n > N
 \end{cases}
 $$
-from which we can derive 
-$p(0) = [1+\sum^{N}_{n=1}(\frac{\lambda}{\micro})^n \frac{N!}{(N-n)!}]^{-1}$  
+da cui deriviamo 
+$$p(0) = [1+\sum^{N}_{n=1}(\frac{\lambda}{\micro})^n \frac{N!}{(N-n)!}]^{-1}$$ 
 
 
-## One step behavior
+## Comportamento un passo alla volta
 
 ![[Pasted image 20231006152829.png]]
-since $T(n)$ sum to $T$ we can add the normalization condition $\sum_np(n)=1$. in this way the unique changes that can happen is the arrival or the departure of a customer.
+siccome $\sum T(n) = T$  possiamo aggiungere la condizione di normalizzazione $\sum_np(n)=1$. In questo modo **lo stato può cambiare solo alla partenza o all'arrivo di un cliente.**
 
 ## State balance of a network of queues
-set of all possible states $S(M) = \{\underline{n} =(n_1,n_2,...,n_M), n_i \geq 0 i=1,2,...,M\}$  
 
-$\underline{k}, \underline{m}$ and $\underline{n}$ will be generic states.
+:LiAward: $S(M) = \{\underline{n} =(n_1,n_2,...,n_M), n_i \geq 0 i=1,2,...,M\}$  => Insieme dei possibili stati 
 
-### Intermediate behavior
-$T(n)$ = total time spent by the system in state $\underline{n}$ during observation period, with $\sum T(n) = T$. 
-Let $P(n)= T(n)/T$ be the fraction of time spent by the system in state $\underline{n}$. 
+:LiArrowRightCircle: $\underline{k}, \underline{m}$ e $\underline{n}$ => generici stati in S(M).
 
-the set of fractions of time spent by the system in each state in $S(M)$ or $\{P(\underline{n}), \underline{n} \in S(M)\}$ is called "distribution of the fractions of time spent by the system in its states". The objective is to derive P(n) not through direct measures but by using the parameters of the model. 
+### Comportamento transitorio
+:LiAward: $T(n)$ => tempo totale speso dal sistema in un generico stato $\underline{n}$ durante il periodo di osservazione, con $\sum T(n) = T$. \
 
-let $C(\underline{n}, \underline{m})$ be # of direct transition made by the system from state $\underline{n}$ to state $\underline{m}$. In our measurement we can't observe transition within the same state so $C(\underline{n},\underline{n}) = 0$ for any n
+Sia :LiArrowRightCircle:  $P(n)= T\frac{n}{T}=> tempo totale speso dal sistema nello stato  $\underline{n}$. 
 
-### Operational equilibrium : steady state
-also in this case $A=C$ is required for every station. The number of departures and arrivals must be $n_i(0)= n_i(T) \ \ \  i=1...M$.
+l'insieme delle frazioni di tempo spese dal sistema nei vari stati in $S(M)$ or $\{P(\underline{n}), \underline{n} \in S(M)\}$ è chiamata **distribuzione delle frazioni di tempo speso dal sistema nei suoi stati**. l'obiettivo è di derivare $P(\underline{n})$ senza misurarlo ma solo dai parametri del modello . 
 
-this means that the op eq condition is satisfied every time the measurement start with a state and ends with that state. For a single server in isolation then 
+Sia $C(\underline{n}, \underline{m})$ => # of direct transition made by the system from state $\underline{n}$ to state $\underline{m}$. In our measurement we can't observe transition within the same state so $C(\underline{n},\underline{n}) = 0$ for any n
+
+### Equilibrio operazionale: stati a regime 
+anche in questo caso si richiede $A=C$ per ogni stazione. il numero di partenze e di arrivi deve essere  $n_i(0)= n_i(T) \ \ \  i=1...M$.
+
+**Questo significa che l'equilibrio operazionale è soddisfatto ogni volta che il sistema parte in uno stato e torna in quello stato**. Per un server singolo in isolamento:
 $$
 \sum_kC(\underline{k},\underline{n}) = \sum_mC(\underline{n},\underline{m}) \ \ \ \forall \underline{n}
 $$
 
-then we can say "the flow balance condition among customer of a system is equivalent to balancing the number of transition among the  state of the system" 
+si può quindi affermare che: "**la condizione di bilanciamento tra clienti di un sistema è equivalente a bilanciare il numero di transizioni tra gli stati di un sistema**" 
 
-Define now the transition rate from n to m as $r(\underline{n},\underline{m})= \frac{C(\underline{n},\underline{m})}{T(\underline{n})}$ . 
-$T(\underline{n})=0$ implies $C(\underline{n}, \underline{m})=0$. Now we can introduce those variables in balance equation 
+:LiAward: $r(\underline{n},\underline{m})= \frac{C(\underline{n},\underline{m})}{T(\underline{n})}$ . 
+:LiAward: $T(\underline{n})=0\implies C(\underline{n}, \underline{m})=0$. Variabili che possiamo introdurre nell equazione di bilanciamento 
 $$
 \sum_\underline{k} P(\underline{k})r(\underline{k},\underline{n}) = P(\underline{n}) \sum_\underline{m}r(\underline{n},\underline{m}) 
 $$
-the definition of P(n) allows to add a normalization equation 
+La definizione di P(n) consente di introdurre la normalizzazione:
 $\sum_\underline{n}P(\underline{n})=1$ 
 
-### Derived Measures (One step behaviour)
-denoting with H the total number of equations of this system, his value can be $H=(N_{max}+1)^M$  and $H = \binom{N+M-1}{M-1}$  in the case of a open system with Nmax customers observed or closed with N respectively.
+### Comportamento a un passo: Misure derivate 
+sia H => numero totale di equazioni del sistema, può avere valore:
+- $H=(N_{max}+1)^M$  =>  in caso di **sistemi aperti** con al massimo Nmax clienti 
+- $H = \binom{N+M-1}{M-1}$  => in caso di **sistemi chiusi** con N clienti
 
-According to the one step behavior hypothesis the transition can occur only within adjacent states.  Let's introduce the following definitions 
-$\underline{n_{ij}} = (n_1,...,n_i+1,...,n_j-1,...,n_M)$ 
-$\underline{n_{i0}} = (n_1,...,n_i+1,...,n_j,...,n_M)$ 
-$\underline{n_{0j}} = (n_1,...,n_i,...,n_j-1,...,n_M)$ 
-that we can use to indicates the states that are adjacent to 
-$\underline{n} = (n_1,...,n_i,...,n_j,...,n_M)$ 
+Stando all'ipotesi del comportamento a un passo, gli stati possono transire solo tra stati adiacenti tra di loro.  Introduciamo le seguenti definizioni:
+- $\underline{n_{ij}} = (n_1,...,n_i+1,...,n_j-1,...,n_M)$ 
+- $\underline{n_{i0}} = (n_1,...,n_i+1,...,n_j,...,n_M)$ 
+- $\underline{n_{0j}} = (n_1,...,n_i,...,n_j-1,...,n_M)$ 
+che possiamo usare per indicare gli stati adiacenti a:
+- $\underline{n} = (n_1,...,n_i,...,n_j,...,n_M)$ 
 
 
-### Homogeneity
-1) the output of a station of the system is completely determined by the length of its input queue, but independent of the length of the others stations.
-2) the transition frequencies among the stations of the system are independent of the state of the system and may depend at most on the total load of the system(N)
+### Omogeneità 
+1) l'output di una stazione è **determinato dalla lunghezza della sua coda** ,ma è indipendente dalla lunghezza delle code delle altre stazioni.
+2) i tassi di transizione da uno stato all'altro è invariante nel tempo e dipende al più dal carico del sistema 
 
 ### Simplify state transition balance equation (homogeneity)
 
-First part of hypothesis allows to simplify the definition of the state transition rates in 
+La prima ipotesi permette di semplificare i ratei di transizione 
 $$
 r(\bar{n},\bar{n}_{ij})=\frac{C_{ij}(n_{j})}{T_{j}(n_{j})}
 $$
-the second part implies that $C_{ji}(n_{j})=C_{j(n_{j})}q_{ji}$
-so that overall we obtain 
+La seconda implica che $C_{ji}(n_{j})=C_{j(n_{j})}q_{ji}$
+per cui si ottiene
 $$
 r(\bar{n},\bar{n}_{ij})= 
 \begin{cases}
@@ -534,29 +553,47 @@ r(\bar{n},\bar{n}_{ij})=
 $$
 
 
-let's introduce an indicator function defined in this way $\sigma(n)= \begin{cases}1 \ \ \ n>0 \\0 \ \ \ n=0\end{cases}$ 
-using $\lambda_{0j}$ as the external arrival rate directed toward the station of index j
-With all those hypothesis the transition balance equations assume the following form 
+sia:
+- $\sigma(n)= \begin{cases}1 \ \ \ n>0 \\0 \ \ \ n=0\end{cases}$  una funzione indicatrice
+ - $\lambda_{0j}$ => rateo di arrivo esterno verso la stazione di indice j
+ 
+Con queste ipotesi le equazioni di bilanciamento assumono questa forma 
 $$
-\sum^{M}_{i,j=1}P(\underline{n}_{ij}) \frac{q_{ij}}{S_i(n_i+1)}\sigma(n_j) + \sum^{M}_{j=1}P(\underline{n}_{0j})\lambda_{0j}\sigma(n_j) + \sum^{M}_{i=1}P(\underline{n}_{i0})\frac{q_{i0}}{S_i(n_i+1)}= P(\underline{n})[\sum^{M}_{i=1}\frac{\sigma(n_i)}{S_i(n_i)} +  \sum^{M}_{j=1}\lambda_{0j}]
+\begin{aligned}
+\sum^{M}_{i,j=1}P(\underline{n}_{ij}) \frac{q_{ij}}{S_i(n_i+1)}\sigma(n_j) + 
+\\
+\sum^{M}_{j=1}P(\underline{n}_{0j})\lambda_{0j}\sigma(n_j) + 
+\\
+\sum^{M}_{i=1}P(\underline{n}_{i0})\frac{q_{i0}}{S_i(n_i+1)}=
+\\
+P(\underline{n})[\sum^{M}_{i=1}\frac{\sigma(n_i)}{S_i(n_i)} +  \sum^{M}_{j=1}\lambda_{0j}]
+\end{aligned}
 $$
 
-## Solving transition balance 
-assume all the $V_i$ are computed so that we can assume $\lambda_i=\begin{cases}\lambda V_i \ \ \ open\ system \\ V_i \ \ \ closed\ system \end{cases}$ , where $\lambda$ represent the total arrival rate of external customers to the system.  Define also the following function 
+## Soluzione agli stati di transizione  
+Assumiamo:
+- che i $V_{i}$ siano calcolati
+- $\lambda_i=\begin{cases}\lambda V_i \ \ \ open\ system \\ V_i \ \ \ closed\ system \end{cases}$ , dove $\lambda$ rappresenta il rateo totale di arrivo dall'esterno.  
+
+Definiamo la funzione ⚠ 
 $$
 f_i(k)= \begin{cases}
 1 \ \ \ k = 0 \\
 \lambda_iS_i(k)f_i)k-1 \ \ \ k>0
 \end{cases}
 $$
-is it possible to show that the time spent by the system in each of its states is $$P(\underline{n})= \frac{1}{G} \prod^{M}_{i=1}f_i(n_i)$$
-This is called product form solution , G is a normalization constant defined in this way 
+è possibile mostrare che il tempo speso da ogni cliente nel sistema è pari a
+>[!important] Soluzione forma prodotto
+>$$P(\underline{n})= \frac{1}{G} \prod^{M}_{i=1}f_i(n_i)$$
+
+Dove: G è una costante di normalizzazione definita nel modo seguente 
 $$
 1= \sum_{\underline{n}}P(\underline{n}) = \frac{1}{G}\sum_{\underline{n}}\prod^{M}_{i=1}f_i(n_i) \rightarrow G= \sum_{\underline{n}}\prod^{M}_{i=1}f_i(n_i)
 $$
-### Queue length distribution 
+### Distribuzione della lunghezza della coda
 
-using the recursive expression of $p(\underline{n})$ we obtain (no intermediary)
+usando l'espressione ricorsiva per $p(\underline{n})$ otteniamo 
+%% ho saltato i passaggi intermedi %%
 $$
 \begin{cases}
 P(\underline{n}_{i0}) = \lambda_iS_i(n_i+1)P(\underline{n}) \\
@@ -567,90 +604,110 @@ P(\underline{n}_{ij}) = \frac{\lambda_iS_i(n_i+1)}{\lambda_jS_j(n_j)}P(\underlin
 \end{cases}
 $$
 
-define the number of distribution of the number of customer at station 
+definiamo la distribuzione dei clienti alla stazione i
 $$
 p_i(k) = \sum_{\underline{n_{n_i = k}}}P(\underline{n})
 $$
-recall $F(k)= \lambda S(k)f(k-1)$ for k>0 and F(0)=1
-- Case 1: Single server queue $p(n)=p(0)F(n)$    n>0
-- Case 2: Single Server queue embedded in Open network $P_M(n)=\frac{1}{G_M}F_M(n)$ n>0
-- Case 3: Single Server queue in closed netork $P_M(n)=\frac{g(N-m,M-1)}{G(N,M)}F_M(n)$    $0 \leq n \leq N$ 
-in Case 1 the normalizing constant p(0) is different from zero if the queue is stable
-$\lambda*S(k)<1$  for k>k0
-in Case 2 the normalizing constant Gm is != 0 if the queue is stable $\lambda_M*S_m(k)<1$ 
-in Case 3 the normalization factor is not constant.
+sapendo che $F(k)= \lambda S(k)f(k-1)$ per k>0 e F(0)=1
 
-We then obtain the following performance indices 
+>[!info] Caso 1: Coda a singolo server  
+> $$p(n)=p(0)F(n);n>0$$    la costante di normalizzazione $p(0) \neq 0$ se la coda è stabile: $\lambda S(k)<1; \forall k>k_{0}$
+
+>[!info] Caso 2: Singolo server integrato in un sistema aperto 
+>$$P_M(n)=\frac{1}{G_M}F_M(n);n>0$$
+>    la costante di normalizzazione $G_{m} \neq 0$ se la coda è stabile $\lambda_M*S_m(k)<1$ 
+
+> [!warning] Caso 3: Singolo server integrato in sistema chiuso
+>  $$P_M(n)=\frac{g(N-m,M-1)}{G(N,M)}F_M(n)    ;0 \leq n \leq N$$ il **fattore di normalizzazione non è costante**
+
+
+Otteniamo quindi i seguenti indici di performance 
 
 - $X_i=\sum^{n}_{k=1}p_i(k)\frac{1}{S_i(k)}$ 
 - $U_i=1-P_i(0)$ 
 - $\overline{n}_i=\sum_kkp_i(k)$ 
 - $\overline{w_i} = \frac{n_i}{X_i}$ 
 
-### The BCMP theorem
-A queueing network has a product form solution if it satisfies the following criteria:
-- The network has a finite number of stations 
-- Customer belong to an arbitrary and finite number of closed or open classes and can change class memberships
-- Routing probability are defined for each class identified by a DTMC (markov chain) (so as a matrix)
-- The station of the network may be of 4 different types:
-	- FCFS with negative exponential distribution of service times
-	- LCFS with a rationale laplace transform distribution of service times 
-	- Processor Sharing with a rationale laplace transform distribution of service times 
-	- Infinite server with a rationale laplace transform distribution of service times
+### Il teorema BCMP
+una rete di code ha una soluzione forma prodotto se soddisfa i seguenti criteri :
+- La rete ha un numero **finito** di stazioni  
+- I clienti appartengono a un numero **finito** di classi chiuse o aperte e possono scambiarle.
+- I tassi di transizione sono definiti da una **DTMC** per ogni classe 
+- Ogni stazione può essere disciplinata da:
+	- FCFS con distribuzione dei tempi di servizi **negativa esponenziale** 
+	- LCFS con una distribuzione **razionale a trasformata di laplace** dei tempi di servizio 
+	- Processor Sharing con una distribuzione **razionale a trasformata di laplace** 
+	- Infinite server con una distribuzione **razionale a trasformata di laplace**
 
-FCFS is commonly associated to negative exponential distribution, this is the standard first come first served policy.
+- FCFS è la policy standard first come first server, associata comunemente a una distribuzione negativa esponenziale
+- LCFS pr (preemptive resume) ultimo arrivato primo servito: semplice approssimazione di un server in cui avvengono interruzioni ad alta priorità. Quando un cliente si unisce a una coda non vuota, il servizio del cliente corrente viene interrotto, aggiunto a uno stack e ripreso più tardi.
+- PS Process sharing discipline: praticamente è il limite di una distribuzione round robin con quanto a 0
+- IS infinte server discipline: Il server è equivalente a una stazione di delay.
 
-LCFSpr (preemptive resume) last come first served: studied as a simple approximation of server undergoing high priority interruptions. When a new customer join a non empty queue, the customer in service is interrupted, pushed into an input stack and resumed later.
+## Calcolare la costante di normalizzazione nei sistemi aperti
 
-PS Process sharing discipline: represent a limit for the round robin discipline as its quantum size goes to 0
+Sia:
+- $N_i,i=1,...,M$ =>  il massimo numero di clienti osservati alla stazione i durante l'osservazione (0,T].
 
-IS infinte server discipline makes the server equivalent to a delay station.
-
-## Computing normalization constant in open systems 
-
-Denote with $N_i,i=1,...,M$ the maximum number of customers observed at station i during all observation (0,T].
-In the case of open systems those $N_i$ can be arbitrarily large (and in fact grow to infinity). This means that there is not dependency among $N_i$ so the normalization constant G becomes .
+In caso di sistemi aperti $N_i$ può crescere all'infinito. Che significa che non c'é dipendenza tra gli $N_i$ perciò la costante di normalizzazione diventa.
 $$
 G=\sum_\underline{n}\prod^{M}_{i=1}f_i(n_i) = \prod^{M}_{i=1}\sum^{N_i}_{i=1}f_i(n_i) = \prod^{M}_{i=1}G_i
 $$
-and then the product form solution become 
+con soluzione forma prodotto
 $$
 P(\underline{n}) = \frac{1}{G} \prod^{M}_{i=1}f_i(n_i)=\prod^{M}_{i=1}\frac{f_i(n_i)}{G_i} = \prod^{M}_{i=1}p_i(n_i) 
 $$
 ## Computing normalization constant in closed systems 
 
-The indipendece of $N_i$ doesn´t apply for closed network. In closed systems there aren't new arrivals, so the only possibility are customers that move from one station to another. The global balance equations assumes a much simpler form. 
+L'indipendenza di $N_i$ non è applicabile nei sistemi chiusi, poichè non vi sono nuovi arrivi in questi sistemi, l'unica possibilità sono clienti che si spostano da una stazione all'altra. 
+
+Le equazioni di bilanciamento assumono una forma più semplice  
 $$
 \sum^{M}_{i,j=1}P(\underline{n_{ij}})\frac{q_{ij}\delta(n_j)}{S_i(n_i+1)}=P(\underline{n})\sum^{M}_{i=1}\frac{\delta(n_i)}{S_i(n_i)}
 $$
 
-the formal definitions remains the same.  for G: $P(\underline{n}) = \frac{1}{G}\prod^{M}_{i=1}f_i(n_i)$  where 
+La definizione formale rimane la stessa. 
+ $$P(\underline{n}) = \frac{1}{G}\prod^{M}_{i=1}f_i(n_i)$$  dove: 
 $$
 f_i(k)= \begin{cases}
 1 \ \ \ k=0 \\
 V_iS_i(k)f_i(k-1) \ \ k>0
 \end{cases}
 $$
-and $G = \sum_\underline{n}\prod^{M}_{i=1}f_i(n_i)$ 
+e $G = \sum_\underline{n}\prod^{M}_{i=1}f_i(n_i)$ 
 
-### The Convolution method
-In a closed system a state $\underline{n}$ is feasible if $n_i \geq 0,i=1\dots M$  and $\sum^{M}_{i=1}n_i=N$ the second condition introduce dependency among the stations of the system.
+### Il metodo convolutivo
+in un sistema chiuso $\underline{n}$ è fattibile se:
+- $n_i \geq 0,i=1\dots M$  
+- $\sum^{M}_{i=1}n_i=N$ 
 
-for convenience let's define the state space of the system with m station and n customers as
-$$
-S(n,m)=\{(n_1 \dots n_M | n_i \geq 0, i=1 \dots m; \sum^{m}_{i=1}n_i=n \}
-$$
-define the following auxiliary function $g(n,m)= \sum_{\underline{n} \in S(n,m)} \prod^{m}_{i=1}f_i(n_i)$  with $g(N,M)=G$ 
-with a little manipulation is possible to prove that 
+La seconda condizione introduce dipendenza tra le stazioni del sistema
+
+Siano:
+- $S(n,m)=\{(n_1 \dots n_M | n_i \geq 0, i=1 \dots m; \sum^{m}_{i=1}n_i=n \}$ =>  lo spazio degli stati con m stazioni e n clienti 
+-  $g(n,m)= \sum_{\underline{n} \in S(n,m)} \prod^{m}_{i=1}f_i(n_i)$ => funzione ausiliaria dove:
+    - $g(N,M)=G$  
+
+con un pò di calcoli si può mostrare che 
 $$
 g(n,m) = \sum^{n}_{k=0}f_m(k)g(n-k,m-1) 
 $$
-the definition of g(n,m) can be made recursive introducing the following base conditions
-$g(0,m) = 1(m=0 \dots )$ and $g(n,0) = 0 (n=1 \dots)$. This definition is a convolution sum (Convolution algorithm) used for compute the normalization constant in efficient manner. 
+la definizione g(n,m) può essere ricorsiva introducendo i seguenti casi base:
+- $g(0,m) = 1(m=0 \dots )$
+- $g(n,0) = 0 (n=1 \dots).$
 
-### Computational Scheme for G
-in order for this scheme to work we must have first computed all the values of $f_m(k)$ and of $g(k,m-1)$ , every row of the recursion of g correspond to a specific load of the system and every column correspond to a specific station. The recursion is made first on the loading level (n) and then on the components of the network(m) starting from the upper left corner and ending to the bottom right.
-The complexity of the computation is in order of : $N^2*M$  in the general case and $N*M$ if all the stations are load indipendent (is much simpler to calculate). 
+Che è una somma convolutiva che calcola efficacemente la distribuzione nel modello.
+
+### Schema di calcolo per  G
+Per far si che questo schema funzioni **dobbiamo prima calcolare tutte le**:
+- $f_m(k)$ 
+- $g(k,m-1)$ 
+
+Ogni riga della ricorsione di g corrisponde a un preciso carico del sistema e ogni colonna a una specifica stazione . La ricorsione è operata prima sul livello di carico (n) e poi sui componenti della rete(m) iniziando dal bordo sinistro superiore e finendo in quello inferiore destro.
+
+La complessità dell'algoritmo è :
+- $N^2*M$  nel caso generale 
+- $N*M$ Se tutte le stazioni sono load indipendent, caso più semplice. 
 ```
 //Input -> M: int,N: int,V[i]: Array<double>, S[i](k): Array<Array<double>>, ST[i]: Array<SType>
 //Output -> G(k): Array<double>
@@ -681,32 +738,40 @@ for i in 1...M{
 	}
 }
 ```
-### Computation of performance figures
-using explicit expression of $P(\underline{n})$ we have $p_m(k)= f_m(k)\frac{g(n-k,m-1)}{g(n,m)}$.
-note: for the rest of the scheme $p_m(k,n)$ will be simplified in $p_m(k)$ omitting the explicit dependence with the size of the population. Here some perfomance indices that can be calculated:
+### Calcolo delle statistiche di performance 
+usando l'espressione esplicita di $P(\underline{n})$ abbiamo  $$p_m(k)= f_m(k)\frac{g(n-k,m-1)}{g(n,m)}$$
+>[!note]  
+>per il resto dello schema $p_m(k,n)$ verrà semplificato in $p_m(k)$ omettendone la dipendenza esplicità con la dimensione della popolazione.
+
+Di seguito il calcolo di alcuni indici di performance 
+
 - $X_m= \sum^{n}_{k=1}p_m(k)\frac{1}{S_m(k)} = V_m \frac{g(n-1,m)}{g(n,m)}$ 
 - $U_m=1-p_m(0)=1- \frac{g(n,m-1)}{g(n,m)}$ 
-notice that X and U can be also picked from the table produced by the computation of g.
+Si noti che U e X possono essere estratti direttamente dalla tabella di ricorsione risparmiando calcoli.
+
 - $\overline{n}_m = \sum^{n}_{k=1}kp_m(k)$ 
 - $\overline{w}_m = \frac{\overline{n}_m}{X_m}$ 
-In case of load indipendent station the following can be applied 
+
+Nel caso di load independent station si può applicare il seguente:
 - $U_m= X_m S_m = V_m S_m \frac{g(n-1,m)}{g(n,m)}$ (standard formula)
 - $\overline{n}_m(n)= U_m(n)[1+\overline{n}_m(n-1)]$ 
 - $\overline{w}_m(n)= S_m[1+\overline{n}_m(n-1)]$ 
 
-### Arrival theorem 
-$\overline{w}(n)= S_m[1+\overline{n}_m(n-1)$ this is known as the Arrival theorem that states: "if a single server has a poisson input process then the arriving customers see the queue as if they were external observers not involved in this operation".
+### Teorema dell'arrivo
+$$\overline{w}(n)= S_m[1+\overline{n}_m(n-1)$$conosciuta anche come teorema dell'arrivo (o PASTA): "Se un server ha una distribuzione **markovniana** degli arrivi allora i clienti che arrivano vedono il sistema come se fossero osservatori esterni non coinvolti nell'operazione".
 
-In the case of closed queueing networks with Product form solution the same theorem say: when network has n customers, arriving customer see queue i as external observers which monitor the queue in equilibrium when only n-1 customers are is the system
-## Mean value analysis 
-Let's group all the recurrent expression
+Nel caso di sistemi chiusi che hanno una soluzione forma prodotto (BCMP):
+quando il sistema ha N clienti, i clienti che arrivano vedono la coda i-esima come osservatori esterni **che monitorano la coda in equilibrio quando n-1 clienti sono presenti** 
+## Analisi del valor medio
+Raggruppando tutte le espressioni ricorrenti
 -  $\overline{w}_i(n) = S_i[1+\overline{n}_i(n-1)]$
 - $U_i(n)=X_i(n)S_i$ 
 - $\overline{n}_i(n)= U_i(n)[1+\overline{n}_i(n-1)]$ 
-The missing $X_i$ equation can be derived by using the little's law 
-- $X_{ref}(n)= \frac{n}{\sum^{M}_{j=1}V_j \overline{w_j}(n)}$ (derived from the definition of $Y_k(n)$)   
+
+l'equazione mancante per $X_i$ può essere derivata usando la [[#Formula di little ⚠]] 
+- $X_{ref}(n)= \frac{n}{\sum^{M}_{j=1}V_j \overline{w_j}(n)}$ (derivato dalla definizione di $Y_k(n)$)   
 - $X_i(n)= V_i X_{ref}(n)$ 
-### MVA for LI stations 
+### MVA per stazioni Load Indipendent 
 ```
 Input -> M: int, N: int, V[i] : Array<double>, S[i]: Array<double>
 Output -> X[i][k]: Array<Array<double>>, U[i][k]:Array<Array<double>>, n[i][k]:Array<Array<int>>, w[i][k] : Array<Array<double>>
@@ -729,8 +794,8 @@ for k in 1...N{
 
 ```
 
-### Mean value analysis with delay stations
-in the case of delay station $\overline{w}_i(n)= Z$ always. The algorithm can so modified observing that 
+### Analisi del valor medio con stazioni di ritardo
+nel caso di stazioni di ritardo è sempre $\overline{w}_i(n)= Z$ . L'algoritmo può essere modificato osservando che
 - $\overline{w}_i(n)= \begin{cases}Z_i \ \ \ delay\ station \\ S_i[1+\overline{n}_i(n-1)] \ \ \ LI \  station \end{cases}$  
 - $\overline{n}_i(n)= \begin{cases}Z_iX_i(n) \ \ \ Delay \ Station \\ U_i(n)[1+\overline{n}_i(n-1)] \ \ \  LI \end{cases}$ 
 - $U_i(n)= \begin{cases}\frac{\overline{n}_i(n)}{n} \ \ \ DI \\ X_i(n)S_i \ \ \ LI \end{cases}$ 
@@ -766,9 +831,15 @@ for k in 1...N{
 
 ### Mean value analysis with  Load dependent stations
 
-consider the expression for the queue length distribution $p_m(k,n)= f_m(k)\frac{g(n-k,m-1)}{g(n,m)}$ , recall: the explicit expression of the service function $f_m(k)=V_mS_m(k)f_m(k-1)$  and throughput $X_m(n)= V_m \frac{g(n-1,m)}{g(n,m)}$  , substituting in the expression of queue length distribution we obtain  $p_m(k,n)= X_m(n)S_m(k)p_m(k-1,n-1)$ (intermediate passage omitted). since expression of $X_m$ hold for any index i we can use that expression for any index. The new recursive expression let us to obtain: 
+considerando:
+- l'espressione per la distribuzione della lunghezza di coda: $$p_m(k,n)= f_m(k)\frac{g(n-k,m-1)}{g(n,m)}$$
+- l'espressione esplicità della funzione di servizio: $$f_m(k)=V_mS_m(k)f_m(k-1)$$
+- del throughput: $X_m(n)= V_m \frac{g(n-1,m)}{g(n,m)}$  
 
-- $\overline{w}_i(n) = \frac{\overline{n}_i}{X_i(n)} = \frac{\sum^{n}_{k=1}kp_i(k,n)}{X_i(n)} = \sum^{n}_{k=1}kS_i(k)p_i(k-1,n-1)$ latter passage with queue length distribution 
+sostituendo nella distribuzione della lunghezza di coda si ottiene: $$p_m(k,n)= X_m(n)S_m(k)p_m(k-1,n-1)$$ %%ho omesso i passaggi intermedi%% 
+ siccome l'espressione di $X_m$ è vera per ogni i possiamo usarla per tutti gli indici. La nuova espressione ricorsiva ci permette di ottenere:
+
+- $\overline{w}_i(n) = \frac{\overline{n}_i}{X_i(n)} = \frac{\sum^{n}_{k=1}kp_i(k,n)}{X_i(n)} = \sum^{n}_{k=1}kS_i(k)p_i(k-1,n-1)$ ultimo passaggio con la distribuzione  
 - $X_{ref}(n)= \frac{n}{\sum^{M}_{j=1}V_j \overline{w}_j(n)}$ 
 - $X_i(n)= V_iX_{ref}(n)$ 
 - $\overline{n}_i(n)=\overline{w}_i(n) * X_i(n)$ 
@@ -776,10 +847,10 @@ consider the expression for the queue length distribution $p_m(k,n)= f_m(k)\frac
 - $p_i(0,n)= 1- \sum^{n}_{k=1}p_i(k,n)$ 
 - $U_i(n)= 1-p_i(0,n)= \sum^{n}_{k=1}p_i(k,n)$ 
 
-embedding these equation is easy, at each step the queue can be computed as $p_i(0,n)=1.0-U_i(n)$  and is initialized $p(0,0)=1.0$ 
-
+ad ogni passo la coda può quindi essere calcolata con $p_i(0,n)=1.0-U_i(n)$  
+inizializzata a $p(0,0)=1.0$ . A questo punto l'integrazione delle nuove espressioni è semplice.
 ### MVA for LD stations 
-not usable when the bottleneck station is load dependent.
+**non si può usare se il collo di bottiglia è dipendente dal carico**
 ```
 Input -> M: int, N: int, V[i] : Array<double>, S[i]: Array<double>
 Output -> X[i][k]: Array<Array<double>>, U[i][k]:Array<Array<double>>, n[i][k]:Array<Array<int>>, w[i][k] : Array<Array<double>>, p[i][k][n]: Array<Matrix<2,double>>

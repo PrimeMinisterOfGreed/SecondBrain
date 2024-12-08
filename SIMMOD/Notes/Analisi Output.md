@@ -1,164 +1,204 @@
-# Finite horizon simulations  
-A finite-horizon discrete event simulation is one for which the simulated operational time is finite. they are also know as terminating simulations. Often the system state is assumed to be idle at the beginning and at the end of the simulation. The terminating condition can be specified by the close the door time.
-- Transient system statistics are produced by this simulation.
-- Initial conditions affect finite horizon statistics
-- No need to assume a static environment 
-## Terminating conditions FHS
-depending on statistics chosen they can be expressed in term of simulation time or number of processed events. 
+# Simulazioni a orizzonte finito
+Una simulazione con orizzonte finito è quella che ha un tempo operativo finito, sono anche chiamate simulazioni terminanti. Spesso si suppone che il sistema sia fermo all'inizio e alla fine della simulazione. Le condizioni di terminazione potrebbero essere specificate ad esempio da un certo punto nel tempo che termina la simulazione.
+- **Questa simulazione produce statistiche del transitorio**.
+- Le condizioni iniziali **hanno impatto** sulle statistiche del transitorio 
+- Non c'é bisogno di assumere un ambiente statico 
+## Condizioni di terminazione
+A seconda delle misure scelte questo possono essere espresse in termini di tempo passato nella simulazione o numero di eventi processati. 
 
-in the case of an SSQ we want to estimate: 
-- the average number of customers in the system up to time T (1)
-- the average waiting time experienced by the first N customers (2)
+Nel caso ad esempio di una coda a singolo server vorremmo stimare : 
+1. il numero medio di clienti fino al tempo T 
+2. il tempo medio d'attesa w sperimentato dai primi N clienti 
 
-Formally 
-1) state variable $n(\cdot)$ is known as stochastic process. typical objective estimate time-averaged transient statistic $\bar{n}(T)=\frac{1}{T} \int^{T}_{0}n(t) dt$ .
-2) $W_i$ also is a stochastic process. typical objective estimate sample-averaged transient statistic $\bar{W}(N)= \frac{1}{N}\sum^{N}_{i=1}W_i$ 
-## Indipendent repications
-the samples collected in a set of replication are not independent (output are correlated), so is possible to calculate mean and variance but they are not independent, so is necessary a system to overcome this problem.
+formalmente 
+1)  $n(\cdot)$ è anche conosciuto come processo stocastico. tipicamente il suo obiettivo è di stimare la statistica transiente $\bar{n}(T)=\frac{1}{T} \int^{T}_{0}n(t) dt$  => numero di clienti medio.
+2) $W_i$ anche è un processo stocastico. tipicamente il suo obiettivo è stimare la statistica transiente $\bar{W}(N)= \frac{1}{N}\sum^{N}_{i=1}W_i$ => tempo d'attesa medio.
 
-Thus the simulation can be repeated varying only the seed of the generator, the totality of the replication is an ensemble or sample, the seed must be chosen so that there is no overlapping between simulations, tipically the final state of the previous simulation is used as seed for the new one.
+
+## Repliche indipendenti
+i campioni raccolti durante una simulazione non sono indipendenti (l'output è correlato), perciò nonostante sia possibile calcolare media e varianza queste non sono indipendenti, per cui bisogna adottare delle tecniche .
+
+La simulazione può essere ripetuta variando solo il seme del generatore, il campione così ottenuto è un super-campione di campioni.
+Il seme va scelto così che non ci siano sovrapposizioni tra le simulazioni, tipicamente lo stato finale del sistema viene usato come stato iniziale della prossima simulazione.
 ### Replication and interval estimation
-suppose the simulation is replicated p times, each time generating a state time history $x_i(t)$ -> $\bar{x_i}(T)=\int^{T}_{0}x_i(t) dt$ where i is the replication index.
+supponiamo che la simulazione sia replicata p volte, ogni volta generando uno stato  $x_i(t)$ -> $\bar{x_i}(T)=\int^{T}_{0}x_i(t) dt$  dove i è l'indice della replica.
 
-- Each data point $\bar{x}_i(T)$ is a indipendent observation of the RV $\bar{X}(T)$ 
-- if p is large enough, pdf of $\bar{X}(T)$ can be estimated from histogram of $\bar{x}_i(T)$  
+- Ogni dato $\bar{x}_i(T)$ è un'osservazione indipendente della variabile aleatoria $\bar{X}(T)$ 
+- con p grande abbastanza, la densità di $\bar{X}(T)$ può essere stimata tramite un istogramma di  $\bar{x}_i(T)$  
 
-Specifically if we want $E[\bar{X}(T)]$ :
-- a point estimate is available as a sample average $\hat{\micro}=\frac{1}{p}\sum^{p}_{i=1}\bar{x}_i(T)$ 
-- an interval estimate for $E[\bar{X}(T)]$ can be calculated: Using the [[Interval estimation.canvas|Interval estimation]] technique. This requires sample mean and std deviation of $\bar{x}_i(T)$ , this can be used to estimate $\bar{n}(T)$ and $\bar{W}(N)$ 
+nello specifico se vogliamo $E[\bar{X}(T)]$ :
+- uno stimatore puntuale è disponibile come media campionaria $\hat{\micro}=\frac{1}{p}\sum^{p}_{i=1}\bar{x}_i(T)$ 
+- una stima intervallare per $E[\bar{X}(T)]$ può essere calcolata: usando la tecnica delle [[Stime Intervallari]] . cosa che però richiede varianza e media campionaria di $\bar{x}_i(T)$.
 
-let $n(T)$ be the number of customers in the system at time T, suppose we want $E[n(T)]$ 
-- n(T) is a RV and the result of the simulation at time T is an instance of RV
-- in general the distribution of n(T) is far from being an approx Normal 
-- repeating the simulation several times produces data that are hard to analyze with standard confidence interval techniques.
-- subdivide the sample of size p into p/K subsample is a good way to compute the average results (with proper confidence intervals) that can be used as a set of measure for other computations.
 
-### Probability of lying in a fixed interval 
+Per stimare $\bar{n}(T)$ e $\bar{W}(N)$, ricorriamo al seguente procedimento:
 
-Assume a sample of p observation of an RV $Y_i \in Y,i=1...p$ coming from p independent observation, we want to estimate the probability that Y takes values within interval I
-$\psi = Prob\{Y \in I\}$ , let X be an RV derived from Y $X_i= \begin{cases} 1 \ \ if \ Y_i \in i \\ 0\end{cases}$   then $E[X]=E[X_i]=\psi$ 
+sia : $n(T)$ => numero di clienti nel sistema al tempo T
+supponiamo di voler ottenere $E[n(T)]$:
+n(T) è una variabile aleatoria, il risultato al tempo T  è un istanza anch'esso di una variabile aleatoria , in generale la distribuzione di n(T) è molto lontana dall'essere approssimativamente normale. 
 
-define m to be the number of sample components $Y_i$ that belong to I -> $m = \sum^{p}_{i=1}X_i$ 
+Ripetere la simulazione molte volte produce dati che sono difficili da analizzare con le tecniche standard di stima intervallare, motivo per il quale di solito si suddivide il campione in $\frac{p}{K}$  sotto-campioni, una buona mossa per calcolare i risultati medi con gli opportuni intervalli di confidenza che possono essere usati come insieme di misure per altre computazioni.
 
-The unbiased estimate of this prob is $\psi = \frac{1}{p}\sum^{p}_{i=1}X_i=\frac{m}{p}$ where $E[\psi]=\frac{1}{p}\sum^{p}_{i=1}E[X_i]=\psi$ 
-and $VAR[\hat{\psi}]=\frac{\psi(1-\psi)}{p}$ 
 
-m has binomial distribution with parameter $\psi$  --> $Prob\{m=k\}= \frac{p!}{k!(p-k)!} \psi^k(1-\psi)^{p-k}$ 
-expected value and variance of this RV are then 
-$E[m]=p \psi$  and $VAR[m]=p \psi(1-\psi)$ 
+### Probabilità di giacere in un certo intervallo
 
-estimating $\psi$ is equal to estimating the parameter of a binomial distribution when $\psi$ is the probability of success $Prob\{\hat{\psi}_L \leq \psi \leq \hat{\psi}_U\}$  where $\hat{\psi}_L$ and $\hat{\psi}_U$ can be obtained from resolving the following 2 equations 
+Assumiamo un insieme di p osservazioni della variabile aleatoria  $Y_i \in Y,i=1...p$ ottenuta da p osservazioni indipendenti. Vogliamo stimare la probabilità che Y assuma valori entro l'intervallo I.
+Sia:
+- $\psi = Prob\{Y \in I\}$ 
+- X una variabile aleatoria derivata da Y in questo modo $X_i= \begin{cases} 1 \ \  \ Y_i \in i \\ 0\end{cases}$   
+Allora $E[X]=E[X_i]=\psi$ .
+Sia:
+- m => numero di elementi in $Y_i$ che appartengono a I allora ->$m = \sum^{p}_{i=1}X_i$ 
 
-$\sum^{p}_{k=m}[\frac{p!}{k!(p-k)!} \psi_L^k(1-\psi_L^k)^{p-k}] = \frac{\alpha}{2}$  for $\psi_L$      
-$\sum^{m-1}_{i=0}[\frac{p!}{k!(p-k)!} \psi_U^k(1-\psi_U^k)^{p-k}] = \frac{\alpha}{2}$  for $\psi_U$    
+lo stimatore non polarizzato di questa probabilità è $$\psi = \frac{1}{p}\sum^{p}_{i=1}X_i=\frac{m}{p}$$ dove:
+- $E[\psi]=\frac{1}{p}\sum^{p}_{i=1}E[X_i]=\psi$ 
+- $VAR[\hat{\psi}]=\frac{\psi(1-\psi)}{p}$ 
 
-when  p is large and both m and p-m are > 5  a simpler way to get the confidence interval for $\psi$ is to use a normal distribution as an approximation of the binomial. So we can claim that $\hat{\psi}$ has a normal distribution with mean $\psi$ and variance $\frac{\psi(1-\psi)}{p}$  
+m ha distribuzione binomiale con:
+- parametro $\psi$  --> $Prob\{m=k\}= \frac{p!}{k!(p-k)!} \psi^k(1-\psi)^{p-k}$ 
+- valore atteso $E[m]=p \psi$  
+- varianza $VAR[m]=p \psi(1-\psi)$ 
 
-so with the following auxiliary variable $Z=\frac{\hat{\psi} - \psi}{\sqrt{\psi(1-\psi}/p}$ , that has a standard normal distribution we can search $Pr(-z_{\alpha/2} \leq Z \leq z_{\alpha/2}) = 1-\alpha$  and then the desired confidence interval becomes 
+stimare $\psi$ è equivalente a stimare un parametro di una distribuzione binomiale con:
+$\psi$  $Prob\{\hat{\psi}_L \leq \psi \leq \hat{\psi}_U\}$ => probabilità di successo 
+
+dove: $\hat{\psi}_L$ e $\hat{\psi}_U$ possono essere ottenuti risolvendo le seguenti equazioni: 
+- $\sum^{p}_{k=m}[\frac{p!}{k!(p-k)!} \psi_L^k(1-\psi_L^k)^{p-k}] = \frac{\alpha}{2}$  for $\psi_L$      
+- $\sum^{m-1}_{i=0}[\frac{p!}{k!(p-k)!} \psi_U^k(1-\psi_U^k)^{p-k}] = \frac{\alpha}{2}$  for $\psi_U$    
+
+quando  p è grande e sia m che p-m sono  > 5  una maniera più semplice per ottenere l'intervallo di confidenza di  $\psi$ è usare una **distribuzione normale come approssimazione di una binomiale** . cosi da poter dire che  $\hat{\psi}$ ha una distribuzione normale con media $\psi$ e varianza $\frac{\psi(1-\psi)}{p}$  
+
+usando quindi la seguente variabile ausiliaria $Z=\frac{\hat{\psi} - \psi}{\sqrt{\psi(1-\psi}/p}$ , che ha una distribuzione normale standardizzata possiamo cercare $Pr(-z_{\alpha/2} \leq Z \leq z_{\alpha/2}) = 1-\alpha$  per cui l'intervallo di confidenza desiderato diventa
 
 $$
 Pr\{\frac{m}{p}-z_{\alpha/2}\sqrt{\frac{m(p-m)}{p}} \leq \psi \leq Pr\{\frac{m}{p}+z_{\alpha/2}\sqrt{\frac{m(p-m)}{p}}\}= 1-\alpha
 $$
-### Waiting time of the K-th customer (jackknifing)
-$W_k^{[i]} :i =1,2,...p$ = sample of measurement of waiting time of the k-th customer (only).
+### Tempo d'attesa del k-esimo cliente (jackknifing)
+Sia:
+- $W_k^{[i]} :i =1,2,...p$ => campione formato dal tempo d'attesa del solo k-esimo cliente.
+- media: $\bar{W}_k=\frac{1}{p}\sum^{p}_{i=1}W_k^{[i]}$  
+- varianza: $\hat{s}^2_{W_k}=\frac{1}{p-1}\sum^{p}_{i=1}(W_k^{[i]} - \bar{W}_k)^2$ 
 
-$\bar{W}_k=\frac{1}{p}\sum^{p}_{i=1}W_k^{[i]}$  ,     $\hat{s}^2_{W_k}=\frac{1}{p-1}\sum^{p}_{i=1}(W_k^{[i]} - \bar{W}_k)^2$ 
-- we obtain confidence interval for $\micro = E[W_k]$  --> $Pr\{\bar{W}_k-t_{(p-1,\frac{\alpha}{2})} \frac{\hat{s}_{W_k}}{\sqrt{p}} \leq \micro \leq \bar{W}_k+t_{(p-1,\frac{\alpha}{2})} \frac{\hat{s}_{W_k}}{\sqrt{p}}\} \approx (1-\alpha)$ 
-- we compute the point estimate of the variance 
-$\hat{s}^2 = \frac{1}{p-1}\sum^{p}_{i=1}(W_k^{[i]}-\bar{W}_k)^2$     $E[\hat{s}^2]=\sigma^2$ 
-- subdivide the original sample into p sub sample of size p-1 items $(W_k)_j$ 
-$\bar{W_k}_j=\frac{1}{p-1}\sum^{p}_{i=1;i \neq j}W_k^{[i]}$        $\hat{s}^2=\frac{1}{p-2}\sum^{p}_{i=1;i \neq j}(W_k^{[i]})^2 - \frac{p-1}{p-2}\bar{(W_k)_j^2}$  
+otteniamo l'intervallo di confidenza per  $\micro = E[W_k]$  --> $$Pr\{\bar{W}_k-t_{(p-1,\frac{\alpha}{2})} \frac{\hat{s}_{W_k}}{\sqrt{p}} \leq \micro \leq \bar{W}_k+t_{(p-1,\frac{\alpha}{2})} \frac{\hat{s}_{W_k}}{\sqrt{p}}\} \approx (1-\alpha)$$ 
+Calcoliamo lo stimatore puntuale per la varianza:
 
-define $Z_j=p \hat{s}^2- (p-1)\hat{s}_j^2$  knowing $E[Z_j]=\sigma^2$ we can form a new sample of $Z_i$ 
-$\bar{Z}=\frac{1}{p}Z_j$     $\hat{s}_Z^2=\frac{1}{p-1}\sum^{p}_{j=1}(Z_j-\bar{Z})^2$ 
+$$\hat{s}^2 = \frac{1}{p-1}\sum^{p}_{i=1}(W_k^{[i]}-\bar{W}_k)^2$$  con $E[\hat{s}^2]=\sigma^2$
 
-we can then define $\Upsilon = \frac{(\bar{Z}-\sigma^2)}{s_Z/\sqrt{p}}$ , and show that is a RV distributed as a t-student with p-1 grade of freedom  and then obtain the confidence interval for $\sigma^2$ 
+suddividiamo il campione originale in un altro sotto-campione in cui manca la j-esima osservazione $(W_k)_j=\{ w_{i} \in W| i\neq j \}$:
+- media: $\bar{W_k}_j=\frac{1}{p-1}\sum^{p}_{i=1;i \neq j}W_k^{[i]}$        
+- varianza: $\hat{s}^2=\frac{1}{p-2}\sum^{p}_{i=1;i \neq j}(W_k^{[i]})^2 - \frac{p-1}{p-2}\bar{(W_k)_j^2}$ 
+
+
+Sia:  $Z_j=p \hat{s}^2- (p-1)\hat{s}_j^2$  
+sapendo che  $E[Z_j]=\sigma^2$ possiamo formare un nuovo campione $Z_i$ che ha:
+- media: $\bar{Z}=\frac{1}{p}Z_j$
+- varianza: $\hat{s}_Z^2=\frac{1}{p-1}\sum^{p}_{j=1}(Z_j-\bar{Z})^2$ 
+
+definiamo quindi $\Upsilon = \frac{(\bar{Z}-\sigma^2)}{s_Z/\sqrt{p}}$ , che una variabile aleatoria distribuita come una t-student con p-1 gradi di libertà, ora otteniamo l'intervallo di confidenza per $\sigma^2$ 
 $$
 Pr\{\bar{Z} - t_{(p-1,\frac{\alpha}{2})} \frac{\hat{s}_Z}{\sqrt{p}} \leq \sigma^2 \leq \bar{Z} + t_{(p-1,\frac{\alpha}{2})} \frac{\hat{s}_Z}{\sqrt{p}} \} \approx (1-\alpha)
 $$
 
-this method is know as jackknifing
+questo metodo è anche conosciuto come jackknifing
 
-# Infinite horizon simulations (steady state)
-Steady state statistics are produced by this type of simulations, in this case the initial conditions doesn't affect the statistics produced (system loses memory of the initial state). Thus the system environment is assumed to remain static.
-
-
-## Terminating conditions
-depending on the statistics chosen, the terminating conditions may assume different aspects. In general state variables $X(t)$ and $Y_i$ of a system are known formally as stochastic process. 
-
-Tipical objective are:
--  time-averaged steady state statistics: $\bar{x} = \lim_{T \rightarrow \infty} \frac{1}{T} \int^{T}_{0}X(t)dt$ 
-- sample-averaged steady state statistics: $\bar{y}=\lim_{N \rightarrow \infty} \frac{1}{N} \sum^{N}_{i=0}Y_i$ 
-both $\bar{x}$ and $\bar{y}$ are not random variables.
-
-### The challenge
-using $\{W_n:n =1,2,3,...\}$ suppose we are interested in estimating the waiting time distribution in steady state: $\lim_{n \rightarrow \infty} Prob\{W_n \leq x\} = F(x)$.
-As in the case of transitory state we are interested in calculate expected value and variance of this value. 
-
-In this case we don't need independent replications, because all RVs have all the same distribution. There are elements to take in consideration however:
-- The observation of the RV must be made after a set of initial observations
-- The observations made in a single simulation are in general highly correlated, and so many of the simple statistical method are ineffective since there is no independence
-
-## The length of the initial transient period 
-The initial condition must not:
-- affect the steady state behaviour 
-- require a very long initial simulation before getting a stable condition. 
-
-The effect of those observation is that we must discard a long initial simulation.
-The identification of the conditions is a difficult task that can only be addressed with preliminary simulations (pilot simulations).  The idea is to perform many simulation and collect statistics at different simulation times in order to construct samples that can be used to compute the probability distributions at these instant. So when compared they can be assumed as the steady state distribution of the process
+# Simulazioni con orizzonte infinito 
+ Questo tipo di simulazioni genera dati statistici a regime, in this case the initial conditions doesn't affect the statistics produced (system loses memory of the initial state). In questo caso l'ambiente è assunto essere statico.
 
 
-### Comparing distributions 
-- let $Y(t)$ be # of person in the system at time t and assume we made many observation $t_1,t_2,...,t_n$ --> $\{Y_i(t_n),i=1...p\} \ \ n=1,2,3...$ 
-- let $m_k(t_n)$ be # of times $Y_i(t_n) = k$ --> $\{m_k(t_n),k=1...N_{max}\}$ 
-- let $\psi_k(t_n)$ be P of observing k person in the system at time $t_n$ 
-Thus we can compute $\{\psi_k(t_n)=\frac{m_k(t_n)}{p}\} \ \ k=1...N_{max}$ where at most $N_{max}$ customers have been observed in the system. 
+## Condizioni di terminazione
+a seconda delle statistiche che si vogliono raccogliere, le condizioni di terminazione possono essere le più disparate.
 
-The initial transient period is defined as the value of index n where the difference between $t_n$ and $t_{n+1}$ becomes smaller than a certain threshold 
+In generale le variabili di stato $X(t)$ e $Y_i$ di un sistema sono conosciute come processi stocastici.
+
+Tipicamente gli obiettivi sono:
+- statistiche a regime temporali : $\bar{x} = \lim_{T \rightarrow \infty} \frac{1}{T} \int^{T}_{0}X(t)dt$ 
+- statistiche a regime discretizzate: $\bar{y}=\lim_{N \rightarrow \infty} \frac{1}{N} \sum^{N}_{i=0}Y_i$ 
+sia $\bar{x}$ che $\bar{y}$ **non sono variabili aleatorie** .
+
+
+usando $\{W_n:n =1,2,3,...\}$ supponiamo di essere interessati a calcolare la distribuzione dei tempi di attesa a regime: $\lim_{n \rightarrow \infty} Prob\{W_n \leq x\} = F(x)$.
+come nel caso dell'analisi del transitorio siamo interessati a stimare media e varianza di questa variabile. 
+
+In questo caso non abbiamo bisogno di repliche indipendenti, perchè tutte le variabili aleatorie hanno la medesima distribuzione. Ci sono degli elementi comunque che vanno presi in considerazione:
+- l'osservazione delle variabili aleatorie va effettuata dopo un certo numero di osservazioni preliminari 
+- Siccome i risultati in una singola simulazione sono altamente correlati, le tecniche statistiche standard non restituiscono i risultati voluti perchè le variabili aleatorie non sono indipendenti 
+
+## Lunghezza del transitorio iniziale
+le condizioni **non devono** :
+- avere impatti sul comportamento a regime 
+- richiedere una simulazione molto lunga prima di diventare a regime 
+
+l'effetto di queste osservazioni è che dobbiamo scartare un periodo iniziale della simulazione. Identificare queste condizioni è un compito difficile e va fatto mediante simulazioni di prova (pilot simulations).  L'idea è di costruire un campione statistico fatto da queste osservazioni iniziali , così che quando comparate con le distribuzione a regime si possa identificare la condizione per cui il sistema è entrato a regime.
+
+
+### Confrontare le distribuzioni  
+Sia:
+- $Y(t)$ => di clienti al tempo t, supponiamo di aver fatto un buon numero di osservazioni 
+- $t_1,t_2,...,t_n$ --> $\{Y_i(t_n),i=1...p\} \ \ n=1,2,3...$ 
+- $m_k(t_n)$ => numero di volte $Y_i(t_n) = k$ --> $\{m_k(t_n),k=1...N_{max}\}$ 
+-  $\psi_k(t_n)$ => probabilità di osservare k clienti nel sistema a  $t_n$ 
+Cosi possiamo calcolare $\{\psi_k(t_n)=\frac{m_k(t_n)}{p}\} \ \ k=1...N_{max}$ 
+dove:
+- al più $N_{max}$ clienti sono stati osservati nel sistema. 
+
+Il transitorio iniziale è definito come indice n dove la differenza tra $t_n$ e $t_{n+1}$ diventa più piccola di una certa soglia
 $$
 t_n:min_n\{\frac{\sum^{N_{max}}_{k=1}[\psi_k(t_n)-\psi_k(t_{n+1}]^2}{N_{max}} < \epsilon\}
 $$
 
 
-### Comparing moments 
-comparing distribution need a big amount of data, a reasonable compromise is to compare moments instead of distributions. In this case we can compute 
+### Confrontare i momenti
+confrontare le distribuzioni richiede un grande ammontare di dati, una via alternativa è quella di comparare i momenti, in questo modo:
 $$
 t_n^{[h]}:min_n\{|\frac{\sum^{p}_{i=1}[Y_i(t_n)]^h}{p} - \frac{\sum^{p}_{i=1}[Y_i(t_{n+1})]^h}{p}|<\epsilon\}
 $$
-Different moments yields different informations, so the actual length may be computed as $t_n:max_h\{t_n^{[h]}\}$ , the cost is high so reducing the compute cost to just the first moments is a good option. Averages computed at different times may oscillate, so we can compute moving averages :
+Momenti differenti portano informazioni diverse, così che la lunghezza del periodo corrente possa essere calcolata come $t_n:max_h\{t_n^{[h]}\}$ , il costo computazionale è comunque alto, perciò si raccomanda di ridurlo ai primi momenti. 
 
-let $\hat{\micro}(t_n)$ be the sample calculated at time $t_n$ --> $\hat{\micro(t_n)}= \frac{\sum^{p}_{i=1}Y_i(t_n)}{p}$ 
-from these derived quantities we can compute moving averages over 2L+1 subsequent instants $\hat{\micro}^{[L]}(t_n)= \frac{\sum^{L}_{i=-L}\hat{\micro}(t_{n+i})}{2L+1}$ 
+### Media mobili
+Le medie calcolate a differenti istanti di tempo possono oscillare, per cui è possibile utilizzare le medie mobili :
 
-### Comparing auto correlation
-we can identify the length of the initial period by measuring auto correlation: i.e measure the influence accross observations 
+sia:
+- $\hat{\micro}(t_n)$ la media campionaria calcolata al tempo $t_n$ =>$\hat{\micro(t_n)}= \frac{\sum^{p}_{i=1}Y_i(t_n)}{p}$ 
 
-Consider a sequence of RVs $\{Y_1,Y_2,...,Y_n\}$ :
-- Compute the auto covariance function $Cov(d)= \frac{1}{N-d}\sum^{N-d}_{i=1}(Y_i-E[Y])(Y_{i+d}-E[Y])$
-- Since we don't know $E[Y]$ we can approximate using an experimental covariance $\phi(d)=\frac{1}{N-d-1}\sum^{N-d}_{i=1}(Y_i-\bar{Y})(Y_{i+d}-\bar{Y})$  
-with the experimental mean $\bar{Y}$ expressed as always.
-
-$\phi(0)$ is the usual variance $\hat{s}^2$, we can thus compute the experimental auto-correlation 
-$\rho(d)=\frac{\phi(d)}{\hat{s}^2}$  that is a normalized auto covariance with interval values (-1,1), values next to 0 mean that influence accross measures are negligible. Thus we can search for this value to state where is the end of the initial transient period $d_0=min_d\{|\rho(d)| \leq \epsilon \}$ 
+da queste quantità derivate possiamo calcolare le medie su 2L+1 istanti sequenziali $$\hat{\micro}^{[L]}(t_n)= \frac{\sum^{L}_{i=-L}\hat{\micro}(t_{n+i})}{2L+1}$$
 
 
-## Overcome statistical dependency amongst observation 
+### Confrontare l'auto correlazione
+possiamo identificare la lunghezza del periodo iniziale usando l'auto correlazione: ossia la **misura dell'influenza tra le osservazioni**
 
-if we have a set of indipendent variables $Y_n$ and we want to estimate the characteristics, we can consider this set as a set of instance of the same RV but highly correlated, thus we need a method to reduce the dependency amongst those instances:
+Sia 
+- $\{Y_1,Y_2,...,Y_n\}$ => un campione di variabili aleatorie indipendenti.
 
-- independent replications 
+ 1. Calcolare la funzione di autocorrelazione $Cov(d)= \frac{1}{N-d}\sum^{N-d}_{i=1}(Y_i-E[Y])(Y_{i+d}-E[Y])$
+ 2.  Siccome non conosciamo $E[Y]$ possiamo approssimarla con una covarianza sperimentale $\phi(d)=\frac{1}{N-d-1}\sum^{N-d}_{i=1}(Y_i-\bar{Y})(Y_{i+d}-\bar{Y})$ , con la media campionaria $\bar{Y}$ espressa come di consueto.
+
+$\phi(0)$ è equivalente alla varianza $\hat{s}^2$, possiamo quindi calcolare la covarianza sperimentale come $\rho(d)=\frac{\phi(d)}{\hat{s}^2}$  che è una auto covarianza normalizzata nell'intervallo (-1,1)
+
+valori vicini a 0 significano che l'influenza tra le osservazioni è poca. così possiamo cercare questo valore per determinare la fine del periodo transitorio $d_0=min_d\{|\rho(d)| \leq \epsilon \}$.
+
+## Superare le dipendenze statistiche tra le osservazioni 
+
+sia:
+- $Y_n$ => un set di variabili aleatorie indipendenti 
+
+vogliamo stimarne le caratteristiche, possiamo considerare questo insieme come insieme di **istanze della stessa** variabile aleatoria ma con elementi altamente correlati, abbiamo bisogno perciò di un metodo che riduca questa correlazione:
+
+- Repliche indipendenti 
 - Batch means
-- Regeneration points 
+- Punti di rigeneramento
 
 
-## independent replications
-the components of the sample are obtained by running the simulations many times with different random generator seeds, with identical initial conditions, disregarding the data obtained by the initial simulation run
+## Repliche indipendenti
+i componenti del campione ottenuto facendo girare la simulazione molte volte devono essere raccolti a queste condizioni:
+- le condizioni iniziali devono essere sempre le stesse
+- il periodo iniziale di simulazione va scartato con le metodologie di prima
 
-### Mean and variance (indipendent replications)
-Determined $n_0$ we run p independent simulations and obtain a sequence of variable of interests 
-$\{ Y_{j1},Y_{j2},...,Y_{jn_0},...,Y_{jk},...,Y_{jN}:j=1...p \}$   from each of this realization we construct measures that become the components of our sample. 
+### Media e varianza 
+determinato $n_0$ eseguiamo p simulazioni indipendenti e otteniamo una sequenza di variabili di interesse $\{ Y_{j1},Y_{j2},...,Y_{jn_0},...,Y_{jk},...,Y_{jN}:j=1...p \}$   da ognuna di queste osservazioni costruiamo il campioni che ci servirà per effettuare le nostre misure
 
-As for the finite horizon analysis we can easily compute interval estimates. Starting from the mean: $\bar{Y}_j = \frac{1}{N-n_0}\sum^{N}_{k=n_0+1}Y_{jk}$, the data can be then organized in this manner 
+Come per il caso del transitorio possiamo facilmente calcolare le stime intervallari. 
+
+partendo dalla media: $\bar{Y}_j = \frac{1}{N-n_0}\sum^{N}_{k=n_0+1}Y_{jk}$, i dati possono essere organizzati in questo modo
 $$
 \begin{aligned}
 \{ Y_{11},Y_{12},...,Y_{1n_0},...,Y_{1k},...,Y_{1N}\} \Rightarrow \bar{Y}_1
@@ -168,12 +208,14 @@ $$
 \{ Y_{p1},Y_{p2},...,Y_{pn_0},...,Y_{pk},...,Y_{pN}\} \Rightarrow \bar{Y}_p
 \end{aligned}
 $$
-out of these values we compute 
-the unbiased sample mean $\hat{\micro}=\bar{Y} =\frac{1}{p}\sum^{p}_{j=1}\bar{Y}_j$ and variance  $\hat{s}^2 = \frac{1}{p-1}\sum^{p}_{j=1}(\bar{Y_j} - \bar{Y})^2$ 
-when $N-n_0$ is large those RVs can be assumed to have a normal distribution and so the confidence interval is $Pr\{\bar{Y} - t_{p-1,\alpha/2}\sqrt{\hat{s}^2/p} \leq \micro \leq \bar{Y} + t_{p-1,\alpha/2}\sqrt{\hat{s}^2/p}\} \approx 1- \alpha$  
-As usual is possible to control the size of the confidence interval by controlling the number of replications P and the number of observations N that has important effects on $\hat{s}^2$ 
+da questi valori calcoliamo 
+- la media campionaria $\hat{\micro}=\bar{Y} =\frac{1}{p}\sum^{p}_{j=1}\bar{Y}_j$ 
+- la varianza campionaria  $\hat{s}^2 = \frac{1}{p-1}\sum^{p}_{j=1}(\bar{Y_j} - \bar{Y})^2$ 
 
-When p>40 the t-student is approximate as a Normal so that $t_{p-1,\alpha/2}$ can be replaced with $z_{\alpha/2}$ 
+quando $N-n_0$ è grande queste  variabili aleatorie si può assumere abbiano una distribuzione t-student perciò l'intervallo di confidenza è $$Pr\{\bar{Y} - t_{p-1,\alpha/2}\sqrt{\hat{s}^2/p} \leq \micro \leq \bar{Y} + t_{p-1,\alpha/2}\sqrt{\hat{s}^2/p}\} \approx 1- \alpha$$  
+Anche qui la dimensione del campione ha importanti effetti sulla larghezza dell'intervallo agendo quindi su la dimensione del campione P e sul numero di osservazioni N si possono avere importanti effetti su $\hat{s}^2$ 
+
+quando p>40 la t-student è approsimativamente una normale, si può quindi sostituire $t_{p-1,\alpha/2}$ con $z_{\alpha/2}$ 
 
 ### Probability of falling within an interval 
 estimate as the other case $\psi_n=Pr\{Y^{[n]} \in I\}$ , where $Y^{[n]}$ is the observation of interest during a simulation of length n. we can assume that $\psi = \lim_{n \rightarrow \infty} \psi_n$ . After having determined $n_0$ we can assume the process to be stationary and so $\psi_n \approx \psi$ . 
@@ -255,11 +297,14 @@ to compute the previous conf interval, we must estimate the variance of $Z_j$
 - $VAR[v_j] \approx \hat{s}^2_v = \frac{1}{p-1}\sum^{p}_{j=1}(v_j-\bar{v})^2=\frac{1}{p-1}[\sum^{p}_{j=1}v^2_j-p \bar{v}^2]=\frac{1}{p-1}\{\hat{S}_{vv}-p \bar{v}^2\}$   
 where
 $\hat{S}_A= \sum^{p}_{j=1}A_j$ , $\hat{S}_{AA} = \sum^{p}_{j=1}A^2_j$ , $\hat{S}_{Av}=\sum^{p}_{j=1}A_jv_j$ ,$\hat{S}_v= \sum^{p}_{j=1}v_j$ , $\hat{S}_{vv} = \sum^{p}_{j=1}v^2_j$, $\hat{r}=\frac{\hat{S}_A}{\hat{S}_v}$ 
+
+$$
 \begin{align}
 X_{01} \Rightarrow \{U_1\} \Rightarrow Y_{11}; && X_{01} \Rightarrow \{U_1^*\} \Rightarrow Y_{21} \\
 ...\\
 X_{0p} \Rightarrow \{U_p\} \Rightarrow Y_{1p}; && X_{0p} \Rightarrow \{U_p^*\} \Rightarrow Y_{2p}
 \end{align}
+$$
 recalling $\sigma^2_Z \approx \hat{s}^2_Z=\hat{s}^2_A-2\hat{r}\hat{s}_{Av}+\hat{r}^2\hat{s}^2_v$ we can write $\hat{s}^2_Z=\frac{1}{p-1}\{\hat{S}_{AA}-2\hat{r}\hat{S}_{Av}+\hat{r}^2\hat{S}_{vv}\}$  so that the width can be 
 $$
 \Delta= \frac{\hat{s}_Z}{\bar{v}\sqrt{p}}=\sqrt{\frac{p}{p-1}}\frac{\sqrt{\hat{S_{AA}-2\hat{r}\hat{S}_{Av}+\hat{r}^2+\hat{S}_{vv}}}}{\hat{S}_v}
