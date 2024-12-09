@@ -217,27 +217,47 @@ Anche qui la dimensione del campione ha importanti effetti sulla larghezza dell'
 
 quando p>40 la t-student è approsimativamente una normale, si può quindi sostituire $t_{p-1,\alpha/2}$ con $z_{\alpha/2}$ 
 
-### Probability of falling within an interval 
-estimate as the other case $\psi_n=Pr\{Y^{[n]} \in I\}$ , where $Y^{[n]}$ is the observation of interest during a simulation of length n. we can assume that $\psi = \lim_{n \rightarrow \infty} \psi_n$ . After having determined $n_0$ we can assume the process to be stationary and so $\psi_n \approx \psi$ . 
+### Probabilità di giacere in un certo intervallo 
+stimare come nell'altro caso $\psi_n=Pr\{Y^{[n]} \in I\}$ 
+dove:
+- $Y^{[n]}$è la variabile di interesse durante il periodo d'osservazione n. 
 
-Given $n_0$ we perform p runs that will provide an interval estimate for $\psi$  and yield a set $\{Y_{ij} :i=1..p;j=1...N\}$  assuming $N>>n_0$ . From each simulation we compute the unbiased estimate of the desired prob $\hat{\psi}_i=\frac{v_i}{N-n_0}$ . where $v_i$ is # of times Y fells in I. Thus $\hat{\psi}_i$ values obtained are independent --> $E[\hat{\psi}_i]=\psi$ 
+Possiamo assumere che  $\psi = \lim_{n \rightarrow \infty} \psi_n$ . Poichè aver determinato $n_0$ possiamo assumere che il processo sia stazionario e che quindi $\psi_n \approx \psi$ . 
 
-We can compute then the sample mean and variance:
-$\hat{\psi}= \frac{1}{p}\sum^{p}_{i=1}\hat{\psi}_i$   ,    $\hat{s}^2(\hat{\psi})=\frac{1}{p-1}(\hat{\psi}_i - \hat{\psi})^2$ . Let's define $Z = \frac{\hat{\psi}-\psi}{\sqrt{\hat{s}^2(\hat{\psi})/p}}$ that has a t-student(p-1). 
-An interval estimate is expressed as $Pr\{\hat{\psi}-t_{p-1,\alpha/2}\frac{s(\hat{\psi})}{\sqrt{p}} \leq \psi \leq \hat{\psi}+t_{p-1,\alpha/2}\frac{s(\hat{\psi})}{\sqrt{p}}\}$ where as usual if p is large we can replace $t_{p-1,\alpha/2}$ with $z_{\alpha/2}$ .
+Dato $n_0$  eseguiamo p sessioni che daranno una stima intervallare per $\psi$  con risultato l'insieme $\{Y_{ij} :i=1..p;j=1...N\}$  assumendo $N>>n_0$ .Per ogni simulazione calcoliamo la stima non polarizzata $\hat{\psi}_i=\frac{v_i}{N-n_0}$ . 
+Dove:
+- $v_i$ => numero di volte Y cade in I. 
+
+Cosi i valori ottenuti $\hat{\psi}_i$ sono indipendenti --> $E[\hat{\psi}_i]=\psi$ 
+
+Possiamo quindi calcolare :
+- Media $\hat{\psi}= \frac{1}{p}\sum^{p}_{i=1}\hat{\psi}_i$   
+- varianza $\hat{s}^2(\hat{\psi})=\frac{1}{p-1}(\hat{\psi}_i - \hat{\psi})^2$ . 
+
+Come di consueto, definiamo  $Z = \frac{\hat{\psi}-\psi}{\sqrt{\hat{s}^2(\hat{\psi})/p}}$ che è una t-student(p-1). 
+esprimiamo l'intervallo di confidenza con $Pr\{\hat{\psi}-t_{p-1,\alpha/2}\frac{s(\hat{\psi})}{\sqrt{p}} \leq \psi \leq \hat{\psi}+t_{p-1,\alpha/2}\frac{s(\hat{\psi})}{\sqrt{p}}\}$ 
+Dove:
+- se p è grande possiamo rimpiazzare  $t_{p-1,\alpha/2}$ con $z_{\alpha/2}$ .
 
 ## Batch means
-the components of sample are collected by a single simulation run after having discarded the data obtained by the transient period and subdividing the data collected into subsamples which are assumed to be approximately independent because of the inter collection time long. 
+I componenti del campione sono ottenuti con una lunga sessione, scartando i campioni che fanno parte del periodo transitorio e dividendo questo campione massiccio in p sottocampioni, che si suppone siano scorrelati grazie all'intervallo di tempo che intercorre tra di essi. 
 
-### Discard the transient period
-in order to identify the transient period, the auto covariance technique is recommended. Let $Y_{i,j}$ be the j-th observation belonging to the i-th sequence. Let's generate 2 subsequences $\{Y_{i,j}:j=1...m\}$ and $\{Y_{i+1,j}:j=1...m\}$ with $m>n_0$ , since this precondition those 2 subsequences are independent, repeating this consideration for the pair $\{Y_{i+1,j};Y_{i,j}\}$ j=2...m we can consider the whole sample made of independent observations. Thus we can apply the techniques used for the independent replication here as well
+### Scartare il transitorio
+è raccomandabile usare la tecnica dell'autocorrelazione per individuare il transitorio.
 
-### Mean and variance (Batch means)
-we can compute sample and mean with this formula 
+Sia:
+- $Y_{i,j}$ la j-esima osservazione appartenente alla sequenza i-esima. 
+- $\{Y_{i,j}:j=1...m\}$ => sotto-sequenza dal campione di riferimento 
+- $\{Y_{i+1,j}:j=1...m\}$ altra sotto-sequenza dal campione di riferimento con $m>n_0$ 
+
+a queste condizioni le due sequenze sono indipendenti,ripetendo queste considerazioni per le coppie $\{Y_{i+1,j};Y_{i,j}\}$ j=2...m , possiamo considerare il campione composto da osservazioni indipendenti . Che ci consente di applicare le stesse tecniche di indagine statistica usate per le repliche indipendenti
+
+### Media e varianza
+Possiamo calcolare un insieme composto da medie così
 $$
 \bar{Y}_j=\frac{1}{N-n_0}\sum^{n_0+(j+1)*m}_{k=n_0+j*m+1}Y_{jk}
 $$
-the data can organized in this way
+organizzare i dati in questo modo
 $$
 \begin{aligned}
 \{ Y_{11},Y_{12},...,Y_{1n_0},...,Y_{1k},...,Y_{1N}\} \Rightarrow \bar{Y}_1
@@ -247,18 +267,20 @@ $$
 \{ Y_{p1},Y_{p2},...,Y_{pn_0},...,Y_{pk},...,Y_{pN}\} \Rightarrow \bar{Y}_p
 \end{aligned}
 $$
-and then apply the techniques used before
+e applicare le tecniche precedenti 
 
-## Regenerative method
-the components of the sample are obtained by a single simulation run splitted into regenerative cycles. Defined as regeneration points where the simulated stochastic process naturally loses the memory of the past.
+## Metodo Rigenerativo
+I componenti del campione sotto ottenuti da una sola simulazione divisa in cicli rigenerativi che si verificano ogni **punto di rigeneramento** . 
 
-### Initial conditions
-- The component of the sample are derived from successive regeneration cycles
-- Regenerations cycles are random length subsequences identified within the simulation run, starting the simulation from one of these regeneration points it's possible to avoid wasting the initial part of the simulation. 
-- RVs in different sequences are independent and equally distributed 
-- If the sequence is regenerative and certain weak conditions hold the sequence has a steady state.
+ ⚠ punto di rigeneramento => **dove il processo stocastico simulato naturalmente perde memoria del suo passato**.
+
+### Condizioni iniziali
+- I componenti del campione sono derivati da successivi cicli di rigeneramento
+- I cicli rigenerativi sono sotto-sequenze di lunghezza aleatoria identificate durante la simulazione, **iniziando da uno di questi punti è possibile evitare di sprecare la parte iniziale della simulazione** . 
+- le variabili aleatorie in sequenze diverse sono **indipendenti e identicamente distribuite
+- Se la sequenza è rigenerativa e tengono alcune deboli condizioni allora il sistema è a regime
 ![[Pasted image 20231118103525 1.png]]
-from this queue we can take the following subsequences $\{W_1,W_2,W_3,W_4,W_5,W_6,W_5\}$ , $\{W_8,W_9\}$ , $\{W_{10},W_{11},W_{12},W_{13}\}$  characterized by the fact that the first element (sequence) is always the waiting time of a customer that arrives and find the queue empty. These subsequences are called regeneration cycles. The data can be organized as p subsequences expressed in this form
+da questa coda possiamo prendere le seguenti sotto-sequenze $\{W_1,W_2,W_3,W_4,W_5,W_6,W_5\}$ , $\{W_8,W_9\}$ , $\{W_{10},W_{11},W_{12},W_{13}\}$  caratterizzato dal fatto che il primo elemento della sotto-sequenza è il tempo d'attesa di un cliente che arriva e trova il sistema vuoto. Le sotto-sequenze sono chiamati **cicli di rigeneramento** e possono essere organizzati in questo modo
 $$
 \begin{aligned}
 \{ W_{11},W_{12},...,W_{1k},...,W_{1m_1}\} 
@@ -269,34 +291,58 @@ $$
 \end{aligned}
 $$
 
-### Initial considerations
-Let $A_j=\sum^{m_j}_{k=1}W_{jk}$ be the sum of the waiting times observed during the j-th regeneration cycle. Where $m_j$ is the number of customers served in the j-th cycle and can be used as a measure of length of the cycle. Thus from each regeneration cycle we get $\bar{W}_j=\frac{1}{m_j}\sum^{m_j}_{k=1}W_{jk}=\frac{A_j}{m_j}$ that is the ratio between 2 correlated variables. 
+### Considerazioni iniziali
+Sia:
+- $A_j=\sum^{m_j}_{k=1}W_{jk}$ la somma dei tempi d'attesa osservati durante il j-esimo ciclo di rigeneramento. 
+Dove: 
+- $m_j$ => numero di clienti serviti durante il ciclo di rigeneramento, che può essere usato come indicazione della lunghezza del ciclo
 
-In a generic form $A_j= \int^{\beta_j}_{\beta_{j-1}}n(t)dt$ can be expressed as integral of n(t) computed in the j-th regeneration cycle. Denoting with $\delta_j=\beta_j-\beta_{j-1}$ the length of the cycle we get a point estimate $\bar{n}_j=\frac{1}{\delta_j}\int^{\beta_j}_{\beta_{j-1}}n(t)dt=\frac{A_j}{\delta_j}$ .
-Running the simulation up to the point of observing p regeneration cycles we collect samples that cannot be used in a standard way because of their correlation. Such that the distribution of $\bar{W}_i$ is different from $\bar{W}$. It is thus mandatory taking into account the correlated nature of the measures coming from different regeneration cycles. 
+Così da ogni ciclo di rigeneramento otteniamo:
+- $\bar{W}_j=\frac{1}{m_j}\sum^{m_j}_{k=1}W_{jk}=\frac{A_j}{m_j}$=> che è un rateo da due variabili correlate  
 
-Given a random variable $Y$ that we measure we can summarize the outcomes with a series of independent and identically distributed random pairs $\{(A_1,v_1),...,(A_p,v_p)\}$ : where 
-- $A_j$ is the sum or integral computed over the j-th regeneration cycle 
-- $v_j$ is the length of the j-th regeneration cycle expressed as the number of occurrences of $Y$ or as the distance in time between its end points. 
+In forma generica si può esprimere come $A_j= \int^{\beta_j}_{\beta_{j-1}}n(t)dt$ calcolato nel j-esimo ciclo di rigeneramento. Denotando con:
+- $\delta_j=\beta_j-\beta_{j-1}$ la lunghezza del ciclo 
+
+otteniamo uno stimatore puntuale: =>  $\bar{n}_j=\frac{1}{\delta_j}\int^{\beta_j}_{\beta_{j-1}}n(t)dt=\frac{A_j}{\delta_j}$ .
+
+Simulando fino ad ottenere P cicli di rigeneramento otteniamo delle osservazioni che sono altamente correlate e su cui le normali tecniche statistiche non funzionano. Questo porta a far si che la distribuzione di  $\bar{W}_i$ è diversa da quella di  $\bar{W}$. Perciò è bisogna prendere in considerazione la natura correlata di misure che vengono da diversi cicli di rigeneramento. 
+
+SIa $Y$ un parametro che vogliamo misurare, possiamo riassumere le osservazioni con coppie di valori identicamente e indipendentemente distribuiti$\{(A_1,v_1),...,(A_p,v_p)\}$ 
+Dove:
+- $A_j$ è la somma o l'integrale di Y calcolato durante il j-esimo ciclo di rigeneramento
+- $v_j$ è la lunghezza del ciclo di rigeneramento, contato come occorrenze di  $Y$ oppure come distanza di tempo tra i suoi terminali. 
 
 
-### Point estimate 
-under some conditions is possible to show $E[\hat{r}] = r = \frac{E[A_1]}{E[v_1]}=\frac{E[A_j]}{E[v_j]}$ so that $\hat{r}$ is the estimate point of interest. 
-Let $Z_j=A_j-rv_j$  for which $E[Z_j]=0$  and $VAR[Z_j]=VAR[A_j]-2rCOV[A_j,v_j]+r^2VAR[v_j]$  , the covariance is present due to the mutual dependence between elements of our ratio. 
-We can define $\bar{Z} = \frac{1}{p}\sum^{p}_{j=1}Z_j=\bar{A}-r \bar{v}$  so that $E[\bar{Z}]=0$ and $VAR[\bar{Z}]=\frac{VAR[Z_j]}{p}=\frac{\sigma^2_Z}{p}$.
-The central limit theorem allows to state $\frac{\bar{Z}}{\sigma_z/\sqrt{p}}=\frac{\bar{A}-r \bar{v}}{\sigma_Z/\sqrt{p}}= \frac{\bar{A}/\bar{v}-r}{\sigma_Z/(\bar{v}\sqrt{p})}=\frac{\hat{r}-r}{\sigma_Z/(\bar{v}\sqrt{p})}$  has a std normal distribution. So we can compute $Pr\{\hat{r}-z_{\alpha/2}\frac{\sigma_Z}{\bar{v}\sqrt{p}} \leq r \leq \hat{r}+z_{\alpha/2}\frac{\sigma_Z}{\bar{v}\sqrt{p}}\} \approx 1-\alpha$ but $\sigma^2_Z$ is unknown so we must use sample variance 
-$\sigma^2_Z \approx \hat{s}^2_Z=\hat{s}^2_A-2\hat{r}\hat{s}_{Av}+\hat{r}^2\hat{s}^2_v$ so that the solution has not std normal but a t-student distribution and then the confidence interval becomes 
+### Stima puntuale
+Sotto alcune condizioni è possibile mostrare che: $E[\hat{r}] = r = \frac{E[A_1]}{E[v_1]}=\frac{E[A_j]}{E[v_j]}$ 
+così che $\hat{r}$ è lo stimatore puntuale della variabile d'interesse. 
+
+Sia:  $Z_j=A_j-rv_j$ 
+- Media $E[Z_j]=0$
+- Varianza $VAR[Z_j]=VAR[A_j]-2rCOV[A_j,v_j]+r^2VAR[v_j]$  , la covarianza è presente a causa della natura correlata del rateo. 
+
+Definiamo quindi $\bar{Z} = \frac{1}{p}\sum^{p}_{j=1}Z_j=\bar{A}-r \bar{v}$ :
+- Media:$E[\bar{Z}]=0$ 
+- $VAR[\bar{Z}]=\frac{VAR[Z_j]}{p}=\frac{\sigma^2_Z}{p}$.
+
+Il teorema del limite centrale ci permette di dire che $$\frac{\bar{Z}}{\sigma_z/\sqrt{p}}=\frac{\bar{A}-r \bar{v}}{\sigma_Z/\sqrt{p}}= \frac{\bar{A}/\bar{v}-r}{\sigma_Z/(\bar{v}\sqrt{p})}=\frac{\hat{r}-r}{\sigma_Z/(\bar{v}\sqrt{p})}$$ha una distribuzione normale standardizzata . così che possiamo calcolare  $$Pr\{\hat{r}-z_{\alpha/2}\frac{\sigma_Z}{\bar{v}\sqrt{p}} \leq r \leq \hat{r}+z_{\alpha/2}\frac{\sigma_Z}{\bar{v}\sqrt{p}}\} \approx 1-\alpha$$ 
+purtroppo però $\sigma^2_Z$ è sconosciuto e dobbiamo usare la varianza campionaria: $\sigma^2_Z \approx \hat{s}^2_Z=\hat{s}^2_A-2\hat{r}\hat{s}_{Av}+\hat{r}^2\hat{s}^2_v$ che porta la soluzione a non avere più distribuzione normale ma t-student, per cui l'intervallo diventa:
 $$
 Pr\{\hat{r}-t_{1,\alpha/2}\frac{\hat{s}_Z}{\bar{v}\sqrt{p}} \leq r \leq \hat{r}+t_{1,\alpha/2}\frac{\hat{s}_Z}{\bar{v}\sqrt{p}} \} \approx 1-\alpha
 $$
  
- ### Width of confidence interval 
-to compute the previous conf interval, we must estimate the variance of $Z_j$ 
+### Larghezza dell'intervallo di confidenza  
+per calcolare l'intervallo di confidenza precedente dobbiamo calcolare la varianza di $Z_j$ 
+
 - $VAR[A_j] \approx \hat{s}^2_A=\frac{1}{p-1}\sum^{p}_{j=1}(A_j-\bar{A})^2=\frac{1}{p-1}[\sum^{p}_{j=1}A^2_j-p \bar{A}^2]=\frac{1}{p-1}\{\hat{S}_{AA}-p \bar{A}^2\}$  
-- $COV[A_j,v_j] \approx \hat{s}_{av}=\frac{1}{p-1}\sum^{p}_{j=1}(A_j-\bar{A})(v_j-\bar{v})=\frac{1}{p-1}[\sum^{p}_{j=1}A_jv_j-p \bar{A}\bar{v}] = \frac{1}{p-1}\{\hat{S}_{Av} - p \bar{A}\bar{v}\}$   
+- $COV[A_j,v_j] \approx \hat{s}_{av}=\frac{1}{p-1}\sum^{p}_{j=1}(A_j-\bar{A})(v_j-\bar{v})=\frac{1}{p-1}[\sum^{p}_{j=1}A_jv_j-p \bar{A}\bar{v}] = \frac{1}{p-1}\{\hat{S}_{Av} - p \bar{A}\bar{v}\}$  
 - $VAR[v_j] \approx \hat{s}^2_v = \frac{1}{p-1}\sum^{p}_{j=1}(v_j-\bar{v})^2=\frac{1}{p-1}[\sum^{p}_{j=1}v^2_j-p \bar{v}^2]=\frac{1}{p-1}\{\hat{S}_{vv}-p \bar{v}^2\}$   
-where
-$\hat{S}_A= \sum^{p}_{j=1}A_j$ , $\hat{S}_{AA} = \sum^{p}_{j=1}A^2_j$ , $\hat{S}_{Av}=\sum^{p}_{j=1}A_jv_j$ ,$\hat{S}_v= \sum^{p}_{j=1}v_j$ , $\hat{S}_{vv} = \sum^{p}_{j=1}v^2_j$, $\hat{r}=\frac{\hat{S}_A}{\hat{S}_v}$ 
+Dove
+- $\hat{S}_A= \sum^{p}_{j=1}A_j$ 
+- $\hat{S}_{AA} = \sum^{p}_{j=1}A^2_j$ 
+- $\hat{S}_{Av}=\sum^{p}_{j=1}A_jv_j$ 
+- $\hat{S}_v= \sum^{p}_{j=1}v_j$ 
+- $\hat{S}_{vv} = \sum^{p}_{j=1}v^2_j$, $\hat{r}=\frac{\hat{S}_A}{\hat{S}_v}$ 
 
 $$
 \begin{align}
@@ -305,103 +351,122 @@ X_{01} \Rightarrow \{U_1\} \Rightarrow Y_{11}; && X_{01} \Rightarrow \{U_1^*\} \
 X_{0p} \Rightarrow \{U_p\} \Rightarrow Y_{1p}; && X_{0p} \Rightarrow \{U_p^*\} \Rightarrow Y_{2p}
 \end{align}
 $$
-recalling $\sigma^2_Z \approx \hat{s}^2_Z=\hat{s}^2_A-2\hat{r}\hat{s}_{Av}+\hat{r}^2\hat{s}^2_v$ we can write $\hat{s}^2_Z=\frac{1}{p-1}\{\hat{S}_{AA}-2\hat{r}\hat{S}_{Av}+\hat{r}^2\hat{S}_{vv}\}$  so that the width can be 
+sapendo che $\sigma^2_Z \approx \hat{s}^2_Z=\hat{s}^2_A-2\hat{r}\hat{s}_{Av}+\hat{r}^2\hat{s}^2_v$  si può dire che ==> $\hat{s}^2_Z=\frac{1}{p-1}\{\hat{S}_{AA}-2\hat{r}\hat{S}_{Av}+\hat{r}^2\hat{S}_{vv}\}$
+per cui la larghezza dell'intervallo in questione diviene
 $$
 \Delta= \frac{\hat{s}_Z}{\bar{v}\sqrt{p}}=\sqrt{\frac{p}{p-1}}\frac{\sqrt{\hat{S_{AA}-2\hat{r}\hat{S}_{Av}+\hat{r}^2+\hat{S}_{vv}}}}{\hat{S}_v}
 $$
-despite the complexity of computing this confidence interval 
-$Pr\{\hat{r}-t_{1,\alpha/2}\Delta \leq r \leq \hat{r}+t_{1,\alpha/2}\Delta \} \approx 1-\alpha$ the values needed $A_j,A^2_j,v_j,v^2_j,A_jv_j$ can be accumulated at the end of each regeneration cycle. 
+nonostante la complessità di calcolare questo intervallo di confidenza $Pr\{\hat{r}-t_{1,\alpha/2}\Delta \leq r \leq \hat{r}+t_{1,\alpha/2}\Delta \} \approx 1-\alpha$ i valori necessari$A_j,A^2_j,v_j,v^2_j,A_jv_j$ possono essere accumulati alla fine di ogni ciclo di rigeneramento. 
 
-### Interval estimation of simulated random variables 
-the regenerative method is well suited for interval estimation of functions of simulated RVs, the unique requirement is to define well the expression of $A_j$ . For example 
-- average queue length $A_j=\int^{\beta_j}_{\beta_{j-1}}N(t)dt$  $v_j=\beta_j-\beta_{j-1}$ 
-- second moment of queue length $A_j=\int^{\beta_j}_{\beta_{j-1}}N(t)^2dt$  $v_j=\beta_j-\beta_{j-1}$ 
-- mean waiting time $A_j=\int^{\beta_j}_{\beta_{j-1}}N(t)dt$  $v_j=C_j$
-- probability of finding k customers in queue $A_j=\int^{\beta_j}_{\beta_{j-1}}I_k(t)dt$   $v_j=\beta_j-\beta_{j-1}$ Ik is # of times N(t)=k
-- Average cost of waiting $A_j=\int^{\beta_j}_{\beta_{j-1}}R(N(t)) dt$        $v_j=\beta_j-\beta_{j-1}$ where R(k) is cost rate due to the presence of k customers in system 
+### Stima intervallare di variabili aleatorie simulate 
+il metodo rigenerativo è comodo per calcolare la distribuzione di determinati tipi di variabili aleatorie, l'unico requisito è definire correttamente l'accumulatore $A_j$ . 
 
-## Finding regeneration points
-a regeneration point correspond to a state reached by the system when the future evolution can be considered as a replica of the previous one. When the system gets to such a point we can answer question on its future behavior without the need of information on its past, thus a regeneration point is defined by the occurrence of a particular event in a defined state. 
+>[!example] 
+>per esempio: 
+>- lunghezza media della coda $A_j=\int^{\beta_j}_{\beta_{j-1}}N(t)dt$  $v_j=\beta_j-\beta_{j-1}$ 
+>- secondo momento della lunghezza media della coda $A_j=\int^{\beta_j}_{\beta_{j-1}}N(t)^2dt$  $v_j=\beta_j-\beta_{j-1}$ 
+>-  tempo d'attesa medio $A_j=\int^{\beta_j}_{\beta_{j-1}}N(t)dt$  $v_j=C_j$
+>- probabilità di trovare k clienti in coda $A_j=\int^{\beta_j}_{\beta_{j-1}}I_k(t)dt$   $v_j=\beta_j-\beta_{j-1}$ con:
+>    - $I_{k}$ => numero di volte che N(t)=k
+>- costo medio d'attesa $A_j=\int^{\beta_j}_{\beta_{j-1}}R(N(t)) dt$        $v_j=\beta_j-\beta_{j-1}$ dove:
+>    - R(k) is cost rate due to the presence of k customers in system 
 
-### Finding regeneration points in FCFS single server system
-Deciding if the system is entered a regenerative conditions correspond to answer to:
-**"what is probability that the system leaves the current state in less then $\Delta$ time units"?**
-without the needs of having information on the past of the system. Depending on the distribution of service time and inter arrival different consideration can be made:
-- G/G/1 queue: general distribution for both inter arrival and service time 
-- M/G/1: inter arrival with neg exp and service time with general 
-- G/M/1: inter arrival with general and service time with neg exp
-- M/M/1: both inter arrival and service time with neg exp distribution
-lets define the following variables 
-- let $\tau$ and $\sigma$ be inter arrival and service time. 
-- $\rho$ and $v$ remaining service time and required time for next arrival 
-## Negative exponential distribution 
-let X be a RV with neg exp distribution with parameter $\micro=\frac{1}{\lambda}$
+## Trovare i punti di rigeneramento
+un punto di rigeneramento corrisponde a un momento raggiunto dal sistema in cui il suo futuro è una replica del suo passato. Quando il sistema raggiunge questo punto siamo in grado di fare considerazioni sul futuro del sistema ignorando il suo passato , un punto di rigeneramento è definito come **coppia (evento,stato)**. 
+
+
+### Distribuzione negativa esponenziale  
+un riassunto delle propietà della distribuzione negativa esponenziale, si consideri una variabile aleatoria X con $\micro=\frac{1}{\lambda}$
 $$
 \begin{align}
 f_X(x)=\lambda e^{-\lambda x} && F_X(x)=1-e^{-\lambda x}\\
 E[X] = \micro=\frac{1}{\lambda} && VAR[X]=\micro^2=\frac{1}{\lambda^2} && CV^2[X]=\frac{VAR[X]}{(E[X])^2}=1
 \end{align}
 $$
-### Minimum among Neg Exp RVs
-Given 2 RVs with neg exp distribution 
+### Minimo tra 2 variabile aleatorie negative esponenziali
+Date 2 variabili aleatorie negative esponenziali X e Y  
 $$
 \begin{align}
 f_X(x)=\lambda e^{\lambda-x}\  \ \ (x \geq 0)  && f_Y(y)=\delta e^{\delta y} \ \ \ (y \geq0)
 \end{align}
 $$
-Define new RV $Z=min(X,Y)$ :
-- Z is neg exp with parameter $\lambda+\delta$ 
+Definiamo una nuova variabile aleatoria $Z=min(X,Y)$ :
+- Z è negativa esponenziale con parametro $\lambda+\delta$ 
 - $F_Z(z)=1-e^{\lambda z} e^{-\delta z}= 1- e^{-(\lambda+\delta)z}$ 
 
-### Memory less property 
-let r(t) be the distribution of the remaining portion of X $r(t)=Pr\{X >s+t|X>s\}$ 
-using conditional probability we can show  $r(t)=\frac{Pr\{X>s+t\}}{Pr\{X>s\}}$ Since X has a negative distribution we have :
-$r(t)=\frac{e^{-\lambda(s+t)}}{e^{-\lambda(s)}}=e^{-\lambda(t)}$ which says that the distribution of the remaining part of X is identical to that of X.
+### Proprietà di assenza di memoria
+sia:
+- r(t) la distribuzione della porzione rimanente di X : $r(t)=Pr\{X >s+t|X>s\}$ 
+usando la probabilità condizionale si può mostrare che   $r(t)=\frac{Pr\{X>s+t\}}{Pr\{X>s\}}$ 
 
-The memory less property can be formally expressed as 
+Siccome X ha distribuzione negativa esponenziale abbiamo che :
+$r(t)=\frac{e^{-\lambda(s+t)}}{e^{-\lambda(s)}}=e^{-\lambda(t)}$ che dice che la distribuzione della porzione rimanente di X (di r(t)) è la stessa di X.
+
+Per cui si può esprimere la proprietà di assenza di memoria formalmente come 
 $$
 Pr\{X> x+\alpha|X>\alpha\}=Pr\{X>x\}
 $$
 
+### Trovare i punti di rigeneramento in una coda FCFS
+Decidere se il sistema è entrato in una condizione di rigeneramento equivale a chiedersi:
+^3ea7fc
+**"Qual'é la probabililtà che il sistema lasci lo stato corrente in meno di $\Delta$ unità di tempo"?**
+Vogliamo rispondere senza sapere il passato del sistema. 
+A seconda della distribuzione dei tempi di servizio e di inter-arrivo diverse considerazioni possono essere fatte : 
+- G/G/1 : distribuzione generica per entrambi i tempi
+- M/G/1: gli inter arrivi hanno distribuzione negativa esponenziale, mentre i tempi di servizio generale 
+- G/M/1: inter-arrivo generale, servizio negativa esponenziale 
+- M/M/1: distribuzione negativa esponenziale per tutti i tempi
 
-### G/G/1 case 
-no negative exponential, The only regeneration point is the arrival of a customer that finds the server idle. 
-- if t be the time of arrival to an empty system --> the answer is $Pr\{[\delta=min(\tau,\sigma)]\leq \Delta\}$  
-- if t is arrival of a new customer while another is already in service, let $\rho$ be the remaining service time -->  $Pr\{[\delta=min(\tau,\rho)]\leq \Delta\}$   
-- if t is time of departure of a customer let $v$ be the time required for the next arrival to happen --> $Pr\{[\delta=min(v,\sigma)]\leq \Delta\}$   
+definiamo le seguenti variabili 
+-  $\tau$ => tempo di inter-arrivo 
+- $\sigma$ => tempo di servizio . 
+- $\rho$ => tempo di servizio rimanente al cliente servito.
+- $v$ => tempo rimanente all'arrivo seguente.
 
-### M/G/1 case 
-arrival process is Poisson and inter-arrival times have neg exp distribution , thus departure times are regeneration points because their occurrence requires the characterization of the remaining time
+### G/G/1
+non c'é la negativa esponenziale, l'unico punto di rigeneramento è un cliente che trova il server scarico.
+sia:
+- se t è il tempo di arrivo a un sistema vuoto --> la risposta alla domanda sopra è $Pr\{[\delta=min(\tau,\sigma)]\leq \Delta\}$  
+- se t è il tempo di arrivo di un cliente mentre un altro è servito:
+    - sia $\rho$ il tempo di servizio rimanente -->  $Pr\{[\delta=min(\tau,\rho)]\leq \Delta\}$   
+- se t è il tempo di partenza di un cliente:
+    - sia $v$ il tempo richiesto perchè avvenga un altro arrivo --> $Pr\{[\delta=min(v,\sigma)]\leq \Delta\}$   
+
+### M/G/1  
+il tempo di arrivo è markoviano mentre il tempo di servizio è generico ,quindi i tempi di partenza sono punti di rigeneramento, la cui caratterizzazione dipende dal tempo di servizio rimanente, per cui:
 $$
 Pr\{[\delta'=min(v,\sigma)]\leq \Delta\} = Pr\{[\delta=min(\tau,\sigma)]\leq \Delta\}
 $$
-The same doesn't apply if we choose the time of the arrival of a customer that find the server busy 
+Lo stesso non si applica se scegliamo il tempo di arrivo di un cliente che trova il server occupato:
 $$
 Pr\{[\delta* =min(\tau,\rho)]\leq \Delta\} \neq Pr\{[\delta=min(\tau,\sigma)]\leq \Delta\} 
 $$
 
-### G/M/1 case 
+### G/M/1 
 dual to M/G/1 case:  any arrival time identifies a regeneration point because $\rho$ has the same distribution of $\sigma$ 
 $$
 Pr\{[\delta*=min(\tau,\rho)]\leq \Delta\} = Pr\{[\delta=min(\tau,\sigma)]\leq \Delta\}
 $$
-### M/M/1 case 
-when both $\tau$ and $\sigma$ have neg exp distribution their memory less property ensure that any arrival or departure times are regeneration points
+### M/M/1  
+quando entrambi $\tau$ e $\sigma$ hanno distribuzione markovniana allora ogni partenza o arrivo è un punto di rigeneramento.
 $$
 Pr\{[\delta'=min(v,\sigma)]\leq \Delta\} = Pr\{[\delta*=min(\tau,\rho)]\leq \Delta\}= Pr\{[\delta'=min(\tau,\sigma)]\leq \Delta\}
 $$
 
-## Finding regeneration points in a network of queue
-the discussion for FCFS easily extends to the case of more complex models. basic criteria remains interrupt the evolution of the model only in situations where there are no activities characterized by a general probability distribution. To make discussion simple let's use a queue with just 2 station in tandem with a fixed number N of customers , summarizing the criteria in the following table
+### Trovare punti di rigeneramento in una rete di code
+la discussione fatta per le  FCFS si può estendere facilmente a modelli più complessi. Il criterio base rimane **interrompere l'evoluzione del modello solo quando ci sono comportamenti caratterizzati da distribuzioni generali** . 
 
-|Service time distribution of first queue| Service time distribution of second queue| Criteria for regeneration point |
-|----|----|-----------|
-|General|General|Any departure that leaves behin exactly n-1 customers from one of the two servers of the network|
-|markov(neg-exp)|General| any departure from the second server
-|General|markov| any departure from the first server
-|markov|markov|any departure in the system
+Immaginando un sistema composto da due stazioni, possiamo riassumere i risultati nella seguente tabella
 
-## Identify regeneration cycles  
+| Service time distribution of first queue | Service time distribution of second queue | Criteria for regeneration point                                                            |
+| ---------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| General                                  | General                                   | Qualunque partenza che lascia indietro esattamente n-1 clienti da qualunque dei due server |
+| markov(neg-exp)                          | General                                   | Qualunque partenza dal secondo server                                                      |
+| General                                  | markov                                    | Qualunque partenza dal primo server                                                        |
+| markov                                   | markov                                    | Qualunque partenza nel sistema                                                             |
+
+## Identificare i cicli di rigeneramento
 when the model admits many regeneration points, one of them must be chosen as a reference and regeneration cycles begin and end when this point is reached. 
 
 for example if in a M/M/1 queue if we decide that a regeneration cycle start start when a departures leaves m customers we cannot end it if it leaves m+k customers. This is because the statistics collected must be identical and independent instances of the same RV.  identify regeneration cycles in a network is more difficult because we lose the memory less property.
