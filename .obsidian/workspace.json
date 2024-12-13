@@ -4,25 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "c3c85a7613b2ee30",
+        "id": "4423df7013d3dce0",
         "type": "tabs",
         "children": [
           {
-            "id": "cba512ed2f33e429",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SIMMOD/Notes/Analisi Output.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Analisi Output"
-            }
-          },
-          {
-            "id": "ca8fe902a6449e3d",
+            "id": "ee98949381210e18",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -35,8 +21,7 @@
               "title": "Analisi Output"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -168,10 +153,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SIMMOD/Notes/Analisi Output.md"
+                "file": "SIMMOD/Notes/Analisi Operazionale.md"
               },
               "icon": "lucide-list",
-              "title": "Struttura di Analisi Output"
+              "title": "Struttura di Analisi Operazionale"
             }
           }
         ],
@@ -193,19 +178,18 @@
       "publish:Pubblica modifiche": false
     }
   },
-  "active": "ca8fe902a6449e3d",
+  "active": "ee98949381210e18",
   "lastOpenFiles": [
     "SIMMOD/Notes/Analisi Operazionale.md",
-    "SIMMOD/Notes/Stime Intervallari.md",
-    "Senza nome.md",
-    "SIMMOD/Notes/Analisi Output.md",
     "SIMMOD/Operational Analysis.canvas",
     "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
     "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
     "Analisi dei segnali/Note/qualcosa.md",
     "Analisi dei segnali/Senza nome.md",
     "SIMMOD/Notes/Teoria Delle Code.md",
+    "SIMMOD/Notes/Stime Intervallari.md",
     "SIMMOD/Notes/Catene di Markov.md",
+    "SIMMOD/Notes/Analisi Output.md",
     "().md",
     "SIMMOD/Notes/Interval Estimation.md",
     "SIMMOD/Monte carlo.canvas",

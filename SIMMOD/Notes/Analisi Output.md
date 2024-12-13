@@ -467,38 +467,50 @@ Immaginando un sistema composto da due stazioni, possiamo riassumere i risultati
 | markov                                   | markov                                    | Qualunque partenza nel sistema                                                             |
 
 ## Identificare i cicli di rigeneramento
-when the model admits many regeneration points, one of them must be chosen as a reference and regeneration cycles begin and end when this point is reached. 
+Quando il modello ammette più punti di rigeneramento , solo uno di loro va scelto come punto da usare per iniziare e terminare un ciclo. 
 
-for example if in a M/M/1 queue if we decide that a regeneration cycle start start when a departures leaves m customers we cannot end it if it leaves m+k customers. This is because the statistics collected must be identical and independent instances of the same RV.  identify regeneration cycles in a network is more difficult because we lose the memory less property.
+>[!example]
+>in una coda M/M/1  se decidiamo che un ciclo inizia quando una partenza lascia m clienti dietro di se non possiamo terminarlo quando ne lascia m+k. Questo proprio perchè le istanze raccolte della stessa variabile aleatoria devono essere indipendenti e identicamente distribuiti.  Identificare i cicli di rigeneramento all'interno del sistema è più difficile perchè perdiamo la proprietà di assenza di memoria.
 
-### Identify regeneration cycles  with passage times
-consider the case of a sub system identified in a system. Assume a single entry point for this sub system, **we are interested in measuring the average time spent by customers in the sub system**. Candidate regeneration points are the arrival or a departure from the entry point of the sub system (because of memory less). If there exists stations outside the sub system with general time distributions they must be empty when the two previous events are considered. 
+### Identificare i cicli di rigeneramento con i tempi di passaggio 
+Consideriamo il caso di un sotto-sistema identificato in un sistema. Assumiamo un solo punto di entrata per questo sotto sistema, **siamo interessati a quantificare il tempo di soggiorno di un cliente all'interno di questo sotto sistema**. I punti di rigeneramento candidati sono l'entrata e l'uscita da questo sotto sistema (che garantiscono la proprietà di assenza di memoria). **Se esistono stazioni con distribuzioni generali allora queste devono essere vuote quando uno dei due punti di rigeneramento considerati viene innescato**. 
 
-### Identify regeneration cycles  with tagged customer
-All customers are statistically identical. This approach arbitrarily selects one customer in the system and follows its way through the system, recording: the time it enters $t_{en}$  and it exit $t_{ex}$ . The difference $\tau=t_{ex}-t_{en}$ is a measure of the passage time.
+### Identificare i cicli di rigeneramento con il tagged customer
+Tutti i clienti sono statisticamente identici. Questo approccio seleziona un singolo cliente arbitrario e lo segue nell'attraversamento del sistema registrando: 
+- il momento in cui entra $t_{en}$  
+- il momento in cui esce $t_{ex}$ 
 
-Let $\tau_j^{[i]}$ be the j-th passage time of the tagged customer.
-Let $A^{[i]}=\sum^{k^{[i]}}_{j=1}\tau_j^{[i]}$ be the sum of the $k^{[i]}$ passage times. 
+la differenza $\tau=t_{ex}-t_{en}$ è **una misura del tempo di passaggio**.
 
-The pair $(A^{[i]},k^{[i]})$ becomes the component of a sample of independent observation that can provide estimates with the regenerative method. 
+Sia:
+- $\tau_j^{[i]}$ => j-esimo tempo di passaggio del cliente.
+- $A^{[i]}=\sum^{k^{[i]}}_{j=1}\tau_j^{[i]}$ somma dei $k^{[i]}$ tempi di passaggio. 
 
-### Grouping regeneration cycles
-When there are many regeneration points it can happen that the chosen ones yield regeneration cycles that are too short. In this case we cannot rely on the central limit theorem stating that the distribution are "quasi-normal", if possible we must choose a new regeneration point that avoid this problem. 
+la coppia $(A^{[i]},k^{[i]})$ diventa un campione di osservazione indipendenti che può essere analizzato con le stesse tecniche utilizzate per il metodo rigenerativo. 
 
-If not is possible to aggregate several regeneration cycles, the unique constraint is that the grouping criteria is always applied during the simulation run. Without conditioning its application on the specific characteristics of the regeneration cycles that need to be aggregated.
+### Raggruppare cicli di rigeneramento 
+Quando ci sono molti punti di rigeneramento può capitare di scegliere quelli che generano cicli che sono troppo corti. In questo caso perdiamo la proprietà del limite centrale e **non possiamo più affermare che la distribuzione sia quasi normale**, se possibile bisognerebbe scegliere un altro punto di rigeneramento. 
 
-## Improve results 
-The precision of the simulation rise proportionally to the size of p, an alternative to that is working on the sample variance to make it smaller. 2 interesting cases exists:
-- Antithetic variates to make the sample components pairwise negatively correlated 
-- Comparing alternative results by positively correlating the corresponding components of the samples obtained for the two alternatives 
+Se non si può allora bisogna raggruppare tra loro i cicli di rigeneramento, con l'unica restrizione di **applicare consistentemente il metodo di raggruppamento nella simulazione** . Senza condizionare in nessun modo le misure su cui questo raggruppamento viene applicato
 
-### Antithetic variates 
-Assume we want to estimate the expected value of an RV Y --> $Y(\micro=E[Y])$ , suppose we run a simulation and produce a sample of 2p observations $\{Y_1...Y_p,Y_{p+1}...Y_{2p}\}$. In normal conditions we would retrieve $\hat{\micro}=\bar{Y}=\frac{1}{2p}\sum^{2p}_{i=1}Y_i$  and $VAR[\bar{Y}]=\frac{\sigma^2}{2p}$  knowing $E[\bar{Y}]=\micro$. 
+## Metodi di riduzione della varianza
+La precisione della simulazione aumenta all'aumentare della dimensione del campione p, un alternativa è lavorare direttamente sulla varianza cercando di ridurla.
 
-Suppose to divide the sample in 2 sub samples of size p $\{Y_1...Y_p,Y_{p+1}...Y_{2p}\}= \{Y_{11}...Y_{1p}\},\{Y_{21}...Y_{2p}\}$ .
-Let $Z_i=\frac{Y_{1i}+Y_{2i}}{2}$  that we use to obtain $\bar{Z}=\frac{1}{p}\sum^{p}_{i=1}Z_i=\bar{Y}$. The expected value and variance of $\bar{Z}$ are:
-- $E[\bar{Z}]=\frac{E[Y_1]+E[Y_2]}{2}=\micro$ 
-- $VAR[\bar{Z}]=\frac{1}{p}VAR[\frac{Y_1+Y_2}{2}]= \frac{\sigma^2}{2p}+\frac{COV[Y_1,Y_2]}{2p}$  
+2 metodi sono interessanti:
+- Variazione antitetiche per generare componenti del campione che siano a coppie negativamente correlati
+- Confrontare risultati alternativi correlandone positivamente i componenti del campione ottenuto dalle due alternative 
+
+### Variazioni antitetiche
+Assumiamo di voler stimare il valore atteso di una variabile aleatoria Y --> $Y(\micro=E[Y])$ , supponiamo di eseguire una simulazione e di generare un campione di 2p osservazioni $\{Y_1...Y_p,Y_{p+1}...Y_{2p}\}$.
+in condizioni normali otterremmo $\hat{\micro}=\bar{Y}=\frac{1}{2p}\sum^{2p}_{i=1}Y_i$  e $VAR[\bar{Y}]=\frac{\sigma^2}{2p}$  sapendo $E[\bar{Y}]=\micro$. 
+
+Supponiamo di dividere il campione in 2 campioni di dimensioni p $\{Y_1...Y_p,Y_{p+1}...Y_{2p}\}= \{Y_{11}...Y_{1p}\},\{Y_{21}...Y_{2p}\}$ .
+Sia:
+- $Z_i=\frac{Y_{1i}+Y_{2i}}{2}$ che usiamo per ottenere $\bar{Z}=\frac{1}{p}\sum^{p}_{i=1}Z_i=\bar{Y}$. 
+    - $E[\bar{Z}]=\frac{E[Y_1]+E[Y_2]}{2}=\micro$ 
+    - $VAR[\bar{Z}]=\frac{1}{p}VAR[\frac{Y_1+Y_2}{2}]= \frac{\sigma^2}{2p}+\frac{COV[Y_1,Y_2]}{2p}$  
+
+
 If 2p of the original sample are independent then also those 2 sub samples are, thus $COV[Y_1,Y_2]=0$ and know that the introduction of the new variable doesn't perturb the experiment $VAR[\bar{Z}]=VAR[\bar{Y}]=\frac{\sigma^2}{2p}$ . 
 
 If they are correlated the division yield different results, if the variables $Y_1$ and $Y_2$ are negatively correlated the variance of $\bar{Z}$ decrease and we obtain $VAR[\bar{Z}] \leq VAR[\bar{Y}]$ . To induce this correlation is sufficient store the seeds used for the first p observations and use them to obtain the observations for the second sub sample. The unique constraint is using Antithetic sequence of random numbers. 
@@ -514,22 +526,31 @@ X_{0p} \Rightarrow \{U_p\} \Rightarrow Y_{1p}; && X_{0p} \Rightarrow \{U_p^*\} \
 $$
 The observation produced here are then Antithetic and the size of the confidence interval becomes smaller (because of COV is negative) as equal cost. 
 
-### Alternative comparison
-if we must compare 2 systems with different management policies, is possible to reduce the variance. If we want to obtain estimates of a measure computed for the 2 alternatives to decide which is the best we can: simulate the 2 alternatives separately and produce $\{Y_{11}...Y_{1p}\},\{Y_{21}...Y_{2p}\}$  , then compute $\bar{Y_1};\bar{Y_2}$ and then make a decision. 
+### Confronto delle alternative
+se dobbiamo confrontare 2 sistemi con politiche di gestione differenti, è possibile ridurre la varianza. Possiamo confrontare le misure estratte dai 2 sistemi per decidere qual'é la migliore per farlo :
+- simulare le 2 alternative separatamente
+- produrre le sequenze  $\{Y_{11}...Y_{1p}\},\{Y_{21}...Y_{2p}\}$  
+- calcolare $\bar{Y_1};\bar{Y_2}$ e prendere una decisione. 
 
-Let $Z_i=(Y_{1i}-Y_{2i})$ , the sample $\{Z_1...Z_p\}$ can be used to obtain:
-- Point estimate (sample average) $\bar{Z} = \frac{1}{p}\sum^{p}_{i=1}Z_i=\bar{Y}_1-\bar{Y}_2$ 
-- Sample variance $\hat{s}_Z^2=\frac{1}{p-1}\sum^{p}_{j=1}(Z_j-\bar{Z})^2$ 
+Sia :
+- $Z_i=(Y_{1i}-Y_{2i})$  il campione $\{Z_1...Z_p\}$ che può essere usato per ottenere:
+    - Media campionaria (stimatore puntuale) $\bar{Z} = \frac{1}{p}\sum^{p}_{i=1}Z_i=\bar{Y}_1-\bar{Y}_2$ 
+    - Varianza campionaria $\hat{s}_Z^2=\frac{1}{p-1}\sum^{p}_{j=1}(Z_j-\bar{Z})^2$ 
 
-Let $\micro_1$ and $\sigma_1^2$ be expected value and variance for $Y_1$ ,same $\micro_2;\sigma_2^2$ for $Y_2$ . The comparison would be made on the basis of $E[\bar{Z}]=E[\bar{Y}_1]-E[\bar{Y}_2]=\micro_1-\micro_2$ and of $VAR[\bar{Z}]=VAR[\bar{Y}_1] + VAR[\bar{Y}_2] - 2COV[\bar{Y}_1,\bar{Y}_2]= \frac{\sigma_1^2+\sigma_2^2}{p} -2 COV[\bar{Y}_1,\bar{Y}_2]$ 
+Siano :
+- $\micro_1$ e $\sigma_1^2$ il valore atteso e la varianza di $Y_1$ 
+- $\micro_2;\sigma_2^2$ per $Y_2$ .
+
+il confronto avviene sulla base che $E[\bar{Z}]=E[\bar{Y}_1]-E[\bar{Y}_2]=\micro_1-\micro_2$ e di $VAR[\bar{Z}]=VAR[\bar{Y}_1] + VAR[\bar{Y}_2] - 2COV[\bar{Y}_1,\bar{Y}_2]= \frac{\sigma_1^2+\sigma_2^2}{p} -2 COV[\bar{Y}_1,\bar{Y}_2]$ 
 
 
-The individual $Z_i$ and $\bar{Z}$ as well may assume positive or negative values (and also the extremes of confidence interval). If both are positive or negative the decision is easier. 
+gli $Z_i$ individuali e $\bar{Z}$ possono entrambi assumere valori positivi o negativi (e anche agli estremi dell'intervallo di confidenza). Se entrambi sono dello stesso segno la scelta è più semplice. 
 
-If the simulations for the 2 alternatives are performed in an independent manner $COV[\bar{Y}_1,\bar{Y}_2]=0$ so that 
-$VAR[\bar{Z}]=VAR[\bar{Y}_1-\bar{Y}_2]= \frac{\sigma^2_1+\sigma^2_2}{p}$ also the decision is easy. 
+se la simulazione per le 2 alternative è effettuata separatamente allora $COV[\bar{Y}_1,\bar{Y}_2]=0$ così che 
 
-if instead the different replications of the 2 experiments are performed with the following scheme:
+$$VAR[\bar{Z}]=VAR[\bar{Y}_1-\bar{Y}_2]= \frac{\sigma^2_1+\sigma^2_2}{p}$$ anche la decisione a questo punto è semplice. 
+
+Se invece effettuiamo la simulazione con il seguente schema:
 $$
 \begin{align}
 X_{01} \Rightarrow \{U_1\} \Rightarrow Y_{11}; && X_{01} \Rightarrow \{U_1\} \Rightarrow Y_{21} \\
@@ -537,10 +558,13 @@ X_{01} \Rightarrow \{U_1\} \Rightarrow Y_{11}; && X_{01} \Rightarrow \{U_1\} \Ri
 X_{0p} \Rightarrow \{U_p\} \Rightarrow Y_{1p}; && X_{0p} \Rightarrow \{U_p\} \Rightarrow Y_{2p}
 \end{align}
 $$
-where X are the seeds. $\bar{Y}_1$ and $\bar{Y}_2$ are positively correlated so that $VAR[\bar{Z}]=VAR[\bar{Y}_1-\bar{Y}_2] < \frac{\sigma_1^2+\sigma_2^2}{p}$ 
-then the estimate is more precise with the same computational cost. 
+dove:
+- X sono i semi del generatore.
 
-### Result precision 
+ allora $\bar{Y}_1$ e $\bar{Y}_2$ sono positivamente correlati, così che  $$VAR[\bar{Z}]=VAR[\bar{Y}_1-\bar{Y}_2] < \frac{\sigma_1^2+\sigma_2^2}{p}$$ 
+per cui la stima è più precisa a un costo di calcolo più basso.
+
+### Precisione del risultato
 Interval estimates allow to get confidence in the robustness of the computed results with respect to possible variation, part of the problem however is the precision we want to reach with our estimate. 
 
 Let $\epsilon$ be the required precision and $\Delta= \frac{\hat{s}_Z}{\bar{v}\sqrt{p}}$ the semi width of the confidence interval. Knowing that $\Delta$ depend on the sample size and sample standard deviation we can work on this values to get a better precision, expressed as 
