@@ -1,64 +1,137 @@
 
 ## Monte carlo simulation
-computerized mathematical technique that allows to account for stochastic phenomena. First used by scientist that were working on the atomic bomb. Using stochastic assumption for service and arrival times we can generate a random but plausible trace for the simulation.
+è una tecnica computerizzata che permette di generare valori con distribuzioni affidabili utili alla simulazione 
 
-## Poisson process (negative exponential)
-events are rare and occur in a completely random manner. Assume that p of one event in interval of length $\Delta$ is $\lambda \Delta+ o(\Delta)$ dividing the interval T in m part of length $\Delta$ and count the events we obtain 
+## Processo di poisson  (negative exponential)
+gli eventi sono rari è occorrono in maniera completamente aleatoria. Assumendo che p sia un evento che capita in un intervallo di tempo  $\Delta$ la frequenza è $\lambda \Delta+ o(\Delta)$ 
+dividendo l'intervallo  T in m parti di lunghezza $\Delta$ e contando gli eventi otteniamo
 ![[Pasted image 20231101180122.png]]
-$P(k,T|\Delta) = \binom{m}{k} (\lambda \Delta)^k(1-\lambda \Delta) ^{(m-k)} + o(\Delta)$ 
-the limit of this probability for $m \rightarrow \infty$ 
-$P(k,T) = \frac{(\lambda T)^k}{k!}e^{-\lambda T}$ , with $\tau$ as distance between successive arrivals we have 
-$P(\tau > T) = P(0,T)= \frac{(\lambda T)^0}{0!}e^{-\lambda T} = e^{-\lambda T}$  so that $P(\tau < t) = 1- e^{-\lambda T}$ 
+$$P(k,T|\Delta) = \binom{m}{k} (\lambda \Delta)^k(1-\lambda \Delta) ^{(m-k)} + o(\Delta)$$ 
+il limite di questa probabilità per  $m \rightarrow \infty$ 
+$$P(k,T) = \frac{(\lambda T)^k}{k!}e^{-\lambda T}$$ dove:
+- $\tau$ distanza tra arrivi successivi 
+- 
+$P(\tau > T) = P(0,T)= \frac{(\lambda T)^0}{0!}e^{-\lambda T} = e^{-\lambda T}$  per cui $P(\tau < t) = 1- e^{-\lambda T}$ 
 
-CDF = $F_X(x)=Pr[X \leq x] = 1-e^{-\lambda x}$ , PDF= $f_X(x)=\frac{dF_X(x)}{dx}= \lambda e^{-\lambda x}$ 
-$E[X] = \sigma = \frac{1}{\lambda}$ , $VAR[X]= \sigma^2 = \frac{1}{\lambda^2}$, $CV[X]=\frac{Std[X]}{E[X]}= \frac{\sqrt{VAR[X]}}{E[X]}= 1$ 
-## Random number generation
-an ideal random number generator produces output such that each value in the interval 0.0 <u< 1.0 is equally likely to occur.
+- CDF = $F_X(x)=Pr[X \leq x] = 1-e^{-\lambda x}$ 
+- PDF= $f_X(x)=\frac{dF_X(x)}{dx}= \lambda e^{-\lambda x}$ 
+- $E[X] = \sigma = \frac{1}{\lambda}$ 
+- $VAR[X]= \sigma^2 = \frac{1}{\lambda^2}$
+- $CV[X]=\frac{Std[X]}{E[X]}= \frac{\sqrt{VAR[X]}}{E[X]}= 1$ 
+## Generazione di numeri casuali
+un generatore di numeri casuali **ideale** produce sequenze $0<u<1$ tali che queste siano equamente distribuite 
 
-a good random generator produces output that is almost statistically indistinguishable from an ideal generator 
+un buon generatore di numeri casuale produce sequenze statisticamente indistinguibili da un generatore di numeri casuale ideale
 
-### Conceptual model 
-- choose a large positive integer m, this defines the set $\chi_m =1...m-1$.
-- fill a urn with the elements of $\chi_m$ , each time a random number u is needed draw an integer at random from the urn and let $u=x/m$ 
+### Modello concettuale  
+- scegli un intero positivo molto grande m, questo definisce l'insieme  $\chi_m =1...m-1$.
+- riempi un urna con gli elementi di $\chi_m$ , ogni volta che abbiamo bisogno di un numero u estrailo e applica $u=x/m$ 
 
-Each draw simulates a sample from a Uniform(0,1) distributed RV, it is important from m to be large so possible values are densely distributed between 0.0 and 1.0
+Ogni estrazione simula un campione da una variabile aleatoria Uniforme(0,1) , è importante che m sia grande così che i valori siano densamente distribuiti nell'intervallo.
 
-### Lehmer's algorithm
-the Linear congruential generator algorithm takes 2 parameters: modulus m (large prime) and multiplier a ($I \in \chi_m)$ 
-the integer sequence $x_0,x_1,...$ is defined by the iterative equation
-$x_{i+1}=g(x_i)$  with $g(x)=ax \mod{m}$ ,  $x_0 \in \chi_m$ is called seed.  Because of mod operator $0 \leq g(x) < m$ . 
-0 must not occur since $g(0)=0$ , since m is prime $g(x) \neq 0$ if $x \in \chi_m$ . if $x_0 \in \chi_m$ then $x_i \in \chi_m$ for all $i \geq 0$.
+### Algoritmo di Lehmer 
+il generatore congruente lineare prende due parametri : 
+- modulo => m (large prime) 
+- moltiplicatore =>  a ($I \in \chi_m)$ 
+la sequenza di interi $x_0,x_1,...$ è definita dall'equazione iterativa 
+$x_{i+1}=g(x_i)$  dove:
+- $g(x)=ax \mod{m}$ 
+- $x_0 \in \chi_m$ è chiamato seme.
 
-There is nothing random in this generator, this is why is called pseudo random generator
+a causa dell'operatore modulo  $0 \leq g(x) < m$ . 
+0 non occorre siccome $g(0)=0$ 
+m , poichè è primo, $g(x) \neq 0$ se $x \in \chi_m$ . 
+Se $x_0 \in \chi_m$ allora $x_i \in \chi_m$  per tutti gli $i \geq 0$.
 
-## Full period 
-the choice of m is dictated in part by system consideration because it cannot be the same in 64,32 or 16 bit system.So this choice must be done with great care. 
-Given a modulus m a full period sequence contains all the numbers in the set (1,m-1) before repeating itself. 
+Non c'é nulla di casuale in questo generatore, per questo motivo è chiamato pseudo casuale 
 
-## Basic probability
-Empirical probability: perform an experiment many times counting the times a certain event occurs $A$ :  Relative frequency : $n_a/n$ , converges as $Pr(A)=\lim_{n \rightarrow \infty}\frac{n_a}{n}$ 
+## Periodo pieno  
+la scelta di m è caratterizzata in parte dalle caratteristiche del sistema, a seconda che sia a 64/32/16 bit . Per cui questa scelta va fatta molto accuratamente. 
+Dato un modulo m , un **periodo pieno** contiene tutti i valori nell'intervallo (1,m-1) prima di ripetersi. 
 
-Axiomatic probability: theoretic approach by mathematically build the sample space.
+## Test per generatori casuali
 
-## Discrete random variables
-A random variable X is discrete if the set of possible values $\chi$ is finite. 
-Is uniquely determined if its probability distribution function is a real value function determined for each element in the set $\chi$  
+### statistica del chi quadro 
+Sia:
+- x una variabile aleatoria, assumiamo che prenda valori in $\chi=(0,m)$
+
+Supponiamo di dividere il suo insieme di valori possibili in k intervalli adiacenti 
+$(a_{0},a_{1}],(a_{1},a_{2}]\dots(a_{k-1},a_{k})$ per formare un nuova variabile aleatoria discreta che assume valori nell'insieme $Y_{k}=\{0,1,\dots,k-1\}$ 
+
+Basandosi su un campione di osservazioni n molto grande e indipendente di y, per ogni valore $y_{j}$ possibile sia:
+- $N_{j}$ => il numero di volte che $y_{j}$ occorre 
+- $\eta_{j} = np_{j}$ => il numero atteso di volte che occorra $y_{j}$ , dove :
+    - $p_{j}$ => probabilità di osservarla in $(a_{j-1},a_{k}]$ 
+
+Allora la risultante quantità **non negativa** $$V=\frac{\sum^{k}_{j=1}(N_{j}-\eta_{j})^2}{\eta_{j}}$$
+è conosciuta anche come **statistica del chi quadro*** 
+
+### Test del chi quadro 
+Se il campione di variabili aleatorie x, rappresentato dal campione $X=\{x_{1},x_{2},\dots,x_{n}\}$ è davvero un campione identicamente e indipendentemente distribuito della distribuzione che volgiamo ottenere e se $\frac{n}{k}$ è sufficientemente grande (>10).
+
+Allora la statistica V è approssimativamente una variabile aleatoria $\chi^2$ con k-1 gradi di libertà 
+
+In queste condizioni siccome la distribuzione del $\chi^2$ non è simmetrica, sia:
+- $v_{1}^*=\chi^2\left( k-1,\frac{\alpha}{2} \right)$ => il percentile definito come $Pr\{\chi^2(k-1)\leq v_{1}^*\}=\frac{\alpha}{2}$
+-  $v_{2}^*=\chi^2\left( k-1,1-\frac{\alpha}{2} \right)$ => il percentile definito come $Pr\{\chi^2(k-1)\leq v_{2}^*\}=\frac{\alpha}{2}$
+
+allora la $Pr\{v_{1}^*<V\leq v_{2}^*\}=1-\alpha$ cioè la statistica del chi quadro apparterrà all'intervallo $(v_{1}^*,v_{2}^*)$ con livello di confidenza $1-\alpha$ 
+
+#### interpretazione del test del chi quadro 
+con l'aiuto della tabella dei percentili del test del chi quadro è possibile accettare l'ipotesi del test basandosi su questi criteri: 
+- Un valore V è considerato **accettabile** con 95% confidenza se cade tra le colonne .025 e .975 della tabella 
+- **rifiutato** prima di 0.005 o dopo .995
+- **dubbioso** tra .005 e .01 o tra .99 e .995 
+- **quasi-dubbioso** tra 0.1 e 0.25 o .975 e .99 
+
+un test di questo tipo è chiamato **test delle due code** 
+
+### Test di uniformità 
+Dividere l'intervallo (0,1) in k sottointervalli di uguale lunghezza generando $U_{1},U_{2},\dots,U_{n}$ , si raccomanda di scegliere $k\geq 100$ e $\frac{n}{k}\geq 5$.
+
+Sia:
+- $N_{j}$ => numero di $U_{i}$ che occorrono nel j-esimo sotto intervallo. 
+
+Allora:  $$V=\frac{k}{n}*\sum^{k}_{j=1}\left( N_{j}-\frac{n}{k}^2 \right)$$
+è approssimativamente una variabile distribuita come un $\chi^2(k-1)$
+
+### Test seriale 
+versione 2-d del test di uniformità per accertare l'indipendenza tra osservazioni successive
+
+dividere l'intervallo (0.,1) in k sotto intervalli di lunghezza uguale 
+generare $U_{1},U_{2},\dots,U_{2n}$ , se le $U_{i}$ sono davvero IID allora le coppie non sovrapposte $(U_{1},U_{2}),(U_{3},U_{4})\dots(U_{2n-1}U_{2n})$ sono vettori di IID uniformemente distribuiti nel quadrato $(0,1)^2$ 
+
+- Contare il numero di risultati che cadono in ogni sotto quadrato ($N_{ij}$ => numero di paia che cadono nel (i,j) sotto quadrato)
+
+allora $$V=\frac{K^2}{n}\sum^{k}_{i=1}\sum^{k}_{j=1}\left( N_{ij}-\frac{n}{k^2} \right)^2$$ è approssimativamente una $\chi^2(k-1)$ 
+**questo test è generalizzabile per più dimensioni** 
+
+### Test del gap
+## Probabilità base 
+Probabilità empirica => dato un evento $A$ si esegua un esperimento per vedere quante volte si ripete:
+- frequenza relativa : $n_a/n$ , converge a $Pr(A)=\lim_{n \rightarrow \infty}\frac{n_a}{n}$ 
+
+Probabilità assiomatica: costruiamo matematicamente lo spazio dei campioni 
+
+## Variabili aleatorie discrete 
+una variabile aleatoria X è discreta se l'insieme dei suoi possibili valori  $\chi$ è finito. 
+è unicamente caratterizzata dalla sua distribuzione di probabilità che è una funzione reale determinata per ogni valore in $\chi$  
 
 PDF: $f(x)=Pr(X=x)$ 
-By definition: $\sum_xf(x)=1$ 
+per definizione : $\sum_xf(x)=1$ 
 
-### CDF (Discrete)
-the cumulative distribution function cdf of X is defined as 
+### Distribuzione Cumulata 
+la distribuzione cumulata di una variabile aleatoria X è specificata come 
 $F(x)= Pr(X \leq x)= \sum_{t \leq x} f(t)$ 
 
-A cdf can be generated from pdf by recursion:
+Si può generare una CDF da una PDF tramite ricorsione
 $\chi=\{x|x=a,a+1,...b\}$ --> $F(a)=f(a) \ \ \ \ F(x)=F(x-1)+f(x)$ 
 
-A pdf also can be generated from cdf:
+Viceversa è possibile tramite differenziazione:
 $f(a)=F(a) \ \ \ \ \ f(x)=F(x)-F(x-1)$ 
 
-A cdf is strictly monotone increasing: 
-- if $x_1<x_2$ then $F(x_1)<F(x_2)$ 
+una cdf è strettamente monotona crescente 
+- se $x_1<x_2$ allora $F(x_1)<F(x_2)$ 
 - CDF values are $\in (0.0,1.0)$ , Monotonicity of F(x) is the basis to generate discrete RVs
 
 ## Continuos random variables 

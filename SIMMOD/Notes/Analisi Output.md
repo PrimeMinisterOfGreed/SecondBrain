@@ -565,27 +565,34 @@ dove:
 per cui la stima è più precisa a un costo di calcolo più basso.
 
 ### Precisione del risultato
-Interval estimates allow to get confidence in the robustness of the computed results with respect to possible variation, part of the problem however is the precision we want to reach with our estimate. 
+Le stime intervallari permettono di ottenere una certa sicurezza nei parametri calcolati , tuttavia parte del problema è la precisione che vogliamo raggiungere con la nostra stima. 
 
-Let $\epsilon$ be the required precision and $\Delta= \frac{\hat{s}_Z}{\bar{v}\sqrt{p}}$ the semi width of the confidence interval. Knowing that $\Delta$ depend on the sample size and sample standard deviation we can work on this values to get a better precision, expressed as 
+sia:
+- $\epsilon$ la precisione richesta 
+- $\Delta= \frac{\hat{s}_Z}{\bar{v}\sqrt{p}}$ la semi estensione dell'intervallo.
+
+sapendo che $\Delta$ dipende dalla grandezza del campione e dalla deviazione standard, possiamo calcolarla come 
 $$
 \frac{\Delta}{\bar{Y}} \leq \epsilon
 $$
-It is better to use a sequential stopping rule to check if the desired precision is reached
+usando naturalmente una regola di stop sequenziale per sapere quando fermarsi
 
 ## Tuning 
-tuning consist of: assessing the adequacy of the distributions assumed as part of the specification models, estimating parameters, testing the quality of the variate generators, checking that variations of the parameters produce coherent variations of the results. 
+Consiste nel verificare l'adeguatezza delle distribuzioni come parte del modello simulato, stimando i parametri e verificando la qualità dei generatori casuali, controllando che parametrizzando il modello i risultati siano coerenti tra di loro . 
 
 ## Validation
-check whether the simulator provides reliable estimates : comparing the simulation output with measures from the real system and with the theoretical values obtained with independent mathematical methods.
+Controllare che il simulatore dia risultati affidabili :
+- comparare i risultati della simulazione con un sistema reale
+- con modelli matematici indipendenti 
 
-It is also important to use simplified version of the required simulator in order to check it's components. Different version should be considered to make sure that various aspects of the original simulator are checked. 
+è importante anche usare una versione semplificata del simulatore, per verificare che i vari componenti si comportino come atteso. Le diverse versioni del simulatore devono concedere una visione chiara sugli aspetti del sistema in esame.
 
-A first way of checking whether the simulator provides reliable estimates is comparing confidence interval (low,up) with a theoretical value $\micro$ to see if it's covered by the interval. 
+Un primo modo per capire se il simulatore sta generando risultati affidabili è prendere gli intervalli di confidenza (low,up) e compararli con un valore teorico $\micro$ controllando se è  coperto dall'intervallo. 
 
-A more reliable way is implementing the definition of confidence level $1-\alpha$ which says that:
-_if the experiment is repeated n times, the theoretical value $\micro$ should be covered by the interval estimates approximate $n(1-\alpha)$ times, while (approx) for $n \alpha$ times the confidence interval should not cover the theoretical value._  In practice we may proceed that way:
-- Each experiment consist of repeating the simulation run with different seeds
-- From each experiment compute the point estimate $\hat{\micro}$ and the confidence interval $(\hat{\micro}-\Delta,\hat{\micro}+\Delta)$  of the true parameter $\micro$ 
-- Given those hypothesis: (approx) 50% of the experiments should provide a point estimate $\hat{\micro}$ that is larger than the theoretical value, while others should be smaller. 
-- (approx) $(1-\alpha )\%$  of the experiments should provide intervals that include the theoretical value $\micro$ while $\alpha\%$ should not provide intervals which include $\micro$ 
+Una via più sicura consiste nell'implementare la definizione di intervallo di confidenza con livello $1-\alpha$ che dice:
+**Se l'esperimento è effettuato N volte, il valore teorico $\micro$ dovrebbe essere coperto dalla stima intervallare $n(1-\alpha)$ volte, mentre approssimativamente per  $n \alpha$ volte l'intervallo non dovrebbe coprire il valore teorico .**  
+in pratica si può applicare questo metodo:
+- Ogni esperimento consiste nel ripetere la simulazione con un seed diverso
+- Da ogni esperimento calcolare lo stimatore puntuale $\hat{\micro}$ e l'intervallo di confidenza $(\hat{\micro}-\Delta,\hat{\micro}+\Delta)$  del vero parametro $\micro$ 
+    - Date queste ipotesi: (approssimativamente) 50% dovrebbe restituire un $\hat{\micro}$ che è più grande del valore teorico, mentre gli altri dovrebbero essere più piccoli. 
+    - (approssimativamente) $(1-\alpha )\%$  degli esperimenti dovrebbero restituire intervalli di confidenza che coprono $\micro$ mentre $\alpha\%$ non dovrebbero coprire $\micro$ 
