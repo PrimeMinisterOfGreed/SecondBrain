@@ -107,6 +107,43 @@ allora $$V=\frac{K^2}{n}\sum^{k}_{i=1}\sum^{k}_{j=1}\left( N_{ij}-\frac{n}{k^2} 
 **questo test è generalizzabile per più dimensioni** 
 
 ### Test del gap
+il test del gap controlla l'aleatorietà del generatore con una visione non locale.
+
+Sia:
+- $\alpha,\beta \in(0,1)$  con $\alpha<\beta$
+- $q=\beta-\alpha$ => probabilità che un numero U sia nell'intervallo $(\alpha,\beta)$
+
+Generare $U_{1},U_{2},\dots,U_{n}$ -> trasformare la sequenza $\{U_{i}\}$ in $\{I_{i}\}$ mediante 
+$$
+I_{i}= \begin{cases}
+1 &&if&U_{i}\in(\alpha,\beta)\\ \\
+0
+\end{cases}
+$$
+
+Identificare sotto sequenze successive $I_{j},I_{j+1},\dots,I_{j+r},I_{j+r+1}$ così che il primo e l'ultimo elemento di questa sequenza siano 1 e gli altri 0. Il gap diventa quindi un **gap di lunghezza r**.
+
+Sia:
+- N => numero totale di gap generati durante l'applicazione del test 
+- $\eta_{j} = Nq(1-q)^j$ => numero atteso di gap di lunghezza j che dovrebbero apparire nella sequenza 
+- $N_{j}$=> numero di gap di lunghezza j osservati nella sequenza 
+
+$$V=\sum^{k}_{i=0}\left( \frac{(N_{j}-\eta_{j})^2}{\eta_{j}} \right)$$
+
+eseguire un test del chi quadro usando lunghezze differenti di gap come categorie e probabilità in questo modo $p_{r}=q(1-q)^r$
+
+la dimensione di un gap potrebbe crescere all'infinito, così consolidiamo il gap, scegliendo un k arbitrario che faccia da tetto e contando insieme tutti i gap di lunghezza (k-1) o più grandi. La probabilità di questo evento consolidato è 
+
+$$Pr\{r\geq k-1\}=(1-q)^{k-1}$$ siccome i gap hanno distribuzione geometrica con parametro (1-q), la lunghezza del gap attesa è 
+$$
+E[r]=\frac{1-q}{q}
+ $$
+valori bassi di q portano a gap di grandezza maggiore.
+
+La scelta di k e q hanno un grande impatto sulla lunghezza della sequenza di valori aleatori che vogliamo usare per il test. Più grande il valore di k meno sarà locale l'aleatorietà del test. Valori grandi di k fanno si che la probabilità di avere gap di lunghezza maggiore di k-2 più piccola. Valori piccoli di q rendono il test più concentrato. La lunghezza della sequenza di numeri aleatori n può essere stimata in questo modo: 
+$$n\geq E[r]  \frac{m}{Pr\{r\geq k-1\}}=\frac{m}{q(1-q)^{k-2}}$$
+
+dove m è il numero minimo di gap con lunghezza $\geq 10$ attesi. Di solito si sceglie $m\geq 10$
 ## Probabilità base 
 Probabilità empirica => dato un evento $A$ si esegua un esperimento per vedere quante volte si ripete:
 - frequenza relativa : $n_a/n$ , converge a $Pr(A)=\lim_{n \rightarrow \infty}\frac{n_a}{n}$ 
@@ -134,21 +171,21 @@ una cdf è strettamente monotona crescente
 - se $x_1<x_2$ allora $F(x_1)<F(x_2)$ 
 - CDF values are $\in (0.0,1.0)$ , Monotonicity of F(x) is the basis to generate discrete RVs
 
-## Continuos random variables 
-A RV X is continuous if possible values $\chi$ is a continuum and determined by:
- PDF that is $\int^{b}_{a}f(x)dx= Pr(a \leq X \leq b)$ 
+## Variabili aleatorie continue
+Una variabile aleatoria X è continua se i suoi valori possibili $\chi$ sono un insieme continuo definito da :
+ - PDF:  $\int^{b}_{a}f(x)dx= Pr(a \leq X \leq b)$ 
 
-by definition $\int_\chi f(x)dx =1$ 
+per definizione  $\int_\chi f(x)dx =1$ 
 
 
-### CDF (Continuos)
-CDF is $F(x)=Pr(X \leq x) = \int_{t \leq x} f(t)dt$ 
-strictly monotone increasing and bounded to 0.0 and 1.0
+### CDF 
+- CDF => $F(x)=Pr(X \leq x) = \int_{t \leq x} f(t)dt$ 
+strettamente monotona crescente entro i valori (0.0,1.0)
 
-cdf can be obtained from pdf by integration 
-pdf can be obtained from cdf by differentation $f(x)= \frac{d}{dx}F(x)$ 
+la CDF si può ottenere dalla PDF usando l'integrazione 
+la PDF si può ottenere dalla CDF tramite derivazione $f(x)= \frac{d}{dx}F(x)$ 
 
-## Summary of Distributions 
+## Sommario delle distribuzioni 
 ### Discrete 
 
 |Generator|Range (x)| Mean| Variance|
@@ -173,57 +210,57 @@ pdf can be obtained from cdf by differentation $f(x)= \frac{d}{dx}F(x)$
 |Chisquare(n)|x>0|n|2n
 |Student(n)| $\forall x$ |0|n/(n-2)
 
-## Generating random distributions 
-The generation of non uniform random variables can be performed with 3 methods:
-- Inverse transformation
-- Acceptance rejection
-- Composition 
+## Generazione di distribuzioni aleatorie 
+La generazione di variabili aleatorie non uniformi può essere fatta nei seguenti modi :
+- Trasformazione inversa 
+- Accettazione rigetto
+- Composizione 
 
-Inverse transformation relies on explicit knoweledge of the cumulative distribution function. 
+la trasformazione inversa si basa sulla conoscenza esplicita della CDF della distribuzione voluta . 
 
-Acceptance rejection and composition assume that Distribution or Density (continuos case) function are known.
+Acceptance rejection e composition assumono che le funzioni di distribuzione o la densità(nel caso continuo) siano conosciute.
 
-## Uniform random variable 
+## Generare una uniforme 
 
-We can generate a uniform(a,b) from a uniform(0,1) a.k.a lehmer generator. This is possible by simply scaling and shifting transformation using a:
-Scaling coefficient $\alpha=(b-a)$ and a Shifting coefficient $\beta=a$ . 
+possiamo generare una uniforme(a,b) da una uniforme(0,1) semplicemente usando gli endpoint dell'intervallo a,b. Cosa possibile semplicemente scalando e shiftando usando a:
+- Coefficiente di scaling $\alpha=(b-a)$ 
+- Coefficiente di shifting $\beta=a$ . 
 ```C
 double Uniform(double a, double b){return (a+(b-a)*Random());}
 ```
 
-### Inverse distribution function 
-The inverse distribution function (idf) of X is the function $F^{-1}:(0,1) \rightarrow \chi$ for all $u \in (0,1)$ as $F^{-1}(u)=x$ 
-where $x \in \chi$ is the unique possible value for $F(x)=u$ 
+### Funzione di distribuzione inversa 
+La funzione di distribuzione inversa (idf) di una variabile aleatoria X è una funzione definita in questo modo $F^{-1}:(0,1) \rightarrow \chi$ per ogni $u \in (0,1)$ come $F^{-1}(u)=x$ 
+dove:
+- $x \in \chi$ è l'unico valore possibile per $F(x)=u$ 
 
-There is correspondence between possible values $x \in \chi$ and cdf values $u=F(x) \in (0,1)$ 
+Esiste una corrispondenza ben precisa tra i valori possibili $x \in \chi$ e i valori della CDF $u=F(x) \in (0,1)$ 
 
-Follow a list of idf with u for the mean from value and x for the value from mean 
-#### IDF Uniform
-Uniform(a,b)
-$u= F(x)= \frac{x-a}{b-a}$  for $a<x<b$ 
-$x= F^{-1}(u)=a+(b-a)u$  for $0  < u < 1$ 
-
-#### IDF Exponential 
-Exponential($\eta$) 
-$u = F(x)= 1-\exp\ ( -\frac{x}{\eta} )$  for $x>0$
-$x= F^{-1}(u)= - \eta \ln(1-u)$ for $0<u<1$ 
-
-#### IDF for pareto type1
-Pareto($L,\alpha$)
-$u=F(x)=1-\left( \frac{L}{x} \right)^{\alpha}$ for $x \geq L$ 
+segue una lista di distribuzioni inverse con media u e distribuzione inversa x.
+>[!important] Uniform(a,b)
+>$$u= F(x)= \frac{x-a}{b-a} ;\forall a<x<b$$ 
+$$x= F^{-1}(u)=a+(b-a)u;  0  < u < 1$$ 
 
 
-#### IDF for quadratic 
-if X is a continuous variable with possible value $0<x<b$ 
-- pdf $f(x)=\frac{2x}{b^2}$ 
-- cdf is $u = F(x)=\left( \frac{x}{b} \right)^{2}$    
-- $x= F^{-1}(u)=b\sqrt{ u }$ for $0<u<1$ 
+>[!important] Exponential($\eta$) 
+>$$u = F(x)= 1-\exp\ \left( -\frac{x}{\eta} \right) ;x>0$$
+>$$x= F^{-1}(u)= - \eta \ln(1-u);0<u<1$$
 
-## Composition method 
-usually used for continuous random variates , for distribution whose idf is not efficient to compute. 
-Distributions are weighted sum of simpler distributions that can be computed efficiently.
+>[!important] Pareto($L,\alpha$)
+$$u=F(x)=1-\left( \frac{L}{x} \right)^{\alpha};x \geq L$$
 
-Algorithm to generate random variate with distribution $f_{x}(X)=\sum^{n}_{i=1}\alpha_{i}g_{i}(x)$ 
+
+>[!important] Quadratica
+>se X è una variabile aleatoria continua con valori $0<x<b$ 
+>- PDF $f(x)=\frac{2x}{b^2}$ 
+>- CDF  $u = F(x)=\left( \frac{x}{b} \right)^{2}$    
+>$$x= F^{-1}(u)=b\sqrt{ u };0<u<1$$
+
+## Metodo di composizione 
+di solito usato per valori aleatorie la cui IDF non è facilmente calcolabile o è costosa. 
+La distribuzione è la somma pesata di distribuzioni che sono più facili da calcolare .
+
+Algoritmo per generare una distribuzione composita$f_{x}(X)=\sum^{n}_{i=1}\alpha_{i}g_{i}(x)$ 
 ```python
 # Initialization
 A = []
