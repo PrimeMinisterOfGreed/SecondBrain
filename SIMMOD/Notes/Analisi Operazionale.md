@@ -235,7 +235,7 @@ la discussione fatta per i sistemi chiusi parlando di
 :LiArrowRightCircle: $D=Y(1)=\sum^{i=1}_{M}V_iS_i = \sum^{i=1}_{M}D_i$ e $Y(N)=NV_bS_b$  
 
 può essere generalizzata portando a 
-:LiArrowRightSquare: $Y(1) = \sum^{i=1}_{M}V_iS_i$ and $Y(N)=NV_bS_b^{[max]}$  --> $V_bS_b^{[max]} = max_i(V_iS_i)^{[max]}$. 
+:LiArrowRightSquare: $Y(1) = \sum^{i=1}_{M}V_iS_i$ e $Y(N)=NV_bS_b^{[max]}$  --> $V_bS_b^{[max]} = max_i(V_iS_i)^{[max]}$. 
 
 >[!important] Nota
  > 1) Questa discussione perde di significato se la velocità di servizio va 0: questo perchè i clienti verranno proprio bloccati dalla stazione. Perciò la generalizzazione è valida solo per quelle stazioni la cui velocità di servizio non è una funzione del carico. 
@@ -291,7 +291,7 @@ lo stato del sistema è rappresentabile come un vettore $\underline{n} = (n_1,n_
 assumiamo 3 stati generici , definiti dal numero di clienti in coda a ciascuna stazione => k,m,n.
 
 :LiAward: sia $C(m,n)$ => numero di transizioni dallo stato m allo stato n. 
-:LiArrowRightCircle: allora l'equazione di bilanciamento tra stati è $$\sum_{k}C(n,k)= \sum_mC(n,m)$$
+:LiArrowRightCircle: allora l'equazione di bilanciamento tra stati è $$\sum_{k}C(k,n)= \sum_mC(n,m)$$
 In generale , questa equazione è vera per tutti gli stati tranne il primo e l'ultimo. Ad eccezion fatta per i sistemi in equilibrio operazionale per cui **è vera per tutti gli stati**.
 
 ![[Pasted image 20231006125755.png]]
@@ -494,7 +494,7 @@ siccome $\sum T(n) = T$  possiamo aggiungere la condizione di normalizzazione $\
 ### Comportamento transitorio
 :LiAward: $T(n)$ => tempo totale speso dal sistema in un generico stato $\underline{n}$ durante il periodo di osservazione, con $\sum T(n) = T$. \
 
-Sia :LiArrowRightCircle:  $P(n)= T\frac{n}{T}=> tempo totale speso dal sistema nello stato  $\underline{n}$. 
+Sia :LiArrowRightCircle:  $P(n)= T\frac{n}{T}$=> tempo totale speso dal sistema nello stato  $\underline{n}$. 
 
 l'insieme delle frazioni di tempo spese dal sistema nei vari stati in $S(M)$ or $\{P(\underline{n}), \underline{n} \in S(M)\}$ è chiamata **distribuzione delle frazioni di tempo speso dal sistema nei suoi stati**. l'obiettivo è di derivare $P(\underline{n})$ senza misurarlo ma solo dai parametri del modello . 
 
