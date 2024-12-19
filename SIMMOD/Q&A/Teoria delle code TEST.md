@@ -17,3 +17,10 @@
 9. Spiega il metodo degli stadi e come può essere applicato per analizzare sistemi di accodamento non markoviani. Il metodo degli stadi consente di rappresentare distribuzioni di tempi di servizio non esponenziali, come la distribuzione Erlang, scomponendole in una serie di stadi esponenziali. Questo permette di utilizzare l'analisi basata su catene di Markov per sistemi con distribuzioni di servizio più generali.
 
 10. Quali sono i principali vantaggi e svantaggi dell'utilizzo della trasformata Z nell'analisi di sistemi di accodamento? La trasformata Z è uno strumento matematico che può semplificare la derivazione di indici di performance come la lunghezza media della coda. Tuttavia, la sua applicazione può richiedere la risoluzione di equazioni algebriche complesse e l'inversione della trasformata per ottenere la distribuzione di probabilità desiderata.
+
+
+1.
+Il processo di nascita e morte a tempo continuo è la base per trovare gli indici di performance stazionari delle stazioni considerate, tipicamente si inserisce all'interno della soluzione il modello proposto , si verificano le condizioni di ergodicità e si calcolano i vari indici di performance 
+
+2.
+la coda M/M/1 assume tempi di inter-arrivo e di servizio markovniani, per cui assumendo tempi costanti e  inserendoli dentro alla soluzione dei processi di nascita e morte , otteniamo $\pi_{k}=\pi_{0}\rho^k$ e $\pi_{0}=1-\rho$ . A questo punto possiamo verificare le condizioni di ergodicità secondo $S_{1}=$
