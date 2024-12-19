@@ -23,4 +23,16 @@
 Il processo di nascita e morte a tempo continuo è la base per trovare gli indici di performance stazionari delle stazioni considerate, tipicamente si inserisce all'interno della soluzione il modello proposto , si verificano le condizioni di ergodicità e si calcolano i vari indici di performance 
 
 2.
-la coda M/M/1 assume tempi di inter-arrivo e di servizio markovniani, per cui assumendo tempi costanti e  inserendoli dentro alla soluzione dei processi di nascita e morte , otteniamo $\pi_{k}=\pi_{0}\rho^k$ e $\pi_{0}=1-\rho$ . A questo punto possiamo verificare le condizioni di ergodicità secondo $S_{1}=$
+la coda M/M/1 assume tempi di inter-arrivo e di servizio markovniani, per cui assumendo tempi costanti e  inserendoli dentro alla soluzione dei processi di nascita e morte , otteniamo $\pi_{k}=\pi_{0}\rho^k$ e $\pi_{0}=1-\rho$ . A questo punto possiamo verificare le condizioni di ergodicità secondo $S_{1}=\sum_{k=0}^{\infty}\left( \frac{\lambda}{k} \right)^k<\infty$ e $S_{2}=\sum_{k=0}^{\infty} \frac{1}{\lambda}\left( \frac{\micro}{\lambda} \right)^{k}= \infty$  che sono soddisfatte solo se $\frac{\lambda}{\micro}<1$ . Per cui questo porta $\pi_{k}=\pi_{0}\rho^k$ e $\pi_{0}=1-\rho$. Da queste due soluzioni è possibile calcolare vari indici di performance, come il numero atteso di client $\frac{\rho}{1-\rho}$ e il secondo momento di questa misura $2\left( \frac{\rho}{1-\rho} \right)+\frac{\rho}{1-\rho}^2$ e la varianza. Usando la formula di little è possibile calcolare l'attesa media e anche la probabilità che la coda ecceda una certa soglia. 
+
+4.
+In una coda con arrivi scoraggiati invece otteniamo l'effetto della decrescita degli arrivi man mano che la coda aumenta. La soluzione diventa quindi $\pi_{0}=e^{-\lambda/\micro}$  e $\pi_{k}=\frac{\left( \frac{\lambda}{\micro}^k \right)}{k!}e^{-\lambda/\micro}$ . L'ergodicità è soddisfatta per $\frac{\lambda}{\micro}<1$ . Anche qui è possibile stimare diversi indici di performance come l'utilizzo 
+
+11. Spiega come si calcolano i tempi di soggiorno in una coda M/M/1
+
+Per spiegare come si calcolano i tempi di soggiorno dobbiamo partire dalla pasta property, che ci dice , grazie alla proprietà di assenza di memoria, che un cliente che arriva vede il sistema come se fosse arrivato in un momento casuale, non connesso cioè allo stato della catena. Sia W la variabile che rappresenta il tempo di soggiorno in questa coda, sia $W_{n}[a]=\sigma+\omega_{1}+\omega_{2}+\omega_{3}\dots+\omega_{n-1}+R$ la variabile che rappresenta il tempo d'attesa dell'n-esimo cliente dati n clienti in coda , R  il tempo di servizio rimanente per il cliente che era in servizio  ,$\sigma$ il tempo di servizio del cliente appena entrato. 
+Siccome tutti i clienti sono statisticamente equivalenti allora $W_{n}^{[a]}$ è la somma di n+1 variabili aleatorie tutte negative esponenziali, quindi applicando la trasformata di laplace e eseguendo vari passaggi otteniamo che $F_{W}(t)=Pr\{X\leq t\}=1-e^{-ut}$ 
+
+
+5.
+In un sistema M/M/inf il rateo di partenze cresce linearmente con l'arrivo dei clienti, ed è quindi un sistema duale a quello degli arrivi scoraggiati. In questo sistema le soluzioni sono $\pi_{0}=e^{-\lambda/\micro}$ e $\pi_{k}= \frac{(\lambda/\micro)^k}{k!}e^{-\lambda/\micro}$ l'ergodicità è soddisfatta per $\frac{\lambda}{\micro}<1$ . I risultati sono i medesimi degli arrivi scoraggiati, per cui $E[n]=\frac{\lambda}{\micro}$ il tempo di soggiorno invece dipende solo dal tempo di servizio $E[w]=\frac{1}{\micro}$ 

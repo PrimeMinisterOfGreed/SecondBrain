@@ -35,13 +35,15 @@ $$
 }=\pi_0(\frac{\lambda}{\micro})^k
 $$
 con condizioni di ergodicità
+
 $$
 \begin{align}
 S_1= \sum^{\infty}_{k=0}(\frac{\lambda}{\micro})^k < \infty && S_2=\sum^{\infty}_{k=0}\frac{1}{\lambda}(\frac{\micro}{\lambda})^k = \infty
 \end{align}
 $$
 
-soddisfatte solo se  $\frac{\lambda}{\micro}<1$ , le condizioni di normalizzazione portrano a :
+soddisfatte solo se  $\frac{\lambda}{\micro}<1$ , le condizioni di normalizzazione 
+portrano a :
 - $\pi_0=1-\frac{\lambda}{\micro}= 1-\rho$  
 - $\pi_k=(1-\rho)\rho^k$ (refer to special case)
 
@@ -328,12 +330,13 @@ sostituendo nell'espressione di  $\bar{N}_{s}$ otteniamo
 \bar{N}_{s}= \frac{\rho}{(1-\rho)}\frac{k+1}{2}
 $$
 
+
 per ottenere la distribuzione del numero dei clienti in coda $P_j$ :
 - compute the k+1 roots $(z_{0},z_{1},...,z_{k})$ of the denominator in $\mathcal{P}(z)$ as  $D(z)=v(1-z)(1-\frac{z}{z_1})(1-\frac{z}{z_{2}})...(1-\frac{z}{z_k})$ 
 - semplifica $$\mathcal{P}(z)=\frac{1-\rho}{\prod^{i=1}_{k}(1-\frac{z}{z_i})}$$
 - applichiamo la decomposizione parziale $\mathcal{P}(z)=(1-\rho)\sum^{k}_{i=1}\frac{A_i}{1-\frac{z}{z_i}}$  dove: 
     - $A_i=\prod^{k}_{h=1;h \neq i}\frac{1}{(1-\frac{z_i}{z_h})}$   
-usando l'antitrasformata
+    -  usando l'antitrasformata
 >[!important] 
 >$$
  >   P_j=(1-\rho)\sum^{k}_{i=1}(z_{i})^{-j}A_{i}

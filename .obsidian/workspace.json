@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f1d5982f3cfbac94",
+        "id": "4423df7013d3dce0",
         "type": "tabs",
         "children": [
           {
-            "id": "47eeca36570df7f3",
+            "id": "ee98949381210e18",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -19,20 +19,6 @@
               },
               "icon": "lucide-file",
               "title": "Teoria delle code TEST"
-            }
-          },
-          {
-            "id": "56c3cefe0e31d633",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SIMMOD/Notes/Teoria Delle Code.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Teoria Delle Code"
             }
           }
         ]
@@ -91,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 289.5
+    "width": 289.5,
+    "collapsed": true
   },
   "right": {
     "id": "e85fc5a525ed010b",
@@ -167,10 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SIMMOD/Q&A/Teoria delle code TEST.md"
+                "file": "SIMMOD/Notes/Analisi Operazionale.md"
               },
               "icon": "lucide-list",
-              "title": "Struttura di Teoria delle code TEST"
+              "title": "Struttura di Analisi Operazionale"
             }
           }
         ],
@@ -192,26 +179,64 @@
       "publish:Pubblica modifiche": false
     }
   },
-  "active": "47eeca36570df7f3",
+  "floating": {
+    "id": "8e6b1e87683068c9",
+    "type": "floating",
+    "children": [
+      {
+        "id": "47deb484c1efe9cb",
+        "type": "window",
+        "children": [
+          {
+            "id": "58b9ab68e5d8ddd1",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "dcd0b258098a774b",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "SIMMOD/Notes/Teoria Delle Code.md",
+                    "mode": "source",
+                    "source": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Teoria Delle Code"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 18,
+        "y": -855,
+        "width": 1024,
+        "height": 800,
+        "maximize": true,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "ee98949381210e18",
   "lastOpenFiles": [
     "SIMMOD/Notes/Teoria Delle Code.md",
-    "SIMMOD/Q&A/Teoria delle code TEST.md",
     "SIMMOD/Notes/Catene di Markov.md",
+    "SIMMOD/Q&A/Teoria delle code TEST.md",
     "SIMMOD/Notes/Monte Carlo.md",
     "SIMMOD/Q&A/Catene di markov TEST.md",
-    "SIMMOD/Q&A/Analisi Output TEST.md",
-    "SIMMOD/Notes/Analisi Output.md",
-    "SIMMOD/Q&A/Analisi operazionale TEST.md",
-    "SIMMOD/Notes/Stime Intervallari.md",
-    "SIMMOD/Notes/Analisi Operazionale.md",
     "SIMMOD/Q&A/Stime intervallari TEST.md",
+    "SIMMOD/Q&A/Analisi Output TEST.md",
+    "SIMMOD/Q&A/Analisi operazionale TEST.md",
     "SIMMOD/Q&A",
-    "SIMMOD/Senza nome.md",
+    "SIMMOD/Notes/Analisi Output.md",
+    "SIMMOD/Notes/Analisi Operazionale.md",
     "SIMMOD/Operational Analysis.canvas",
     "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
     "Analisi dei segnali/Note/Caratterizzazione dei segnali.md",
     "Analisi dei segnali/Note/qualcosa.md",
     "Analisi dei segnali/Senza nome.md",
+    "SIMMOD/Notes/Stime Intervallari.md",
     "().md",
     "SIMMOD/Notes/Interval Estimation.md",
     "SIMMOD/Monte carlo.canvas",
@@ -237,6 +262,7 @@
     "^derived_ns.md",
     "Queue theory/^32ac4f.md",
     "Queue theory",
+    "Math/Formulas.md",
     "SIMMOD/Notes",
     "SIMMOD/images/Pasted image 20231207130743.png",
     "SIMMOD/images/Pasted image 20231203114257.png",
