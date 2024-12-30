@@ -166,7 +166,7 @@ Si considerino due sequenze esponenziali complesse $x_{1}[n]=e^{jw_{1}n}$ e $x_{
  
 La second proprietà segue questa precedente
 >[!definition] Proprietà 2
->siano $$x_{1}[n]=\cos(\omega_{1}n),x_{2}[n]= \cos(\omega_{2}n)$ con $0\leq \omega_{1}<\pi$ e $\pi \leq \omega_{2}<2\pi$$  Allora se $$\omega_{2}=2\pi-\omega_{1} \implies x_{2}[n]=\cos(2\pi n-\omega_{1}n)=\cos(\omega_{1}n)=x_{1}[n]$$
+>siano $$x_{1}[n]=\cos(\omega_{1}n),x_{2}[n]= \cos(\omega_{2}n)$$ con $0\leq \omega_{1}<\pi$ e $\pi \leq \omega_{2}<2\pi$  Allora se $$\omega_{2}=2\pi-\omega_{1} \implies x_{2}[n]=\cos(2\pi n-\omega_{1}n)=\cos(\omega_{1}n)=x_{1}[n]$$
 >che di nuovo rende le 2 sequenze indistinguibili
 
 Così una sinusoidale con frequenza angolare normalizzata $\omega_{2}$ nel range $\pi \leq \omega_{2}<2\pi$ assume l'identità di una sinusoidale con frequenza $\omega_{1}=2\pi-\omega_{2}$ nel range $0\leq \omega_{1}<\pi$. La frequenza $\pi$ diventa così nota come **frequenza di piegamento**.  
@@ -202,3 +202,112 @@ una nuova sequenza può essere formata sommando $y[n]=x_{1}[n]+\frac{1}{3}x_{2}[
 
 
 
+### Componenti fondamentali e armoniche 
+Una sinusoidale può essere composta da più forme d'onda che hanno una frequenza angolare che sono multipli tra di loro. La frequenza minima in quest'onda è chiamata **frequenza fondamentale o componente fondamentale** mentre i suoi multipli di ordine k sono **k-esima armonica** (o più genericamente armoniche). Ogni onda periodica è rappresentabile tramite somme pesate delle sue componenti, quest'operazione si chiama **espansione in serie di Fourier** , i cui pesi sono chiamati coefficienti della serie. 
+
+### Rappresentazione di una sequenza arbitraria
+è possibile rappresentare una sequenza nel dominio del tempo usando combinazioni di sequenze ritardate/anticipate, di solito si usa la sequenza unitaria per eseguire questa operazione. Ad esempio si può esprimere come 
+$$x[n]=0.5\updelta[n+2]+1.5\updelta[n-1]-\updelta[n-2]+\updelta[n-4]+0.75\updelta[n-6]$$
+
+## Il processo di campionamento 
+è un processo che prende un segnale continuo $x_{a}(t)$ e lo converte in una sequenza discreta, mettendo in relazione la variabile continua t e l'indice della sequenza n 
+$$
+t_{n}=nT=\frac{n}{F_{T}}=\frac{2\pi n}{\Omega_{T}}
+$$
+dove:
+- $F_{T}$=> è la frequenza di campionamento 
+- $\Omega_{T}=2\pi F_{T}$ => frequenza angolare di campionamento. 
+
+Per esempio se il segnale continuo $x_{a}(t)=A\cos(2\pi f_{0}t+\phi)=A \cos(\Omega_{0}t+\phi)$ viene convertito in discreto $x[n]=A\cos(\Omega_{0}nT+\phi)=A\cos(\omega _{0}n+\phi)$ 
+%%ci sono dei passaggi intermedi qui%%
+dove:
+- $\omega_{0}=\frac{2\pi \Omega_{0}}{\Omega_{T}}=\Omega_{0}T$ => frequenza angolare normalizzata del segnale discreto x, che ha unità **radianti per campione**, mentre l'unità della frequenza angolare nel continuo è **radianti al secondo** 
+
+In generale a una certa frequenza è possibile campionare una certa varietà di sinuosoidi le cui frequenze angolari sono multiple tra di loro, rendendo quindi impossibile discriminare una sequenza da un'altra. Questo fenomeno è in generale noto come **aliasing**. (Un esempio è prendere 3 segnali con sequenze multiple, convertirle in un segnale discreto e mostrare che sono equivalenti se campionate a una certa frequenza {3hz,7hz,13hz} e {10hz camp}).
+
+Nel caso generale , la famiglia di sinusoidi continue $$
+x_{a,k}(t)= A \cos(\pm(\Omega_{0}t+\phi)+k\Omega_{T}t);k=0,\pm 1,\pm 2\dots
+$$
+Portano allo stesso identico segnale campionato 
+$$
+x_{a,k}(nT)= A\cos((\Omega_{0}+k\Omega_{T})nT+\phi)=^{!2}A \cos(\omega_{0}n+\phi)=x[n]
+$$
+
+## Correlazione dei segnali 
+è una misura di similarità tra segnali, usata quando abbiamo necessità di confrontare due segnali. Utile per esempio per capire nel caso delle comunicazioni se è avvenuta la trasmissione di un certo segnale, oppure nei radar per determinare l'oggetto rilevato. s
+
+### Definizioni 
+
+>[!important] Cross Correlazione
+> è una misura di similarità tra **l'energia** di due segnali, definita come $r_{xy}[l]$ 
+> $$
+> r_{xy}[l]=\sum_{n=-\infty}^\infty x[n]y[n-l]
+>$$ 
+>questa somma infinita converge 
+
+dove: 
+- $l$ => indica il time-shift tra i campioni, parametro chiamato **lag** 
+
+l'ordine di xy nella funzione indica che la sequenza $x[n]$ è la sequenza di riferimento che rimane fissa nel tempo mentre $y[n]$ è shiftata rispetto a x. Se vogliamo invece usare y come sequenza di riferimento, si può invertire il tutto facendo 
+$$
+r_{yx}[l]=\sum_{n=-\infty}^{\infty} y[n]x[n-l]=\sum_{n=-\infty}^{\infty}y[m+l]x[m]=r_{xy}[-l] 
+$$
+per cui basta invertire la sequenza originale.
+
+>[!important] Autocorrelazione 
+>l'autocorrelazione è data da $$r_{xx}[l]=\sum_{n=-\infty}^{\infty}x[n]x[n-l]$$ 
+
+per cui $r_{xx}[l]=r_{xx}[-l]$. Esaminando l'equazione si può intravedere che la cross correlazione è abbastanza simile alla convoluzione , infatti su può riscrivere come 
+$r_{xy}[l]=\sum_{n=-\infty}^{\infty} x[n]y[-(l-n)]=x[l] \circledast y[-l]$
+
+### Proprietà dell'autocorrelazione e della cross correlazione 
+Siano $x[n]$ e $y[n]$ due sequenze a energia finita. **L'energia delle sequenze combinate $ax[n]+y[n-l]$ anche è finita** , per cui 
+$$
+\sum_{n=-\infty}^{\infty}(ax[n]+y[n-l])^2=^{!1}a^2r_{xx}[0]+2ar_{xy}[l]+r_{yy}[0]\geq 0
+$$
+dove:
+- $r_{xx}[0]=\mathcal{E}_{x}>0$ e $r_{yy}[0]=\mathcal{E}_{x}>0$  sono le energie delle sequenze x e y. 
+Possiamo riscrivere le precedenti equazioni in forma matriciale 
+$$
+\begin{bmatrix}
+a & 1
+\end{bmatrix}* \begin{bmatrix}
+r_{xx}[0] & r_{xy}[l]\\ \\
+r_{xy}[l] & r_{yy}[0]
+\end{bmatrix}
+\begin{bmatrix}
+a  \\
+1
+\end{bmatrix} \geq 0
+$$
+la matrice centrale è positvamente semi definita per ogni a positivo. Che implica 
+$r_{xx}[0]r_{yy}[0]-r^2_{xy}[l]\geq 0$ o equivalentemente $|r_{xy}[l]|\leq \sqrt{ r_{xx}[0]r_{yy}[0] }=\sqrt{ \mathcal{E_{x}}\mathcal{E_{y}} }$ . Questa diseguaglianza porta a un 
+>[!important] **limite superiore**
+> per la cross correlazione $$|r_{xx}[l]|\leq r_{xx}[0]=\mathcal{E_{x}}$$ 
+
+che ci dice che con lag $l=0$ , **l'autocorrelazione assume il suo valore massimo**. 
+
+considerando una sequenza del tipo $y[n]=\pm bx[n-N]$ possiamo derivare una seconda proprietà considerando N intero e b>0 $\sqrt{ \mathcal{E_{x}\mathcal{E_{y}}} }=\sqrt{ b^2\mathcal{E_{x}}^2 }=b^2\mathcal{E_{x}}$  per cui 
+$$
+-br_{xx}[0]\leq r_{xy}[l]\leq br_{xx}[0]
+$$
+### Correlazione per sequenze periodiche
+nel caso di sequenze periodiche queste misure sono definite in modo leggermente differente. Per una coppia di segnali x e y 
+>[!important]  Cross correlazione 
+>$$r_{xy}[l]=\lim_{ K \to \infty } \frac{1}{2K+1}\sum_{n=-K}^{K}x[n]y[n-l]$$
+
+>[!important] Auto correlazione 
+>$$r_{xx}[l]=\lim_{ K \to \infty } \frac{1}{2K+1}\sum_{n=-K}^{K}x[n]x[n-l]$$ 
+
+entrambe le sequenze generate rxy e rxx sono anch'esse periodiche, questa proprietà può essere usata per recuperare la periodicità di un segnale che subisce un interruzione improvvisa. 
+
+sia:
+- $\tilde{x}[n]$ =>sequenza x interrotta da un segnale di disturbo 
+- $d[i]$=> sequenza di disturbo 
+
+il segnale risultante sarà $w[n]=\tilde{x}[n]+d[n]$, che è osservato in $0\leq n\leq M-1$ con $M\gg N$ 
+l'autocorrelazione di $w[n]$ è data da 
+$$
+r_{ww}[l]=\frac{1}{M}\sum_{n=0}^{M-1} w[n]w[n-l]=^{!2}r_{\tilde{x}\tilde{x}}[l]+r_{dd}[l]+r_{\tilde{x}d}[l]+r_{d\tilde{x}}[l] 
+$$
+per cui rxx è una sequenza periodica con periodo N, per cui avrà picchi a $l=0,N,2\mathbf{N}\dots$ con la stessa ampiezza allorchè $l$ tende a M. Siccome $\tilde{x}[n]$ e $d[n]$ non sono correlati, ci aspettiamo che le loro cross correlazioni siano molto piccole. L'autocorrelazione del segnale di disturbo d mostrerà un picco a l=0 per cui i picchi di $r_{ww}[l]$ con l>0 possono essere usati per ricostruire la periodicità del segnale originale. 
