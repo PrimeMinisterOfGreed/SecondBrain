@@ -307,3 +307,41 @@ $$
 con $x[n]=\{\cos(0.1n)+\cos(0.4n)\}\mu[n]$
 
 ## Ritardo della fase e del gruppo
+per caratterizzare la forma dell'output altri due parametri sono fondamentali e sono associati alla risposta in frequenza del sistema. La risposta stabile del sistema per un input sinusoidale ha la stessa forma dell'input eccetto cambiamenti nella magnitudine determinati dai valori assunti dalla funzione di magnitudine $|H(e^{ j\omega })|$ alla frequenza $\omega_{0}$ e della fase relativa a una quantità definita dalla funzione di fase $\theta(\omega_{0})=arg\{H(e^{ j\omega_{0} })\}$ 
+
+### Definizioni 
+Se l'input è una sinusoide con frequenza $\omega_{0}$ l'output anche è una sinusoide con la stessa frequenza ma con un lag nella fase di $\theta(\omega_{0})$ radianti. Per cui
+$$y[n]=A|H(e^{ j\omega })|\cos(\omega_{0}(n-\tau_{p}(\omega_{0}))+\phi)$$
+dove: $\tau _p(\omega_{0})=- \frac{\theta(\omega_{0})}{\omega_{0}}$ => ritardo della fase. 
+Quando l'input contiene molte componenti sinusoidale con frequenze differenti che sono relazionate armonicamente ogni componente attraversa un certo ritardo nella fase quando processato. Il delay del segnale è determinato usando un parametro chiamato delay del gruppo 
+$$
+\tau_{g}= - \frac{d\theta(\omega)}{d\omega}
+$$
+### Calcolo della Phase Delay 
+
+Consideriamo il sistema $y[n]=-x[n-1]$ dove x è l'input e y e l'output. la unwrapped phase è $\theta(\omega)=-\omega+\pi+2K\pi$ da cui arriviamo al delay di fase con $\omega=\omega_{0}$
+$$
+\tau_{p}(\omega_{0})=1- \frac{\pi}{\omega_{0}}- \frac{2K\pi}{\omega_{0}}
+$$
+Per tutti i valori dell'intero K e tutti i valori di $\omega_{0}$.
+Se $\omega_{0} \to_{0}$ allora $\tau_{p}(\omega_{0})\to \pm \infty$ a seconda del valore K, questo risultato è di difficile interpretazione, d'altro canto il group delay di questo sistema è semplicemente 
+$\tau_{g}(\omega)=1$ indipendentemente da $\omega$ .
+
+Il significato fisico di questi due delay è esaminabile tramite il caso in tempo continuo. Consideriamo un LTI con una risposta in frequenza $H_{a}(j\Omega)=|H_{a}(j\Omega)|e^{ j\theta_{a}(\Omega) }$. Stimolato da un segnale continuo in ampiezza di banda ristretta dato da $x_{a}(t)=a(t)\cos(\Omega_{c}t)$ dove $a(t)$ è un segnale modulato passa basso con una trasformata di Fourier data da $|A(j\Omega)|=0$
+e $\cos(\Omega_{c}t)$ è l'altra frequenza del segnale portante. 
+
+Assumiamo che nel range di frequenza $\Omega_{c}-\Omega_{0}<|\Omega|<\Omega_{c}+\Omega_{0}$ la risposta in frequenza del sistema continuo abbia una magnitudine costante, quindi 
+
+$$
+|H_{a}(j\Omega)=|H_{a}(j\Omega_{c})|
+$$
+$$\theta_{a}=\theta_{a}(\Omega_{c})-(\Omega-\Omega _{c}) \frac{d\theta_{a}(\Omega)}{d\Omega}|_{\Omega=\Omega_{c}}= -\Omega_{c}\tau_{p}(\Omega_{c})+(\Omega-\Omega _{c})\tau_{g}(\Omega_{c})$$ 
+Adesso la CTFT del segnale in input $x_{a}(t)$ è nella forma 
+$$
+X_{a}(j\Omega)=\frac{1}{2} (A(j[\Omega+\Omega_{c}]) + A(j[\Omega-\Omega_{c}]))
+$$
+ottenuto usando la proprietà di shifting.  Per di più grazie al vincolo imposto dalla DTFT del segnale  $X_{a}(j\Omega)=0$ fuori dal range $\Omega_{c}-\Omega_{0}<|\Omega|<\Omega_{c}+\Omega_{0}$. Che risulta in un output dell'LTI 
+$$
+y_{a}(t)=a(t-\tau_{g}(\Omega_{c}))\cos\Omega_{c}(t-\tau_{p}(\Omega_{c}))
+$$
+

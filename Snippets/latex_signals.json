@@ -1,0 +1,9 @@
+[
+	
+    {trigger:"infsum", replacement:"\\sum_{$0=-\\infty}^{\\infty}$1",options: "mA"},
+    {trigger:"posinfsum", replacement:"\\sum_{n=0}^{\\infty}",options: "mA"},
+    {trigger:"subeq", replacement:"=^{!$0}",options:"mA"},
+    {trigger:"fouint", replacement:"\\int_{-\\pi}^{\\pi} $0 \\, d$1", "options":"mA"},
+    {"trigger":"forsum","replacement":"\\sum_{$0=$1}^{$2}$3","options":"mA"},
+    {"trigger":"conv","replacement":"\\circledast","options":"mA"}
+]
