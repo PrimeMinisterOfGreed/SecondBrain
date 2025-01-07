@@ -5,5 +5,6 @@
     {trigger:"subeq", replacement:"=^{!$0}",options:"mA"},
     {trigger:"fouint", replacement:"\\int_{-\\pi}^{\\pi} $0 \\, d$1", "options":"mA"},
     {"trigger":"forsum","replacement":"\\sum_{$0=$1}^{$2}$3","options":"mA"},
+        {"trigger":"forprod","replacement":"\\prod_{$0=$1}^{$2}$3","options":"mA"},
     {"trigger":"conv","replacement":"\\circledast","options":"mA"}
 ]

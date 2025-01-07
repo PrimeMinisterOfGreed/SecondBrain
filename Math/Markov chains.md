@@ -52,6 +52,3 @@ $$
 ### Stationary Process 
 
 if for any constant $\tau$ is true $F_X(x;t+\tau) = F_X(x;t)$ where $t+\tau= \sum^{n}_{i=1} (t_i+\tau)$
- 
- 
- 

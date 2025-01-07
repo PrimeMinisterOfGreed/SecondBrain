@@ -137,12 +137,12 @@ La somma di due sequenze periodiche è anch'essa periodica.
 ### Sequenze sinusoidali 
 
 >[!definition] Sinusoide Reale 
->  $x[n]=A-\cos(w_{0}*n+d);n<\infty$ dove: 
+>  $x[n]=A-\cos(w_{0}*n+\phi);n<\infty$ dove: 
 >- $A$ =>ampiezza 
 >- $w_{0}$=>frequenza angolare normalizzata 
->- d=> fase 
+>- $\phi$=> fase 
 
-tutti $\in \mathbb{R}$ . Alternativamente questa sinusoide si può scrivere come $x[n]=x_{i}[n]+x_{q}[n]$ 
+tutte costanti $\in \mathbb{R}$ . Alternativamente questa sinusoide si può scrivere come $x[n]=x_{i}[n]+x_{q}[n]$ 
 dove:
 - $x_{i}[n]$ => in phase 
 - $x_{q}[n]$=> componente di quadratura 
@@ -150,6 +150,12 @@ dati da $$\begin{align}
 x_{i}[n]= A*\cos \phi \cos(w_{0}n) \\ x_{q}[n]=-A\sin \phi*\sin(w_{0n})
 \end{align}
 $$
+negli esempi sopra $A\cos \phi$ e $A\sin \phi$ sono sequenze esponenziali, e la loro forma più generica è $x[n]=A\alpha^{n}$ riscrivendo $\alpha=e^{ (\sigma_{0}+j\omega_{0}) }$ e $A=|A|e^{ j\phi }$ la sequenza diventa 
+$$
+x[n]=Ae^{ (\sigma_{0}+j\omega_{0})n }=|A|e^{ \sigma_{0} n}\cos(\omega_{0}n+\phi)+j|A|e^{ \sigma_{0}n }\sin(\omega_{0}n+\phi)
+$$
+
+
 Con $A,\alpha \in \mathbb{R}$ la sequenza si riduce a una sequenza reale esponenziale. Con $|\alpha|<1$ decade e con $|\alpha|>1$ Cresce. Notare che la precedente sinusoide reale e la complessa con $\sigma_{0}=0$ sono sequenze periodiche con periodo N finchè 
 >[!definition] Periodo fondamenetale 
 >$w_{0}N=2\pi r$ dove N e r sono $\mathbb{I}>0$. Il $\min(N)$ che soddisfa questa condizione è il periodo fondamentale della sequenza. 

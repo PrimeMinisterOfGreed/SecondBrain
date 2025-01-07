@@ -11,5 +11,6 @@
   "useTab": false,
   "alwaysUpdateLinks": true,
   "readableLineLength": true,
-  "showLineNumber": true
+  "showLineNumber": true,
+  "vimMode": false
 }
