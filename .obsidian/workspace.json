@@ -11,14 +11,10 @@
             "id": "ec7b0b007cdb795f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "FisicaRV/Formulario.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Formulario"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Vista grafo"
             }
           }
         ]
@@ -154,10 +150,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Analisi dei segnali/Note/Filtri digitali nel dominio z.md"
+                "file": "FisicaRV/Formulario.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Struttura di Filtri digitali nel dominio z"
+              "title": "Struttura di Formulario"
             }
           },
           {
@@ -191,9 +190,9 @@
   },
   "active": "ec7b0b007cdb795f",
   "lastOpenFiles": [
+    "FisicaRV/Formulario.md",
     "Analisi dei segnali/Note/Analisi discreta nel dominio del tempo.md",
     "SIMMOD/Notes/Catene di Markov.md",
-    "FisicaRV/Formulario.md",
     "FisicaRV/images/rectangle.png",
     "FisicaRV/images",
     "FisicaRV",

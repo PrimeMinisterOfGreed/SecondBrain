@@ -19,3 +19,4 @@ Note
 \upzeta
 \upalpha
 \uparrow
+\rho
