@@ -403,7 +403,7 @@ $$ \sum F = -\rho_{0} V_{0} g + \rho_{f} V_{f}g = 0 \implies \rho_{0} V_{0} = \r
 > $$ \Delta M_{1}=\rho A_{1}v_{1}\Delta t=\rho A_{1}\Delta x_{1}=\rho \Delta V_{1} $$ $$\Delta M_{2}=\rho A_{2}v_{2}\Delta t=\rho A_{2}\Delta x_{2}=\rho \Delta V_{2}$$ $$\implies \rho A_{i}\Delta x_{i} = const $$
 
 >[!important] Portata 
-> in volume: $$ Q_{v}= \frac{\Delta V}{\Delta t} $$
+> in volume: $$ Q_{v}= \frac{\Delta V}{\Delta t} = A*v $$
 > in massa: $$ Q_{M}= \frac{\Delta M}{\Delta t} $$
 
 

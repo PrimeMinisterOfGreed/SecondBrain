@@ -583,6 +583,7 @@ dinamica
 direzione
 deformazione
 doppler
+diga
 potenze
 ports
 port
@@ -2750,6 +2751,7 @@ allontanamento
 avvicinamento
 archimede
 attrito
+aria
 running
 redirection
 redirected
@@ -5475,6 +5477,7 @@ exploitando
 elastica
 estremo
 equabile
+esercizio
 Nikto
 NB
 NAA
